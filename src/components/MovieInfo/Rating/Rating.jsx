@@ -5,7 +5,8 @@ import {
   TmdbLink,
   ImdbLink,
   Ratings,
-  VoteCount,
+  Stat,
+  Reviews,
 } from './Rating.styled';
 
 const DEF_TAG_WIDTH = 40;
@@ -18,6 +19,7 @@ export const Rating = ({
   vote_count,
   popularity,
   imdb_id,
+  reviewsCount,
   id,
   ...restProps
 }) => {
@@ -33,20 +35,22 @@ export const Rating = ({
   return (
     <Ratings>
       <VoteAverage {...tmdbData}>{rating}</VoteAverage>
-
       {imdb_id && (
         <ImdbLink {...imdbData}>
           <IconImdbLogo />
         </ImdbLink>
       )}
-
       <TmdbLink {...tmdbData}>
         <IconTmdbLogo size={height} title={tmdbUrl} />
       </TmdbLink>
-
-      <VoteCount>
-        <span data->{vote_count}</span> votes
-      </VoteCount>
+      <Stat>
+        <span>{vote_count}</span> votes
+      </Stat>
+      {reviewsCount > 0 && (
+        <Reviews>
+          <span>{reviewsCount}</span> review(s)
+        </Reviews>
+      )}
     </Ratings>
   );
 };

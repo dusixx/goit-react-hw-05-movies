@@ -1,5 +1,7 @@
 import styled from '@emotion/styled';
+import { Link } from 'react-router-dom';
 import { Title } from 'styles/shared';
+import { FlexCentered } from 'styles/shared';
 
 export const Info = styled.div`
   display: flex;
@@ -15,7 +17,7 @@ export const Info = styled.div`
   }
 `;
 
-export const Thumb = styled.div`
+export const PosterLink = styled(Link)`
   position: relative;
   flex-shrink: 0;
 
@@ -58,12 +60,34 @@ export const Desc = styled.div`
 `;
 
 export const MovieTitle = styled(Title)`
-  font-size: 36px;
+  font-size: 38px;
   text-align: center;
 
   @media screen and (min-width: 768px) {
-    max-width: 800px;
-    font-size: 34px;
+    max-width: 700px;
     text-align: left;
   }
+`;
+
+export const Container = styled.div`
+  position: relative;
+  ${FlexCentered()};
+
+  & :nth-of-type() {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+`;
+
+export const Thumb = styled.div`
+  position: absolute;
+
+  & img {
+    height: 95vh;
+    width: auto;
+    /* max-width: 70vw; */
+
+    object-fit: cover;
+    object-position: center;
 `;

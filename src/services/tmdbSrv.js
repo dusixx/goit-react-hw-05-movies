@@ -6,8 +6,8 @@ const controller = new AbortController();
 const cache = new Cache();
 
 const data = {
-  API_BASE_URL: 'https://api.themoviedb.org/3/',
-  IMAGE_BASE_URL: 'https://image.tmdb.org/t/p/',
+  API_BASE_URL: 'https://api.themoviedb.org/3',
+  IMAGE_BASE_URL: 'https://image.tmdb.org/t/p',
   API_KEY: '86d04e898c465c8de09e1ea2fc383ab8',
 };
 
@@ -60,7 +60,7 @@ export default class TmdbService {
    * @returns
    */
   async get(path, params) {
-    const url = `${data.API_BASE_URL}${path}?api_key=${
+    const url = `${data.API_BASE_URL}/${path}?api_key=${
       data.API_KEY
     }&${new URLSearchParams(namesToSnake(params))}`;
 

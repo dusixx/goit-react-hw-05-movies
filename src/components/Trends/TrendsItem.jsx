@@ -12,7 +12,7 @@ import {
 } from './TrendsItem.styled';
 
 const srv = new TmdbService();
-const DEF_POSTER_WIDTH = 500;
+const DEF_POSTER_HEIGHT = 500;
 
 //
 // TrendsItem
@@ -22,7 +22,7 @@ export const TrendsItem = ({
   id,
   title,
   poster_path,
-  posterSize = DEF_POSTER_WIDTH,
+  posterSize = DEF_POSTER_HEIGHT,
   vote_average,
   vote_count,
   overview,

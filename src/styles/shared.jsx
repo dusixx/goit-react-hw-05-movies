@@ -74,7 +74,7 @@ export const LinkBase = css`
 export const Title = styled.h2`
   font-family: Arial Black;
   line-height: 1.1;
-  letter-spacing: -1px;
+  letter-spacing: -2px;
   word-break: keep-all;
 `;
 

@@ -6,11 +6,11 @@ import Loader from 'components/Loader';
 import { showError } from 'utils';
 
 const srv = new TmdbService();
-const PAGE_TITLE = `Today's top`;
+const PAGE_TITLE = `Top 20`;
 
 const titleStyle = {
   marginBottom: '30px',
-  fontSize: 34,
+  fontSize: 40,
   textTransform: 'capitalize',
   textAlign: 'center',
 };

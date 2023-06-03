@@ -15,9 +15,6 @@ export const MovieDetails = () => {
       .getMovieDetails(movieId)
       .then(data => setDetails(data))
       .catch(showError);
-
-    // srv.getMovieCredits(movieId).then(console.log).catch(showError);
-    // srv.getMovieReviews(movieId).then(console.log).catch(showError);
   }, [movieId]);
 
   return details && <MovieInfo value={details} />;

@@ -13,9 +13,11 @@ export const Container = styled.div`
 `;
 
 export const Title = styled.h3`
-  margin-bottom: 15px;
+  margin-bottom: 20px;
+  text-transform: uppercase;
   font-family: Arial Black;
   font-size: 16px;
+  letter-spacing: -0.5px;
 `;
 
 export const List = styled.ul`
@@ -23,6 +25,7 @@ export const List = styled.ul`
   flex-direction: column;
   align-items: center;
   gap: 15px;
+  max-width: 700px;
 
   @media screen and (min-width: 768px) {
     align-items: initial;
@@ -48,7 +51,9 @@ export const Item = styled.li`
   }
 
   & span:first-of-type {
-    color: #858585;
+    /* color: #858585; */
+    font-weight: bold;
+    letter-spacing: -0.2px;
     width: 100px;
     flex-shrink: 0;
   }
@@ -79,7 +84,7 @@ export const Homepage = styled(Link)`
 `;
 
 export const Text = styled.p`
-  max-width: 800px;
+  max-width: 700px;
 `;
 
 export const Overview = styled.div`
@@ -88,5 +93,16 @@ export const Overview = styled.div`
 
   @media screen and (min-width: 768px) {
     text-align: left;
+  }
+`;
+
+export const CastList = styled.p`
+  text-align: center;
+
+  @media screen and (min-width: 768px) {
+    text-align: left;
+  }
+  & a {
+    color: var(--color-blue);
   }
 `;

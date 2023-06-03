@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import {
   List,
   Item,
@@ -6,7 +7,10 @@ import {
   Title,
   Overview,
   Text,
+  CastList,
 } from './AboutMovie.styled';
+
+const DEF_CAST_COUNT = 5;
 
 export const AboutMovie = ({
   budget,
@@ -16,11 +20,24 @@ export const AboutMovie = ({
   overview,
   release_date,
   tagline,
+  credits,
   style,
   ...restProps
 }) => {
   const genresList = genres.map(({ name }) => name).join(', ');
   const countries = production_countries.map(({ name }) => name).join(', ');
+
+  const castList = credits?.cast
+    ?.slice(0, DEF_CAST_COUNT)
+    .map(({ original_name: name }) => name)
+    .join(', ');
+
+  console.log(credits?.crew);
+
+  const crewList = credits?.crew
+    ?.slice(0, DEF_CAST_COUNT)
+    .map(({ original_name: name }) => name)
+    .join(', ');
 
   const releaseDate = release_date
     ? new Date(release_date).toLocaleDateString()
@@ -53,6 +70,30 @@ export const AboutMovie = ({
           <span>Budget:</span>
           <span>{budget ? `$${budget}` : `n/a`}</span>
         </Item>
+
+        {castList && castList.length > 0 && (
+          <Item>
+            <span>Cast:</span>
+            <CastList>
+              {castList}
+              <Link to="cast">
+                ...and other {credits.cast.length - DEF_CAST_COUNT} actor(s)
+              </Link>
+            </CastList>
+          </Item>
+        )}
+
+        {crewList && crewList.length > 0 && (
+          <Item>
+            <span>Crew:</span>
+            <CastList>
+              {crewList}
+              <Link to="cast">
+                ...and other {credits.crew.length - DEF_CAST_COUNT} peoples(s)
+              </Link>
+            </CastList>
+          </Item>
+        )}
       </List>
 
       {homepage && (
