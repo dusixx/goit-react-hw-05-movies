@@ -1,0 +1,22 @@
+:root {
+  --color-blue: #1c66ee;
+  --color-blue-light: #296ff0;
+  --color-orange: #ed4f34;
+  --color-gray-lighter: #f1f1f1;
+  --color-black: rgb(43, 43, 43);
+  --color-text: var(--color-black);
+  --color-background: rgb(226, 226, 226);
+  --color-imdb-yellow: #f6c700;
+  --color-tmdb-green: #14b18c;
+  --color-tmdb-blue: #01a4e4;
+
+  --box-shadow: 0 1px 1px 1px rgb(202, 202, 202);
+  --border-radius: 8px;
+  --header-height: 60px;
+
+  --gallery-items-gap: 15px;
+  --gallery-items-per-row: 1;
+
+  --trans-func: ease;
+  --trans-duration: 250ms;
+}
