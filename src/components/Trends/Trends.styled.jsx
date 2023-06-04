@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { TransitionBase } from 'styles/shared';
 
 // const POSTER_HMULT = 1.5;
 
@@ -11,6 +12,7 @@ export const List = styled.ul`
 
 export const Item = styled.li`
   position: relative;
+  ${TransitionBase('filter')};
 
   flex-basis: calc(
     (100% - var(--gallery-items-gap) * (var(--gallery-items-per-row) - 1)) /
@@ -28,8 +30,4 @@ export const Item = styled.li`
   @media screen and (min-width: 1200px) {
     --gallery-items-per-row: 4;
   }
-
-  transition-property: filter;
-  transition-timing-function: var(--trans-func);
-  transition-duration: var(--trans-duration);
 `;

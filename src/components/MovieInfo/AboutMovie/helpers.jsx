@@ -1,4 +1,4 @@
-const normalize = s => s.trim().toLocaleLowerCase();
+import { normalizeStr } from 'utils';
 const DEF_CAST_COUNT = 5;
 
 /**
@@ -6,10 +6,11 @@ const DEF_CAST_COUNT = 5;
  *
  * @param {object} credits - объект с массивами cast и crew
  * @param {number} count - кол-во имен актеров для анонса
+ *
  * @returns {object}
  *  {preview, remaining}
  *    preview - строка-список имен
- *    remaining - строка оставшиеся для ссылки на страницу всех ролей
+ *    remaining - строка (оставшиеся) для ссылки на страницу всех актеров
  */
 export const getCastData = (credits, count = DEF_CAST_COUNT) => {
   if (!Array.isArray(credits?.cast)) return;
@@ -44,9 +45,9 @@ export const getCrewData = credits => {
   if (!Array.isArray(credits?.crew)) return;
   const { crew } = credits;
 
-  let crewListCount = 0;
+  let personsCount = 0;
 
-  const crewList = {
+  const personsList = {
     director: [],
     screenplay: [],
     writer: [],
@@ -55,19 +56,19 @@ export const getCrewData = credits => {
   };
 
   // known_for_department
-  const data = crew.reduce((res, { department, job, name }) => {
-    const jobName = normalize(job);
-    const dep = normalize(department);
+  const data = crew.reduce((persons, { department, job, name }) => {
+    const jobName = normalizeStr(job);
+    const dep = normalizeStr(department);
 
-    if (jobName === 'director' && dep !== 'directing') return res;
+    if (jobName === 'director' && dep !== 'directing') return persons;
 
-    if (res[jobName]) {
-      crewListCount += 1;
-      res[jobName] = [...res[jobName], name];
+    if (persons[jobName]) {
+      personsCount += 1;
+      persons[jobName] = [...persons[jobName], name];
     }
 
-    return res;
-  }, crewList);
+    return persons;
+  }, personsList);
 
-  return crewListCount ? data : null;
+  return personsCount ? data : null;
 };

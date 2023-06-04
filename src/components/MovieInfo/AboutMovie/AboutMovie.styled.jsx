@@ -112,6 +112,9 @@ export const Cast = styled.p`
 `;
 
 export const CastAndCrewLink = styled(LinkPrimary)`
+  display: flex;
+  align-items: center;
+  /* gap: 2px; */
   margin-top: 30px;
   width: max-content;
   text-transform: capitalize;

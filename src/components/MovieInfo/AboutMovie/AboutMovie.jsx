@@ -1,6 +1,7 @@
 import { LinkPrimary } from 'styles/shared';
 import { Cast } from './AboutMovie.styled';
 import { getCastData, getCrewData } from './helpers';
+// import { RiArrowRightSLine as IconRightArrow } from 'react-icons/ri';
 import {
   List,
   Item,
@@ -37,6 +38,8 @@ export const AboutMovie = ({
 
   const castData = getCastData(credits);
   const crewData = getCrewData(credits);
+
+  const newTab = { target: '_blank', rel: 'noopener noreferrer' };
 
   let haveAnyDataAbout =
     releaseDate || countries || genresList || tagline || budget > 0 || castData;
@@ -101,17 +104,20 @@ export const AboutMovie = ({
               <span>cast</span>
               <Cast>
                 {castData.preview}
-                <LinkPrimary to="cast">{castData.remaining}</LinkPrimary>
+                <LinkPrimary to="credits">{castData.remaining}</LinkPrimary>
               </Cast>
             </Item>
           )}
         </List>
       )}
 
-      <CastAndCrewLink to="cast">Full cast & crew</CastAndCrewLink>
+      <CastAndCrewLink to="credits">
+        Full cast & crew
+        {/* <IconRightArrow size={20} /> */}
+      </CastAndCrewLink>
 
       {homepage && (
-        <Homepage to={homepage} title={homepage}>
+        <Homepage to={homepage} title={homepage} {...newTab}>
           Official website
         </Homepage>
       )}

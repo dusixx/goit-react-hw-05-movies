@@ -1,15 +1,10 @@
-import { useState, useEffect } from 'react';
-import { ToastContainer, toast } from 'react-toastify';
-import { Container, Button } from './App.styled';
-//import Searchbar from 'components/Searchbar';
-//import MemoizedImageGallery from 'components/ImageGallery';
-import Loader from 'components/Loader';
-import { Routes, Route, NavLink } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import { Container } from './App.styled';
+import { Routes, Route } from 'react-router-dom';
 import { SharedLayout } from 'components/SharedLayout/SharedLayout';
-import { Home } from 'components/pages';
-import { MovieDetails } from 'components/pages/MovieDetails';
-
-// const { IDLE, REJECTED, RESOLVED, PENDING } = status;
+import { Home } from 'pages';
+import { MovieDetails } from 'pages/MovieDetails';
+import { Credits } from 'pages/Credits';
 
 //
 // App
@@ -18,14 +13,16 @@ import { MovieDetails } from 'components/pages/MovieDetails';
 export const App = () => {
   return (
     <Container>
-      {/* <Loader visible={status === PENDING} /> */}
-
       <Routes>
         <Route path="/" element={<SharedLayout />}>
           <Route index element={<Home />}></Route>
           <Route path="movies" element={<div>Movies</div>}></Route>
           <Route path="movies/:movieId" element={<MovieDetails />}></Route>
-          <Route path="movies/:movieId/cast" element={<div>Cast</div>}></Route>
+          <Route path="movies/:movieId/credits" element={<Credits />}>
+            {/* <Route path="cast" element={<div>Cast subpage</div>}></Route>
+            <Route path="crew" element={<div>Crew subpage</div>}></Route> */}
+          </Route>
+          <Route path="*" element={<div>Page Not Found</div>} />
         </Route>
       </Routes>
 

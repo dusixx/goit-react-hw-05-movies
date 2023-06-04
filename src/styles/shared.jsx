@@ -1,14 +1,10 @@
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
-import { isStr, calcCSSValue } from 'utils';
 import { Link } from 'react-router-dom';
+import { isStr, calcCSSValue } from 'utils';
 
-// Utils
+// utils
 
-/**
- * @param {string|object} cssProps
- * @returns
- */
 export const FlexCentered = cssProps => css`
   display: flex;
   align-items: center;
@@ -22,7 +18,24 @@ export const Disabled = css`
   opacity: 0.4;
 `;
 
-// Button
+/**
+ * @param {string} propNames - список свойств через пробел или запятую
+ * @returns
+ */
+export const TransitionBase = propNames => {
+  const list =
+    isStr(propNames) && propNames
+      ? propNames.split(/[,\s]/).join(', ')
+      : 'unset';
+
+  return css`
+    transition-property: ${list};
+    transition-duration: var(--trans-duration);
+    transition-timing-function: var(--trans-func);
+  `;
+};
+
+// button
 
 export const ButtonBase = styled.button`
   ${FlexCentered(`gap: 5px`)}
@@ -33,8 +46,7 @@ export const ButtonBase = styled.button`
   border: none;
   cursor: pointer;
 
-  transition-timing-function: var(--trans-func);
-  transition-duration: var(--trans-duration);
+  ${TransitionBase()};
 
   &[disabled],
   &[disabled='true'] {
@@ -62,32 +74,15 @@ export const ButtonPrimary = styled(ButtonBase)`
   }
 `;
 
+// link
+
 export const LinkBase = css`
   position: relative;
   color: currentColor;
   text-decoration: none;
 
-  transition-property: color;
-  transition-duration: var(--trans-duration);
-  transition-timing-function: var(--trans-func);
+  ${TransitionBase('color')};
 `;
-
-/**
- * @param {string} propNames - список свойств через пробел или запятую
- * @returns
- */
-export const TransitionBase = propNames => {
-  const list =
-    isStr(propNames) && propNames
-      ? propNames.split(/[,\s]/).join(', ')
-      : 'unset';
-
-  return css`
-    transition-property: ${list};
-    transition-duration: var(--trans-duration);
-    transition-timing-function: var(--trans-func);
-  `;
-};
 
 export const LinkPrimary = styled(Link)`
   display: inline-block;
@@ -102,9 +97,25 @@ export const LinkPrimary = styled(Link)`
   }
 `;
 
+// typography
+
 export const Title = styled.h2`
   font-family: Arial Black;
   line-height: 1.1;
   letter-spacing: -2px;
-  word-break: keep-all;
+`;
+
+export const PageTitle = styled(Title)`
+  font-size: 46px;
+  text-transform: capitalize;
+  text-align: center;
+`;
+
+export const PageSubtitle = styled.h3`
+  font-size: 20px;
+  line-height: 1;
+  letter-spacing: -0.5px;
+  text-transform: capitalize;
+  text-align: center;
+  color: rgb(0 0 0 / 0.3);
 `;

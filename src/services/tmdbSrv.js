@@ -151,6 +151,10 @@ export default class TmdbService {
     return data;
   }
 
+  get cache() {
+    return cache.data;
+  }
+
   abort() {
     controller.abort();
   }

@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import { NavLink } from 'react-router-dom';
-import { LinkBase } from 'styles/shared';
+import { LinkBase, TransitionBase } from 'styles/shared';
 
 export const Nav = styled.nav`
   display: flex;
@@ -36,9 +36,7 @@ export const StyledNavLink = styled(NavLink)`
     height: 5px;
 
     background-color: transparent;
-    transition-property: background-color;
-    transition-duration: var(--trans-duration);
-    transition-timing-function: var(--trans-func);
+    ${TransitionBase('background-color')};
   }
 
   &.active {

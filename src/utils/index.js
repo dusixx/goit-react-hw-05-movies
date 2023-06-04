@@ -28,6 +28,7 @@ export const parseCSSValue = v => {
 let id = 0;
 export const getId = () => `id-${(id++).toString(16)}`;
 
+export const normalizeStr = s => s.trim().toLocaleLowerCase();
 export const cap = v => (isStr(v) && v ? v[0].toUpperCase() + v.slice(1) : '');
 
 export function camelToSnake(str) {

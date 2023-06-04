@@ -1,41 +1,33 @@
 import { useEffect, useState } from 'react';
-import TmdbService from 'services/tmdbSrv';
 import { Trends } from 'components/Trends/Trends';
-import { Title } from 'styles/shared';
-import Loader from 'components/Loader';
+import { PageHeader } from 'components/PageHeader/PageHeader';
+import { PageTitle } from 'styles/shared';
 import { showError } from 'utils';
+import TmdbService from 'services/tmdbSrv';
+// import Loader from 'components/Loader';
 
 const srv = new TmdbService();
 const PAGE_TITLE = `Top 20`;
 
-const titleStyle = {
-  marginBottom: '30px',
-  fontSize: 40,
-  textTransform: 'capitalize',
-  textAlign: 'center',
-};
-
 export const Home = () => {
   const [trends, setTrends] = useState([]);
-  const [showLoader, setShowLoader] = useState(true);
 
   useEffect(() => {
     srv
       .getTrendingMovies('day')
-      .then(res => setTrends(res))
+      .then(setTrends)
       .catch(err => {
         // if (err.code === 'ERR_CANCELED') return;
         showError(err);
-      })
-      .finally(() => setShowLoader(false));
+      });
 
     // return () => srv.abort();
-  }, [setShowLoader]);
+  }, []);
 
   return (
     <>
-      {/* <Loader visible={showLoader} /> */}
-      <Title style={titleStyle}>{PAGE_TITLE}</Title>
+      {/* <Loader visible={trends.length <= 0} /> */}
+      <PageTitle style={{ marginBottom: 30 }}>{PAGE_TITLE}</PageTitle>
       <Trends value={trends} />
     </>
   );
