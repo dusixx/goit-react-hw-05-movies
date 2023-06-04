@@ -1,12 +1,9 @@
-import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useState } from 'react';
 import TmdbService from 'services/tmdbSrv';
 import { Rating } from './Rating/Rating';
 import { AboutMovie } from './AboutMovie/AboutMovie';
-import { showError } from 'utils';
 import Modal from 'components/Modal';
 import { Spinner } from 'components/Loader';
-import Loader from 'components/Loader';
 
 import {
   Info,
@@ -16,38 +13,22 @@ import {
   MovieTitle,
   Container,
   Thumb,
-} from './MovieInfo.styled';
+} from './MovieCard.styled';
 
 const srv = new TmdbService();
 
 const POSTER_WIDTH = 500;
 const COLOR_MODAL_BG = 'rgb(255 255 255 / 0.7)';
 
-export const MovieInfo = ({ value = {} }) => {
-  // деструктурируем инфу
-  const { original_title, title, poster_path, ...restProps } = value;
+export const MovieCard = ({ data = {} }) => {
+  // деструктурируем инфу - делаем так,
+  // чтобы не извлекать общие пропы для прокидывания кому надо
+  // TODO: сделать нормально
+  const { original_title, title, poster_path, credits, reviews, ...restProps } =
+    data;
 
-  const [reviews, setReviews] = useState(null);
-  const [credits, setCredits] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [wasModalImageLoaded, setWasModalImageLoaded] = useState(false);
-  const { movieId } = useParams();
-
-  useEffect(() => {
-    srv
-      .getMovieReviews(movieId)
-      .then(data => {
-        setReviews(data);
-      })
-      .catch(showError);
-
-    srv
-      .getMovieCredits(movieId)
-      .then(data => {
-        setCredits(data);
-      })
-      .catch(showError);
-  }, [movieId]);
 
   const handleImageClick = e => {
     e.preventDefault();
@@ -65,13 +46,11 @@ export const MovieInfo = ({ value = {} }) => {
   };
 
   // год релиза
-  const releaseYear = value.release_date?.substring(0, 4);
+  const releaseYear = data.release_date?.substring(0, 4);
   const reviewsCount = reviews?.total_results;
 
   return (
     <>
-      {/* <Loader visible={!credits || !reviews} /> */}
-
       <Info>
         <PosterLink to={posterData.original} onClick={handleImageClick}>
           <Poster {...posterData} />

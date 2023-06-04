@@ -49,28 +49,28 @@ export const AboutMovie = ({
         <List {...restProps}>
           {releaseDate && (
             <Item>
-              <span>Release:</span>
+              <span>release</span>
               <span>{releaseDate}</span>
             </Item>
           )}
 
           {countries && (
             <Item>
-              <span>Counries:</span>
+              <span>countries</span>
               <span>{countries}</span>
             </Item>
           )}
 
           {genresList && (
             <Item>
-              <span>Genres:</span>
+              <span>genres</span>
               <span>{genresList}</span>
             </Item>
           )}
 
           {tagline && (
             <Item>
-              <span>Tagline:</span>
+              <span>tagline</span>
               <span>
                 <i>{tagline}</i>
               </span>
@@ -79,17 +79,17 @@ export const AboutMovie = ({
 
           {budget > 0 && (
             <Item>
-              <span>Budget:</span>
+              <span>budget</span>
               <span>${budget}</span>
             </Item>
           )}
 
           {crewData &&
-            Object.entries(crewData).map(([job, persons]) => {
+            Object.entries(crewData).map(([jobName, persons]) => {
               return (
                 persons.length > 0 && (
-                  <Item key={job}>
-                    <span>{job}:</span>
+                  <Item key={jobName}>
+                    <span>{jobName}</span>
                     <span>{persons.join(', ')}</span>
                   </Item>
                 )
@@ -98,7 +98,7 @@ export const AboutMovie = ({
 
           {castData && (
             <Item>
-              <span>Cast:</span>
+              <span>cast</span>
               <Cast>
                 {castData.preview}
                 <LinkPrimary to="cast">{castData.remaining}</LinkPrimary>

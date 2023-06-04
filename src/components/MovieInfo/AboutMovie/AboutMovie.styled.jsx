@@ -60,6 +60,10 @@ export const Item = styled.li`
     font-weight: bold;
     letter-spacing: -0.2px;
     text-transform: capitalize;
+
+    &::after {
+      content: ':';
+    }
   }
 `;
 
