@@ -1,3 +1,4 @@
+import { LinkPrimary } from 'styles/shared';
 import { ReactComponent as IconImdbLogo } from '../../../images/imdbLogo.svg';
 import { SiThemoviedatabase as IconTmdbLogo } from 'react-icons/si';
 import {
@@ -6,15 +7,14 @@ import {
   ImdbLink,
   Ratings,
   Stat,
-  Reviews,
 } from './Rating.styled';
 
-const DEF_TAG_WIDTH = 40;
+const DEF_HEIGHT = 40;
 const TMDB_BASE_URL = 'https://www.themoviedb.org/movie/';
 const IMDB_BASE_URL = 'https://www.imdb.com/title/';
 
 export const Rating = ({
-  height = DEF_TAG_WIDTH,
+  height = DEF_HEIGHT,
   vote_average,
   vote_count,
   popularity,
@@ -47,9 +47,9 @@ export const Rating = ({
         <span>{vote_count}</span> votes
       </Stat>
       {reviewsCount > 0 && (
-        <Reviews>
+        <LinkPrimary>
           <span>{reviewsCount}</span> review(s)
-        </Reviews>
+        </LinkPrimary>
       )}
     </Ratings>
   );

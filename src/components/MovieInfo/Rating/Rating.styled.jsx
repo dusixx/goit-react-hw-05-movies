@@ -27,16 +27,10 @@ const Tag = styled(Link)`
 
 export const VoteAverage = styled(Tag)`
   padding: 0 10px 0 10px;
-
   font-family: Arial Black;
   font-size: 22px;
   line-height: 0;
   background-color: var(--color-orange);
-  /* background: linear-gradient(
-    to right,
-    var(--color-blue) 0%,
-    var(--color-orange) 100%
-  ); */
 `;
 
 export const ImdbLink = styled(Tag)`
@@ -53,10 +47,6 @@ export const Stat = styled.span`
   & span {
     font-weight: bold;
   }
-`;
-
-export const Reviews = styled(Link)`
-  color: var(--color-blue);
 `;
 
 export const TmdbLink = styled(Tag)`

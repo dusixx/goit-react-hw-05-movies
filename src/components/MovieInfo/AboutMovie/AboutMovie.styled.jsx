@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import { Link } from 'react-router-dom';
-import { LinkBase, TransitionBase } from 'styles/shared';
+import { LinkBase, LinkPrimary, TransitionBase } from 'styles/shared';
 
 export const Container = styled.div`
   display: flex;
@@ -13,7 +13,9 @@ export const Container = styled.div`
 `;
 
 export const Title = styled.h3`
+  margin-top: 30px;
   margin-bottom: 20px;
+
   text-transform: uppercase;
   font-family: Arial Black;
   font-size: 16px;
@@ -50,12 +52,14 @@ export const Item = styled.li`
     }
   }
 
+  /* label */
   & span:first-of-type {
-    /* color: #858585; */
-    font-weight: bold;
-    letter-spacing: -0.2px;
     width: 100px;
     flex-shrink: 0;
+
+    font-weight: bold;
+    letter-spacing: -0.2px;
+    text-transform: capitalize;
   }
 `;
 
@@ -88,7 +92,6 @@ export const Text = styled.p`
 `;
 
 export const Overview = styled.div`
-  margin-top: 30px;
   text-align: center;
 
   @media screen and (min-width: 768px) {
@@ -96,13 +99,16 @@ export const Overview = styled.div`
   }
 `;
 
-export const CastList = styled.p`
+export const Cast = styled.p`
   text-align: center;
 
   @media screen and (min-width: 768px) {
     text-align: left;
   }
-  & a {
-    color: var(--color-blue);
-  }
+`;
+
+export const CastAndCrewLink = styled(LinkPrimary)`
+  margin-top: 30px;
+  width: max-content;
+  text-transform: capitalize;
 `;

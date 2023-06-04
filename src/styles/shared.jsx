@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
 import { isStr, calcCSSValue } from 'utils';
+import { Link } from 'react-router-dom';
 
 // Utils
 
@@ -71,20 +72,15 @@ export const LinkBase = css`
   transition-timing-function: var(--trans-func);
 `;
 
-export const Title = styled.h2`
-  font-family: Arial Black;
-  line-height: 1.1;
-  letter-spacing: -2px;
-  word-break: keep-all;
-`;
-
 /**
- * @param {string} names - список свойств через пробел или запятую
+ * @param {string} propNames - список свойств через пробел или запятую
  * @returns
  */
-export const TransitionBase = names => {
+export const TransitionBase = propNames => {
   const list =
-    isStr(names) && names ? names.split(/[,\s]/).join(', ') : 'unset';
+    isStr(propNames) && propNames
+      ? propNames.split(/[,\s]/).join(', ')
+      : 'unset';
 
   return css`
     transition-property: ${list};
@@ -92,3 +88,23 @@ export const TransitionBase = names => {
     transition-timing-function: var(--trans-func);
   `;
 };
+
+export const LinkPrimary = styled(Link)`
+  display: inline-block;
+  ${TransitionBase('color')};
+
+  font-size: inherit;
+  color: var(--color-blue);
+
+  &:hover,
+  &:focus-visible {
+    color: var(--color-orange);
+  }
+`;
+
+export const Title = styled.h2`
+  font-family: Arial Black;
+  line-height: 1.1;
+  letter-spacing: -2px;
+  word-break: keep-all;
+`;

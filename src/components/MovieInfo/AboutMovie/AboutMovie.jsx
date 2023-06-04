@@ -1,4 +1,6 @@
-import { Link } from 'react-router-dom';
+import { LinkPrimary } from 'styles/shared';
+import { Cast } from './AboutMovie.styled';
+import { getCastData, getCrewData } from './helpers';
 import {
   List,
   Item,
@@ -7,10 +9,8 @@ import {
   Title,
   Overview,
   Text,
-  CastList,
+  CastAndCrewLink,
 } from './AboutMovie.styled';
-
-const DEF_CAST_COUNT = 5;
 
 export const AboutMovie = ({
   budget,
@@ -21,80 +21,94 @@ export const AboutMovie = ({
   release_date,
   tagline,
   credits,
-  style,
   ...restProps
 }) => {
-  const genresList = genres.map(({ name }) => name).join(', ');
-  const countries = production_countries.map(({ name }) => name).join(', ');
+  const genresList = genres?.length
+    ? genres.map(({ name }) => name).join(', ')
+    : null;
 
-  const castList = credits?.cast
-    ?.slice(0, DEF_CAST_COUNT)
-    .map(({ original_name: name }) => name)
-    .join(', ');
-
-  console.log(credits?.crew);
-
-  const crewList = credits?.crew
-    ?.slice(0, DEF_CAST_COUNT)
-    .map(({ original_name: name }) => name)
-    .join(', ');
+  const countries = production_countries?.length
+    ? production_countries.map(({ name }) => name).join(', ')
+    : null;
 
   const releaseDate = release_date
     ? new Date(release_date).toLocaleDateString()
-    : 'n/a';
+    : null;
+
+  const castData = getCastData(credits);
+  const crewData = getCrewData(credits);
+
+  let haveAnyDataAbout =
+    releaseDate || countries || genresList || tagline || budget > 0 || castData;
 
   return (
-    <Container style={style}>
-      <Title>About</Title>
+    <Container>
+      {haveAnyDataAbout && <Title>About</Title>}
 
-      <List {...restProps}>
-        <Item>
-          <span>Release:</span>
-          <span>{releaseDate}</span>
-        </Item>
-        <Item>
-          <span>Counries:</span>
-          <span>{countries || 'n/a'}</span>
-        </Item>
-        <Item>
-          <span>Genres:</span>
-          <span>{genresList || 'n/a'}</span>
-        </Item>
-        <Item>
-          <span>Tagline:</span>
-          <span>
-            <i>{tagline || 'n/a'}</i>
-          </span>
-        </Item>
-        <Item>
-          <span>Budget:</span>
-          <span>{budget ? `$${budget}` : `n/a`}</span>
-        </Item>
+      {haveAnyDataAbout && (
+        <List {...restProps}>
+          {releaseDate && (
+            <Item>
+              <span>Release:</span>
+              <span>{releaseDate}</span>
+            </Item>
+          )}
 
-        {castList && castList.length > 0 && (
-          <Item>
-            <span>Cast:</span>
-            <CastList>
-              {castList}
-              <Link to="cast">
-                ...and other {credits.cast.length - DEF_CAST_COUNT} actor(s)
-              </Link>
-            </CastList>
-          </Item>
-        )}
+          {countries && (
+            <Item>
+              <span>Counries:</span>
+              <span>{countries}</span>
+            </Item>
+          )}
 
-        {crewList && crewList.length > 0 && (
-          <Item>
-            <span>Crew:</span>
-            <CastList>
-              {crewList}
-              <Link to="cast">
-                ...and other {credits.crew.length - DEF_CAST_COUNT} peoples(s)
-              </Link>
-            </CastList>
-          </Item>
-        )}
-      </List>
+          {genresList && (
+            <Item>
+              <span>Genres:</span>
+              <span>{genresList}</span>
+            </Item>
+          )}
+
+          {tagline && (
+            <Item>
+              <span>Tagline:</span>
+              <span>
+                <i>{tagline}</i>
+              </span>
+            </Item>
+          )}
+
+          {budget > 0 && (
+            <Item>
+              <span>Budget:</span>
+              <span>${budget}</span>
+            </Item>
+          )}
+
+          {crewData &&
+            Object.entries(crewData).map(([job, persons]) => {
+              return (
+                persons.length > 0 && (
+                  <Item key={job}>
+                    <span>{job}:</span>
+                    <span>{persons.join(', ')}</span>
+                  </Item>
+                )
+              );
+            })}
+
+          {castData && (
+            <Item>
+              <span>Cast:</span>
+              <Cast>
+                {castData.preview}
+                <LinkPrimary to="cast">{castData.remaining}</LinkPrimary>
+              </Cast>
+            </Item>
+          )}
+        </List>
+      )}
+
+      <CastAndCrewLink to="cast">Full cast & crew</CastAndCrewLink>
 
       {homepage && (
         <Homepage to={homepage} title={homepage}>
@@ -102,10 +116,12 @@ export const AboutMovie = ({
         </Homepage>
       )}
 
-      <Overview>
-        <Title>Overview</Title>
-        <Text>{overview}</Text>
-      </Overview>
+      {overview && (
+        <Overview>
+          <Title>Overview</Title>
+          <Text>{overview}</Text>
+        </Overview>
+      )}
     </Container>
   );
 };

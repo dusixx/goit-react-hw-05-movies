@@ -6,6 +6,8 @@ import { AboutMovie } from './AboutMovie/AboutMovie';
 import { showError } from 'utils';
 import Modal from 'components/Modal';
 import { Spinner } from 'components/Loader';
+import Loader from 'components/Loader';
+
 import {
   Info,
   PosterLink,
@@ -22,11 +24,13 @@ const POSTER_WIDTH = 500;
 const COLOR_MODAL_BG = 'rgb(255 255 255 / 0.7)';
 
 export const MovieInfo = ({ value = {} }) => {
-  const { title, poster_path, ...restProps } = value;
+  // деструктурируем инфу
+  const { original_title, title, poster_path, ...restProps } = value;
+
   const [reviews, setReviews] = useState(null);
   const [credits, setCredits] = useState(null);
   const [showModal, setShowModal] = useState(false);
-  const [wasLoaded, setWasLoaded] = useState(false);
+  const [wasModalImageLoaded, setWasModalImageLoaded] = useState(false);
   const { movieId } = useParams();
 
   useEffect(() => {
@@ -41,7 +45,6 @@ export const MovieInfo = ({ value = {} }) => {
       .getMovieCredits(movieId)
       .then(data => {
         setCredits(data);
-        console.log(data);
       })
       .catch(showError);
   }, [movieId]);
@@ -51,11 +54,14 @@ export const MovieInfo = ({ value = {} }) => {
     setShowModal(true);
   };
 
+  // имя фильма
+  let movieTitle = original_title || title;
+
   // постер
   const posterData = {
     original: srv.buildImageUrl(poster_path),
     src: srv.buildImageUrl(poster_path, POSTER_WIDTH),
-    alt: title,
+    alt: movieTitle,
   };
 
   // год релиза
@@ -64,25 +70,25 @@ export const MovieInfo = ({ value = {} }) => {
 
   return (
     <>
+      {/* <Loader visible={!credits || !reviews} /> */}
+
       <Info>
         <PosterLink to={posterData.original} onClick={handleImageClick}>
           <Poster {...posterData} />
         </PosterLink>
 
-        <Desc>
-          <MovieTitle style={{ marginBottom: 30 }}>
-            {title}
-            {releaseYear && ` (${releaseYear})`}
-          </MovieTitle>
+        {movieTitle && (
+          <Desc>
+            <MovieTitle>
+              {movieTitle}
+              {releaseYear && ` (${releaseYear})`}
+            </MovieTitle>
 
-          <Rating reviewsCount={reviewsCount} {...restProps} />
+            <Rating reviewsCount={reviewsCount} {...restProps} />
 
-          <AboutMovie
-            style={{ marginTop: 30 }}
-            credits={credits}
-            {...restProps}
-          />
-        </Desc>
+            <AboutMovie credits={credits} {...restProps} />
+          </Desc>
+        )}
       </Info>
 
       <Modal
@@ -91,12 +97,12 @@ export const MovieInfo = ({ value = {} }) => {
         visible={showModal}
       >
         <Container>
-          <Spinner width={40} visible={!wasLoaded} />
+          <Spinner width={40} visible={!wasModalImageLoaded} />
           <Thumb>
             <img
               src={posterData.original}
               alt={posterData.alt}
-              onLoad={() => setWasLoaded(true)}
+              onLoad={() => setWasModalImageLoaded(true)}
             />
           </Thumb>
         </Container>
