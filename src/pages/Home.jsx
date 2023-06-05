@@ -3,7 +3,7 @@ import { Trends } from 'components/Trends/Trends';
 import { PageHeader } from 'components/PageHeader/PageHeader';
 import { PageTitle } from 'styles/shared';
 import { showError } from 'utils';
-import TmdbService from 'services/tmdbSrv';
+import TmdbService from 'services/tmdb/tmdbSrv';
 // import Loader from 'components/Loader';
 
 const srv = new TmdbService();

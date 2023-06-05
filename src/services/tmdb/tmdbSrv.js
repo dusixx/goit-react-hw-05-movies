@@ -1,6 +1,6 @@
 import axios from 'axios';
-import { isObj, isArray, camelToSnake } from '../utils';
-import Cache from 'services/cache';
+import { isObj, isArray, camelToSnake } from '../../utils';
+import Cache from './cache';
 
 const controller = new AbortController();
 const cache = new Cache();
@@ -120,11 +120,11 @@ export default class TmdbService {
    * @returns
    */
   async getMovieDetails(id, params) {
-    const cached = cache.get(`movies/${id}`);
+    const cached = cache.get(`movie/${id}`);
     if (cached) return cached;
 
     const { data } = await this.get(`movie/${id}`, params);
-    cache.set(`movies/${id}`, data);
+    cache.set(`movie/${id}`, data);
 
     return data;
   }
@@ -134,7 +134,7 @@ export default class TmdbService {
     if (cached) return cached;
 
     const { data } = await this.get(`movie/${id}/credits`, params);
-    cache.set(`movies/${id}/credits`, data);
+    cache.set(`movie/${id}/credits`, data);
 
     return data;
   }
@@ -146,7 +146,7 @@ export default class TmdbService {
     if (cached) return cached;
 
     const { data } = await this.get(`movie/${id}/reviews`, params);
-    cache.set(`movies/${id}/reviews`, data);
+    cache.set(`movie/${id}/reviews`, data);
 
     return data;
   }

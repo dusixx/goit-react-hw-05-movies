@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import { Link } from 'react-router-dom';
-import { Title } from 'styles/shared';
+import { Title, TransitionBase } from 'styles/shared';
 import { FlexCentered } from 'styles/shared';
 
 export const Info = styled.div`
@@ -23,6 +23,13 @@ export const PosterLink = styled(Link)`
 
   @media screen and (min-width: 768px) {
     width: 330px;
+  }
+
+  ${TransitionBase('filter')};
+
+  &:hover,
+  &:focus-visible {
+    filter: brightness(1.1);
   }
 `;
 
@@ -66,11 +73,11 @@ export const Thumb = styled.div`
   position: absolute;
 
   & img {
-    height: 95vh;
+    height: 90vh;
     width: auto;
     /* чтобы оставалось куда кликнуть в бекдроп */
-    max-width:80vw;
-
-    object-fit: cover;
+    max-width: 70vw;
+    object-fit: contain;
     object-position: center;
+  }
 `;

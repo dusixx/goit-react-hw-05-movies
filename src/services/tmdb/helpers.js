@@ -1,4 +1,25 @@
 import { normalizeStr } from 'utils';
+/**
+ *
+ * Убирает дублирование персон, сворачивая поле job в список
+ * @param {array} crew - массив данных (объектов) о съмочной группе
+ * @returns - массив объектов без дублирования
+ */
+export const normalizeCrewData = crew => {
+  const hash = crew.reduce((res, { id, job, ...rest }) => {
+    if (res[id]) res[id].job.push(job);
+    else res[id] = { ...rest, id, job: [job] };
+
+    return res;
+  }, {});
+
+  //   преобразуем job в строку, чтобы не делать это в целевом компоненте
+  return Object.values(hash).map(({ job, ...rest }) => ({
+    ...rest,
+    job: job.join(', '),
+  }));
+};
+
 const DEF_CAST_COUNT = 5;
 
 /**
@@ -9,14 +30,14 @@ const DEF_CAST_COUNT = 5;
  *
  * @returns {object}
  *  {preview, remaining}
- *    preview - строка-список имен
+ *    preview - строка-список имен (анонс)
  *    remaining - строка (оставшиеся) для ссылки на страницу всех актеров
  */
-export const getCastData = (credits, count = DEF_CAST_COUNT) => {
+export const getCastPreview = (credits, count = DEF_CAST_COUNT) => {
   if (!Array.isArray(credits?.cast)) return;
   const { cast } = credits;
 
-  // валидность массива для простоты не проверяем
+  // валидность данных массива не проверяем (для упрощения)
   const castList = cast
     .slice(0, count)
     .map(({ original_name, name }) => original_name || name);
@@ -38,10 +59,10 @@ export const getCastData = (credits, count = DEF_CAST_COUNT) => {
 /**
  * Информация об основном персонале
  *
- * @param {*} credits
- * @returns
+ * @param {object} credits - объект с массивами cast и crew
+ * @returns {object} - {director, screenplay, writer, ...}
  */
-export const getCrewData = credits => {
+export const getCrewPreview = credits => {
   if (!Array.isArray(credits?.crew)) return;
   const { crew } = credits;
 

@@ -8,7 +8,7 @@ export const BodyScrollLock = () => {
     const top = window.scrollY;
     const bodyCSSText = body.style.cssText;
     // NOTE: может не всегда работать
-    const hasVScrollBar = body.clientHeight >= root.clientHeight;
+    const hasVScrollBar = body.clientHeight > root.clientHeight;
 
     body.style.cssText = `
         ${bodyCSSText};

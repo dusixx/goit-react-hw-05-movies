@@ -2,13 +2,13 @@ import { useState } from 'react';
 import Modal from 'components/Modal';
 import { Spinner } from 'components/Loader';
 import { FiCameraOff as IconNoPhoto } from 'react-icons/fi';
-import TmdbService from 'services/tmdbSrv';
+import TmdbService from 'services/tmdb/tmdbSrv';
 import {
   Thumb,
   ProfileImage,
   Desc,
   Name,
-  Character,
+  Job,
   ModalContainer,
   ModalThumb,
   ProfileLink,
@@ -16,7 +16,13 @@ import {
 
 const srv = new TmdbService();
 const PROFILE_WIDTH = 185;
+const ICON_NO_PHOTO_COLOR = 'lightgray';
+const ICON_NO_PHOTO_SIZE = 50;
+const JOB_NA_STR = 'n/a';
 const COLOR_MODAL_BG = 'rgb(255 255 255 / 0.7)';
+
+// для crew вместо character доступно поле job
+// В остальном для crew и cast все рендерится единообразно
 
 export const PersonCard = ({ profile_path, name, character, job }) => {
   const [showModal, setShowModal] = useState(false);
@@ -28,27 +34,32 @@ export const PersonCard = ({ profile_path, name, character, job }) => {
     setShowModal(true);
   };
 
+  const previewPhoto = srv.buildImageUrl(profile_path, PROFILE_WIDTH);
+  const originalPhoto = srv.buildImageUrl(profile_path);
+
   return (
     <>
       <ProfileLink
-        to={srv.buildImageUrl(profile_path)}
+        to={originalPhoto}
         onClick={e => handleImageClick(e, profile_path)}
       >
         <Thumb>
           {profile_path ? (
-            <ProfileImage
-              src={srv.buildImageUrl(profile_path, PROFILE_WIDTH)}
-              alt={name}
-            ></ProfileImage>
+            <ProfileImage src={previewPhoto} alt={name}></ProfileImage>
           ) : (
-            <IconNoPhoto size={50} color="lightgray" />
+            <IconNoPhoto
+              size={ICON_NO_PHOTO_SIZE}
+              color={ICON_NO_PHOTO_COLOR}
+            />
           )}
         </Thumb>
-        <Desc>
-          <Name>{name}</Name>
-          <Character>{job || character}</Character>
-        </Desc>
       </ProfileLink>
+
+      {/* Не ссылкой, чтобы копировать текст при желании */}
+      <Desc>
+        <Name>{name}</Name>
+        <Job>{job || character || JOB_NA_STR}</Job>
+      </Desc>
 
       <Modal
         onClose={() => setShowModal(false)}
@@ -59,7 +70,7 @@ export const PersonCard = ({ profile_path, name, character, job }) => {
           <Spinner width={40} visible={!wasModalImageLoaded} />
           <ModalThumb>
             <img
-              src={srv.buildImageUrl(profile_path)}
+              src={originalPhoto}
               alt={name}
               onLoad={() => setWasModalImageLoaded(true)}
             />

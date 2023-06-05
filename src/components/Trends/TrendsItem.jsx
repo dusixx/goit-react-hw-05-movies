@@ -1,6 +1,6 @@
 import { showError } from 'utils';
 import { useState, useEffect } from 'react';
-import TmdbService from 'services/tmdbSrv';
+import TmdbService from 'services/tmdb/tmdbSrv';
 import {
   Poster,
   MovieLink,

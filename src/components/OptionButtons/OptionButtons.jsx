@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { OptionsList, OptionButton } from './OptionButtons.styled';
 import { normalizeStr } from 'utils';
 
-// NOTE: не передавать инлайн (<OptionButtons items = {...} />) -
+// !!! НЕ передавать инлайн (<OptionButtons items = {...} />) -
 // Каждый раз будет новый объект и перерендер
 
 export const OptionButtons = ({ items, onClick }) => {

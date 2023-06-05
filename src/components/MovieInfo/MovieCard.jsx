@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import TmdbService from 'services/tmdbSrv';
+import TmdbService from 'services/tmdb/tmdbSrv';
 import { Rating } from './Rating/Rating';
 import { AboutMovie } from './AboutMovie/AboutMovie';
 import Modal from 'components/Modal';

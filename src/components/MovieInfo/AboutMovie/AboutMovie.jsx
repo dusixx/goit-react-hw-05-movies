@@ -1,7 +1,7 @@
 import { LinkPrimary } from 'styles/shared';
 import { Cast } from './AboutMovie.styled';
-import { getCastData, getCrewData } from './helpers';
-// import { RiArrowRightSLine as IconRightArrow } from 'react-icons/ri';
+import { getCrewPreview, getCastPreview } from 'services/tmdb/helpers';
+
 import {
   List,
   Item,
@@ -36,8 +36,8 @@ export const AboutMovie = ({
     ? new Date(release_date).toLocaleDateString()
     : null;
 
-  const castData = getCastData(credits);
-  const crewData = getCrewData(credits);
+  const castData = getCastPreview(credits);
+  const crewData = getCrewPreview(credits);
 
   const newTab = { target: '_blank', rel: 'noopener noreferrer' };
 
@@ -111,10 +111,7 @@ export const AboutMovie = ({
         </List>
       )}
 
-      <CastAndCrewLink to="credits">
-        Full cast & crew
-        {/* <IconRightArrow size={20} /> */}
-      </CastAndCrewLink>
+      <CastAndCrewLink to="credits">Full cast & crew</CastAndCrewLink>
 
       {homepage && (
         <Homepage to={homepage} title={homepage} {...newTab}>

@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { FlexCentered } from 'styles/shared';
+import { FlexCentered, TransitionBase } from 'styles/shared';
 import { Link } from 'react-router-dom';
 
 export const Thumb = styled.div`
@@ -15,6 +15,8 @@ export const Desc = styled.div`
   gap: 5px;
 
   width: 100%;
+  height: 100%;
+
   padding: 7px;
   padding-bottom: 10px;
   color: var(--color-black);
@@ -28,12 +30,19 @@ export const Name = styled.b`
   text-transform: capitalize;
 `;
 
-export const Character = styled.span`
+export const Job = styled.span`
   font-size: 12px;
 `;
 
 export const ProfileLink = styled(Link)`
   position: relative;
+
+  ${TransitionBase('filter')};
+
+  &:hover,
+  &:focus-visible {
+    filter: brightness(1.1);
+  }
 `;
 
 export const ProfileImage = styled.img`
@@ -57,11 +66,11 @@ export const ModalThumb = styled.div`
   position: absolute;
 
   & img {
-    height: 95vh;
+    height: 90vh;
     width: auto;
     /* чтобы оставалось куда кликнуть в бекдроп */
-    max-width:80vw;
-
-    object-fit: cover;
+    max-width: 70vw;
+    object-fit: contain;
     object-position: center;
+  }
 `;

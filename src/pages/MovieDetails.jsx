@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import TmdbService from 'services/tmdbSrv';
+import TmdbService from 'services/tmdb/tmdbSrv';
 import { MovieCard } from 'components/MovieInfo/MovieCard';
 import { showError } from 'utils';
 // import Loader from 'components/Loader';
