@@ -4,6 +4,7 @@ import { Rating } from './Rating/Rating';
 import { AboutMovie } from './AboutMovie/AboutMovie';
 import Modal from 'components/Modal';
 import { Spinner } from 'components/Loader';
+import { ReviewList } from './Reviews/ReviewsList';
 
 import {
   Info,
@@ -19,6 +20,10 @@ const srv = new TmdbService();
 
 const POSTER_WIDTH = 500;
 const COLOR_MODAL_BG = 'rgb(255 255 255 / 0.7)';
+
+//
+// Movie card
+//
 
 export const MovieCard = ({ data = {} }) => {
   // деструктурируем инфу - делаем так,
@@ -49,6 +54,10 @@ export const MovieCard = ({ data = {} }) => {
   const releaseYear = data.release_date?.substring(0, 4);
   const reviewsCount = reviews?.total_results;
 
+  //
+  console.log('reviews', reviews);
+  //
+
   return (
     <>
       <Info>
@@ -69,6 +78,8 @@ export const MovieCard = ({ data = {} }) => {
           </Desc>
         )}
       </Info>
+
+      {reviewsCount > 0 && <ReviewList data={reviews} />}
 
       <Modal
         onClose={() => setShowModal(false)}

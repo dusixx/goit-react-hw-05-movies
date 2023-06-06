@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { Trends } from 'components/Trends/Trends';
-import { PageHeader } from 'components/PageHeader/PageHeader';
 import { PageTitle } from 'styles/shared';
 import { showError } from 'utils';
 import TmdbService from 'services/tmdb/tmdbSrv';

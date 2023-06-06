@@ -4,7 +4,11 @@ export const CreditsList = styled.ul`
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 25px;
+  gap: 30px;
+
+  /* @media screen and(min-width: 768px) {
+    gap: 30px;
+  } */
 
   width: 100%;
   margin-top: 30px;

@@ -41,6 +41,8 @@ export const ButtonBase = styled.button`
   ${FlexCentered(`gap: 5px`)}
   padding: 0;
 
+  font-size: inherit;
+  font-family: inherit;
   color: currentColor;
   background-color: transparent;
   border: none;
@@ -55,22 +57,46 @@ export const ButtonBase = styled.button`
 `;
 
 export const ButtonPrimary = styled(ButtonBase)`
-  padding-left: ${({ paddingSide }) => calcCSSValue(paddingSide) || '12px'};
-  padding-right: ${({ paddingSide }) => calcCSSValue(paddingSide) || '12px'};
+  padding: 10px;
+  padding-left: ${({ paddingSide }) => calcCSSValue(paddingSide) || '20px'};
+  padding-right: ${({ paddingSide }) => calcCSSValue(paddingSide) || '20px'};
 
-  padding-top: 7px;
-  padding-bottom: 7px;
-
-  font-size: 14px;
   color: white;
-
-  background-color: var(--color-accent);
   border-radius: var(--border-radius);
+  background-color: var(--color-blue);
+
   transition-property: background-color;
 
   &:focus-visible,
   &:hover {
     background-color: var(--color-blue-light);
+  }
+`;
+
+export const ButtonSecondary = styled(ButtonPrimary)`
+  color: var(--color-blue);
+  background-color: transparent;
+  border: 2px solid var(--color-blue);
+
+  transition-property: color, background-color;
+
+  &:focus-visible,
+  &:hover {
+    background-color: var(--color-blue);
+    color: white;
+  }
+`;
+
+export const ButtonLink = styled(ButtonBase)`
+  display: inline-block;
+  ${TransitionBase('color')};
+
+  font-size: inherit;
+  color: var(--color-blue);
+
+  &:hover,
+  &:focus-visible {
+    color: var(--color-orange);
   }
 `;
 
@@ -80,7 +106,6 @@ export const LinkBase = css`
   position: relative;
   color: currentColor;
   text-decoration: none;
-
   ${TransitionBase('color')};
 `;
 
@@ -103,6 +128,13 @@ export const Title = styled.h2`
   font-family: Arial Black;
   line-height: 1.1;
   letter-spacing: -2px;
+`;
+
+export const Subtitle = styled.h3`
+  text-transform: uppercase;
+  font-family: Arial Black;
+  font-size: 16px;
+  letter-spacing: -0.5px;
 `;
 
 export const PageTitle = styled(Title)`

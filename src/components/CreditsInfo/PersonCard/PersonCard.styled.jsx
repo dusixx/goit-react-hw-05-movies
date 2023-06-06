@@ -2,6 +2,15 @@ import styled from '@emotion/styled';
 import { FlexCentered, TransitionBase } from 'styles/shared';
 import { Link } from 'react-router-dom';
 
+export const Container = styled.div`
+  line-height: 1.2;
+`;
+
+export const ProfileLink = styled(Link)`
+  position: relative;
+  /* height: 100%; */
+`;
+
 export const Thumb = styled.div`
   ${FlexCentered()};
   height: calc(150px * 1.5);
@@ -34,21 +43,18 @@ export const Job = styled.span`
   font-size: 12px;
 `;
 
-export const ProfileLink = styled(Link)`
-  position: relative;
-
-  ${TransitionBase('filter')};
-
-  &:hover,
-  &:focus-visible {
-    filter: brightness(1.1);
-  }
-`;
-
 export const ProfileImage = styled.img`
   width: 100%;
   height: 100%;
   object-fit: cover;
+
+  ${TransitionBase('filter')};
+
+  /* Сюда вместо ссылки - чтобы не cработывало для заглушек */
+  &:hover,
+  &:focus-visible {
+    filter: brightness(1.1);
+  }
 `;
 
 export const ModalContainer = styled.div`

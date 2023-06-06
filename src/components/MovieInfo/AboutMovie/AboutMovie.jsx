@@ -11,10 +11,15 @@ import {
   Overview,
   Text,
   CastAndCrewLink,
+  Tagline,
+  Label,
 } from './AboutMovie.styled';
+
+const NEW_TAB = { target: '_blank', rel: 'noopener noreferrer' };
 
 export const AboutMovie = ({
   budget,
+  revenue,
   production_countries = [],
   genres = [],
   homepage,
@@ -39,8 +44,6 @@ export const AboutMovie = ({
   const castData = getCastPreview(credits);
   const crewData = getCrewPreview(credits);
 
-  const newTab = { target: '_blank', rel: 'noopener noreferrer' };
-
   let haveAnyDataAbout =
     releaseDate || countries || genresList || tagline || budget > 0 || castData;
 
@@ -52,38 +55,45 @@ export const AboutMovie = ({
         <List {...restProps}>
           {releaseDate && (
             <Item>
-              <span>release</span>
+              <Label>release</Label>
               <span>{releaseDate}</span>
             </Item>
           )}
 
           {countries && (
             <Item>
-              <span>countries</span>
+              <Label>countries</Label>
               <span>{countries}</span>
             </Item>
           )}
 
           {genresList && (
             <Item>
-              <span>genres</span>
+              <Label>genres</Label>
               <span>{genresList}</span>
             </Item>
           )}
 
           {tagline && (
             <Item>
-              <span>tagline</span>
+              <Label>tagline</Label>
               <span>
-                <i>{tagline}</i>
+                <Tagline>{tagline}</Tagline>
               </span>
             </Item>
           )}
 
           {budget > 0 && (
             <Item>
-              <span>budget</span>
+              <Label>budget</Label>
               <span>${budget}</span>
+            </Item>
+          )}
+
+          {revenue > 0 && (
+            <Item>
+              <Label>revenue</Label>
+              <span>${revenue}</span>
             </Item>
           )}
 
@@ -92,7 +102,7 @@ export const AboutMovie = ({
               return (
                 persons.length > 0 && (
                   <Item key={jobName}>
-                    <span>{jobName}</span>
+                    <Label>{jobName}</Label>
                     <span>{persons.join(', ')}</span>
                   </Item>
                 )
@@ -101,7 +111,7 @@ export const AboutMovie = ({
 
           {castData && (
             <Item>
-              <span>cast</span>
+              <Label>cast</Label>
               <Cast>
                 {castData.preview}
                 <LinkPrimary to="credits">{castData.remaining}</LinkPrimary>
@@ -114,7 +124,7 @@ export const AboutMovie = ({
       <CastAndCrewLink to="credits">Full cast & crew</CastAndCrewLink>
 
       {homepage && (
-        <Homepage to={homepage} title={homepage} {...newTab}>
+        <Homepage to={homepage} title={homepage} {...NEW_TAB}>
           Official website
         </Homepage>
       )}

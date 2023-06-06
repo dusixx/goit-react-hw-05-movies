@@ -23,6 +23,8 @@ export const MovieDetails = () => {
       .catch(showError);
   }, [movieId]);
 
+  console.log('Details', details);
+
   return (
     <>
       {/* мельтешит и по сути бесполезен */}

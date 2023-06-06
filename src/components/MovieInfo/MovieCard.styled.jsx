@@ -20,8 +20,11 @@ export const Info = styled.div`
 export const PosterLink = styled(Link)`
   position: relative;
   flex-shrink: 0;
+  height: max-content;
 
   @media screen and (min-width: 768px) {
+    position: sticky;
+    top: 58px;
     width: 330px;
   }
 

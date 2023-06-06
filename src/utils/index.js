@@ -1,9 +1,10 @@
 export * from './toast';
 
 const toStr = Object.prototype.toString;
-const normId = id => `${id}`.replace(/[^$\w]/gi, '').replace(/^\d+/, '');
 
+//
 // prove
+//
 
 export const isStr = v => typeof v === 'string';
 export const isNum = v => !isNaN(v - parseFloat(v));
@@ -13,7 +14,9 @@ export const isInt = v => Number.isInteger(v);
 export const isObj = v => toStr.call(v) === '[object Object]';
 export const isArray = v => Array.isArray(v);
 
+//
 // css
+//
 
 export const calcCSSValue = v => (isNum(v) ? `${v}px` : v);
 
@@ -23,11 +26,14 @@ export const parseCSSValue = v => {
   return { value, unit };
 };
 
+//
 // string
+//
 
 let id = 0;
 export const getId = () => `id-${(id++).toString(16)}`;
 
+const normId = id => `${id}`.replace(/[^$\w]/gi, '').replace(/^\d+/, '');
 export const normalizeStr = s => s.trim().toLocaleLowerCase();
 export const cap = v => (isStr(v) && v ? v[0].toUpperCase() + v.slice(1) : '');
 
@@ -37,7 +43,9 @@ export function camelToSnake(str) {
     .replace(/_+/g, '_');
 }
 
+//
 // object
+//
 
 export function setProp(obj, path, value, splitter = '/') {
   if (typeof obj !== 'object') return;
@@ -58,4 +66,18 @@ export function getProp(obj, path, splitter = '/') {
       .split(splitter)
       .reduce((ref, key) => ref[key], obj);
   } catch {}
+}
+
+//
+// number
+//
+
+export function truncateNumber(v) {
+  if (!isNum(v)) return '';
+  const digits = String(v).length;
+
+  if (digits >= 7) return `${(v / 10 ** 6).toFixed(1)}M`;
+  if (digits >= 4) return `${(v / 10 ** 3).toFixed(1)}K`;
+
+  return String(v);
 }

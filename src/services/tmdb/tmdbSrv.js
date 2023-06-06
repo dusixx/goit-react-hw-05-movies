@@ -139,15 +139,9 @@ export default class TmdbService {
     return data;
   }
 
-  // TODO: загружает постранично - учесть
-  // Сохранять в movie/id/reviews = {page1: [], page2: [], ...}
+  // не кешируем - грузятся страницами
   async getMovieReviews(id, params) {
-    const cached = cache.get(`movie/${id}/reviews`);
-    if (cached) return cached;
-
     const { data } = await this.get(`movie/${id}/reviews`, params);
-    cache.set(`movie/${id}/reviews`, data);
-
     return data;
   }
 

@@ -1,25 +1,21 @@
 import styled from '@emotion/styled';
 import { Link } from 'react-router-dom';
-import { LinkBase, LinkPrimary, TransitionBase } from 'styles/shared';
+import { LinkBase, LinkPrimary, Subtitle, TransitionBase } from 'styles/shared';
 
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  line-height: 1.3;
 
   @media screen and (min-width: 768px) {
     align-items: initial;
   }
 `;
 
-export const Title = styled.h3`
-  margin-top: 30px;
+export const Title = styled(Subtitle)`
+  margin-top: 35px;
   margin-bottom: 20px;
-
-  text-transform: uppercase;
-  font-family: Arial Black;
-  font-size: 16px;
-  letter-spacing: -0.5px;
 `;
 
 export const List = styled.ul`
@@ -43,6 +39,7 @@ export const Item = styled.li`
   @media screen and (min-width: 768px) {
     flex-direction: row;
     align-items: initial;
+    gap: 20px;
   }
 
   & span {
@@ -51,20 +48,39 @@ export const Item = styled.li`
       text-align: left;
     }
   }
+`;
 
-  /* label */
-  & span:first-of-type {
-    width: 100px;
-    flex-shrink: 0;
+export const Label = styled.span`
+  width: 100px;
+  flex-shrink: 0;
 
-    font-weight: bold;
-    letter-spacing: -0.2px;
-    text-transform: capitalize;
+  font-weight: bold;
+  letter-spacing: -0.2px;
+  text-transform: capitalize;
 
-    &::after {
-      content: ':';
-    }
+  &::after {
+    content: ':';
   }
+`;
+
+export const Cast = styled.p`
+  text-align: center;
+
+  @media screen and (min-width: 768px) {
+    text-align: left;
+  }
+`;
+
+export const CastAndCrewLink = styled(LinkPrimary)`
+  display: flex;
+  align-items: center;
+  width: max-content;
+
+  padding: 5px;
+  padding-left: 0;
+  margin-top: 25px;
+
+  text-transform: capitalize;
 `;
 
 export const Homepage = styled(Link)`
@@ -72,7 +88,7 @@ export const Homepage = styled(Link)`
 
   display: block;
   width: 150px;
-  margin-top: 30px;
+  margin-top: 20px;
   padding: 10px;
 
   text-transform: capitalize;
@@ -91,31 +107,21 @@ export const Homepage = styled(Link)`
   }
 `;
 
-export const Text = styled.p`
-  max-width: 700px;
-`;
-
 export const Overview = styled.div`
   text-align: center;
+  line-height: 1.5;
 
   @media screen and (min-width: 768px) {
     text-align: left;
   }
 `;
 
-export const Cast = styled.p`
-  text-align: center;
-
-  @media screen and (min-width: 768px) {
-    text-align: left;
-  }
+export const Tagline = styled.span`
+  font-style: italic;
+  font-weight: 400;
+  color: gray;
 `;
 
-export const CastAndCrewLink = styled(LinkPrimary)`
-  display: flex;
-  align-items: center;
-  /* gap: 2px; */
-  margin-top: 30px;
-  width: max-content;
-  text-transform: capitalize;
+export const Text = styled.p`
+  max-width: 700px;
 `;

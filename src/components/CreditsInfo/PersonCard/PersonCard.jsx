@@ -12,13 +12,15 @@ import {
   ModalContainer,
   ModalThumb,
   ProfileLink,
+  Container,
 } from './PersonCard.styled';
 
 const srv = new TmdbService();
+
 const PROFILE_WIDTH = 185;
 const ICON_NO_PHOTO_COLOR = 'lightgray';
 const ICON_NO_PHOTO_SIZE = 50;
-const JOB_NA_STR = 'n/a';
+const STR_NA = 'n/a';
 const COLOR_MODAL_BG = 'rgb(255 255 255 / 0.7)';
 
 // для crew вместо character доступно поле job
@@ -38,14 +40,18 @@ export const PersonCard = ({ profile_path, name, character, job }) => {
   const originalPhoto = srv.buildImageUrl(profile_path);
 
   return (
-    <>
+    <Container>
       <ProfileLink
         to={originalPhoto}
         onClick={e => handleImageClick(e, profile_path)}
       >
         <Thumb>
           {profile_path ? (
-            <ProfileImage src={previewPhoto} alt={name}></ProfileImage>
+            <ProfileImage
+              src={previewPhoto}
+              alt={name}
+              loading="lazy"
+            ></ProfileImage>
           ) : (
             <IconNoPhoto
               size={ICON_NO_PHOTO_SIZE}
@@ -58,7 +64,7 @@ export const PersonCard = ({ profile_path, name, character, job }) => {
       {/* Не ссылкой, чтобы копировать текст при желании */}
       <Desc>
         <Name>{name}</Name>
-        <Job>{job || character || JOB_NA_STR}</Job>
+        <Job>{job || character || STR_NA}</Job>
       </Desc>
 
       <Modal
@@ -77,6 +83,6 @@ export const PersonCard = ({ profile_path, name, character, job }) => {
           </ModalThumb>
         </ModalContainer>
       </Modal>
-    </>
+    </Container>
   );
 };

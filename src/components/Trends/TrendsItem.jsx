@@ -59,7 +59,11 @@ export const TrendsItem = ({
       {wasLoaded && <Rating title={`Votes: ${vote_count}`}>{rating}</Rating>}
 
       <MovieLink to={`movies/${id}`}>
-        <Poster {...posterData} onLoad={() => setWasLoaded(true)} />
+        <Poster
+          {...posterData}
+          onLoad={() => setWasLoaded(true)}
+          loading="lazy"
+        />
 
         <Overlay data-overlay>
           {title && (
