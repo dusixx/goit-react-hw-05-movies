@@ -6,7 +6,7 @@ import { Home } from 'pages';
 import { MovieDetails } from 'pages/MovieDetails';
 import { Credits } from 'pages/Credits';
 import { ScrollToTop } from 'components/MovieInfo/Reviews/ScrollToTop/ScrollToTop';
-
+import { PageNotFound } from 'components/PageNotFound/PageNotFound';
 //
 // App
 //
@@ -21,11 +21,8 @@ export const App = () => {
             <Route index element={<Home />}></Route>
             <Route path="movies" element={<div>Movies</div>}></Route>
             <Route path="movies/:movieId" element={<MovieDetails />}></Route>
-            <Route path="movies/:movieId/credits" element={<Credits />}>
-              {/* <Route path="cast" element={<div>Cast subpage</div>}></Route>
-            <Route path="crew" element={<div>Crew subpage</div>}></Route> */}
-            </Route>
-            <Route path="*" element={<div>Page Not Found</div>} />
+            <Route path="movies/:movieId/credits" element={<Credits />}></Route>
+            <Route path="*" element={<PageNotFound />} />
           </Route>
         </Routes>
 

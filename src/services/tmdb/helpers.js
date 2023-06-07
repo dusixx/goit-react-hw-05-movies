@@ -20,8 +20,6 @@ export const normalizeCrewData = crew => {
   }));
 };
 
-const DEF_CAST_COUNT = 5;
-
 /**
  * Информация об актерах
  *
@@ -33,7 +31,7 @@ const DEF_CAST_COUNT = 5;
  *    preview - строка-список имен (анонс)
  *    remaining - строка (оставшиеся) для ссылки на страницу всех актеров
  */
-export const getCastPreview = (credits, count = DEF_CAST_COUNT) => {
+export const getCastPreview = (credits, count = 5) => {
   if (!Array.isArray(credits?.cast)) return;
   const { cast } = credits;
 
@@ -77,18 +75,18 @@ export const getCrewPreview = credits => {
   };
 
   // known_for_department
-  const data = crew.reduce((persons, { department, job, name }) => {
+  const data = crew.reduce((res, { department, job, name }) => {
     const jobName = normalizeStr(job);
     const dep = normalizeStr(department);
 
-    if (jobName === 'director' && dep !== 'directing') return persons;
+    if (jobName === 'director' && dep !== 'directing') return res;
 
-    if (persons[jobName]) {
+    if (res[jobName]) {
       personsCount += 1;
-      persons[jobName] = [...persons[jobName], name];
+      res[jobName] = [...res[jobName], name];
     }
 
-    return persons;
+    return res;
   }, personsList);
 
   return personsCount ? data : null;

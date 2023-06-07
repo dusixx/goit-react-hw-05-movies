@@ -32,7 +32,9 @@ export const Rating = styled.span`
   z-index: 9;
 
   ${FlexCentered()};
-  padding: 2px 7px 0px 7px;
+
+  padding-left: 7px;
+  padding-right: 7px;
   height: 20px;
 
   font-size: 16px;

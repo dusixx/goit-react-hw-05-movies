@@ -2,10 +2,10 @@ import { useState, useEffect } from 'react';
 import { OptionsList, OptionButton } from './OptionButtons.styled';
 import { normalizeStr } from 'utils';
 
-// !!! НЕ передавать инлайн (<OptionButtons items = {...} />) -
+// !!! НЕ передавать инлайн items (<OptionButtons items = {...} />) -
 // Каждый раз будет новый объект и перерендер
 
-export const OptionButtons = ({ items, onClick }) => {
+export const OptionButtons = ({ items, onClick, style }) => {
   const [active, setActive] = useState(null);
   const btns = items ?? '';
 
@@ -28,7 +28,7 @@ export const OptionButtons = ({ items, onClick }) => {
 
   return (
     btnNames.length > 0 && (
-      <OptionsList>
+      <OptionsList style={style}>
         {btnNames.map(name => (
           <OptionButton
             key={name}

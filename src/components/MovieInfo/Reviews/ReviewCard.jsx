@@ -51,7 +51,7 @@ export const ReviewCard = ({
               />
             )}
           </AvatarThumb>
-          <b>Review by {author}</b>
+          <b>{author}</b>
         </AvatarAndName>
 
         <HeaderGroup>

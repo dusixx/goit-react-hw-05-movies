@@ -2,11 +2,11 @@ import { List, Item } from './Trends.styled';
 import { TrendsItem } from './TrendsItem';
 
 export const Trends = ({
-  value = [],
+  data = [],
   // поле должно быть числовым
   sortKey = 'vote_average',
 }) => {
-  const sorted = [...value].sort((a, b) => b[sortKey] - a[sortKey]);
+  const sorted = [...data].sort((a, b) => b[sortKey] - a[sortKey]);
 
   return (
     <List>

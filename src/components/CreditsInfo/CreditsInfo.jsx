@@ -1,31 +1,76 @@
 import { useState } from 'react';
-import { CreditsList, CreditsListItem } from './CreditsInfo.styled';
 import { OptionButtons } from '../OptionButtons/OptionButtons';
 import { PersonCard } from './PersonCard/PersonCard';
 import { normalizeCrewData } from 'services/tmdb/helpers';
-import Loader from 'components/Loader';
+import { useEffect, useRef } from 'react';
 
+import {
+  CreditsList,
+  CreditsListItem,
+  LoadMoreBtn,
+  Container,
+} from './CreditsInfo.styled';
+
+const CARDS_PER_PAGE = 30;
 const btns = { cast: 1, crew: 0 };
 
-export const CreditsInfo = ({ data: { credits }, sortKey = 'popularity' }) => {
+export const CreditsInfo = ({ data, sortKey = 'popularity' }) => {
   const [active, setActive] = useState('cast');
-  const [showLoader, setShowLoader] = useState(false);
-  const { crew, cast } = credits;
+  const [cards, setCards] = useState([]);
+  const [page, setPage] = useState(1);
 
-  const personsData = active === 'cast' ? cast : normalizeCrewData(crew);
-  const sorted = [...personsData].sort((a, b) => b[sortKey] - a[sortKey]);
+  const sortedCredits = useRef(null);
 
-  const content = sorted.map(({ id, ...rest }) => (
-    <CreditsListItem key={id}>
-      <PersonCard {...rest} />
-    </CreditsListItem>
-  ));
+  const credits = useRef({
+    cast: data.credits.cast,
+    crew: normalizeCrewData(data.credits.crew),
+  });
+
+  useEffect(() => {
+    const data = credits.current[active];
+    sortedCredits.current = [...data].sort((a, b) => b[sortKey] - a[sortKey]);
+  }, [active, sortKey]);
+
+  useEffect(() => {
+    const start = (page - 1) * CARDS_PER_PAGE;
+    const end = start + CARDS_PER_PAGE;
+    setCards(cur => [...cur, ...sortedCredits.current.slice(start, end)]);
+  }, [page, active]);
+
+  const handleClickOption = name => {
+    setCards([]);
+    setActive(name);
+    setPage(1);
+  };
+
+  const showLoadMore =
+    cards.length > 0 &&
+    sortedCredits.current &&
+    cards.length < sortedCredits.current.length;
 
   return (
-    <>
-      <Loader visible={showLoader} />
-      <OptionButtons items={btns} onClick={name => setActive(name)} />
-      <CreditsList>{content}</CreditsList>
-    </>
+    <Container>
+      <OptionButtons items={btns} onClick={handleClickOption} />
+
+      {cards.length > 0 && (
+        <CreditsList>
+          {cards.map(({ id, ...rest }) => (
+            <CreditsListItem key={id}>
+              {/* NOTE: при большом кол-ве тормозит - 
+                возможно из-за большого кол-ва styled component
+                в разметке PersonCard
+              */}
+              <PersonCard {...rest} />
+            </CreditsListItem>
+          ))}
+        </CreditsList>
+      )}
+
+      {showLoadMore && (
+        <LoadMoreBtn onClick={() => setPage(cur => cur + 1)}>
+          Load more
+        </LoadMoreBtn>
+      )}
+    </Container>
   );
 };

@@ -21,7 +21,7 @@ export const Desc = styled.div`
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  gap: 5px;
+  gap: 2px;
 
   width: 100%;
   height: 100%;

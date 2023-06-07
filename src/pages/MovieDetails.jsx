@@ -7,6 +7,10 @@ import { showError } from 'utils';
 
 const srv = new TmdbService();
 
+// !!! некоторая информация для фильмов из списка трендов
+// более актуальная чем при запросе деталей того же фильма
+// Например - рейтинг и кол-во голосов
+
 export const MovieDetails = () => {
   const { movieId } = useParams();
   const [details, setDetails] = useState(null);
@@ -22,8 +26,6 @@ export const MovieDetails = () => {
       })
       .catch(showError);
   }, [movieId]);
-
-  console.log('Details', details);
 
   return (
     <>

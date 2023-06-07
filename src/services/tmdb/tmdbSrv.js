@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { isObj, isArray, camelToSnake } from '../../utils';
+import { isObj, isArray, camelToSnake, normalizeStr } from '../../utils';
 import Cache from './cache';
 
 const controller = new AbortController();
@@ -94,23 +94,18 @@ export default class TmdbService {
    */
   async getTrendingMovies(period, params) {
     // сложнее кешировать - зависит от period (может быть несколько страниц)
-    const resp = await this.get(`trending/movie/${period}`);
+    const resp = await this.get(`trending/movie/${normalizeStr(period)}`);
     return resp.data.results;
   }
 
-  /**
-   *
-   * @param {*} params
-   * @returns
-   */
-  async getDayTrendingMovies(params) {
-    const cached = cache.get('trends/day');
+  async getTop20(period = 'day', params) {
+    const cached = cache.get(`trending/movie/${period}`);
     if (cached) return cached;
 
-    const data = await this.getTrendingMovies('day', params);
-    cache.set('trends/day', data);
+    const results = await this.getTrendingMovies(period, params);
+    cache.set(`trending/movie/${period}`, results);
 
-    return data;
+    return results;
   }
 
   /**

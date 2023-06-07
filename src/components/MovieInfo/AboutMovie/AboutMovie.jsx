@@ -1,6 +1,7 @@
 import { LinkPrimary } from 'styles/shared';
 import { Cast } from './AboutMovie.styled';
 import { getCrewPreview, getCastPreview } from 'services/tmdb/helpers';
+import { splitIntoTriads } from 'utils';
 
 import {
   List,
@@ -27,6 +28,7 @@ export const AboutMovie = ({
   release_date,
   tagline,
   credits,
+  runtime,
   ...restProps
 }) => {
   const genresList = genres?.length
@@ -44,8 +46,22 @@ export const AboutMovie = ({
   const castData = getCastPreview(credits);
   const crewData = getCrewPreview(credits);
 
-  let haveAnyDataAbout =
-    releaseDate || countries || genresList || tagline || budget > 0 || castData;
+  const runtimeHHMM = `${new Date(runtime * 60000)
+    .toISOString()
+    .substr(11, 5)
+    .replace(':', 'h ')}m`;
+
+  // !! как-то проще?
+  const haveAnyDataAbout =
+    releaseDate ||
+    countries ||
+    genresList ||
+    tagline ||
+    budget > 0 ||
+    revenue > 0 ||
+    castData ||
+    crewData ||
+    runtimeHHMM;
 
   return (
     <Container>
@@ -86,14 +102,14 @@ export const AboutMovie = ({
           {budget > 0 && (
             <Item>
               <Label>budget</Label>
-              <span>${budget}</span>
+              <span>${splitIntoTriads(budget)}</span>
             </Item>
           )}
 
           {revenue > 0 && (
             <Item>
               <Label>revenue</Label>
-              <span>${revenue}</span>
+              <span>${splitIntoTriads(revenue)}</span>
             </Item>
           )}
 
@@ -116,6 +132,13 @@ export const AboutMovie = ({
                 {castData.preview}
                 <LinkPrimary to="credits">{castData.remaining}</LinkPrimary>
               </Cast>
+            </Item>
+          )}
+
+          {runtime > 0 && (
+            <Item>
+              <Label>runtime</Label>
+              <span>{runtimeHHMM}</span>
             </Item>
           )}
         </List>

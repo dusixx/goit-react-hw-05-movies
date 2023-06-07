@@ -1,10 +1,13 @@
 import styled from '@emotion/styled';
 import { ButtonBase, FlexCentered, TransitionBase } from 'styles/shared';
+import { calcCSSValue } from 'utils';
 
 export const OptionsList = styled.div`
   ${FlexCentered()};
   flex-wrap: wrap;
   gap: 10px;
+
+  margin-bottom: ${({ style }) => calcCSSValue(style?.marginBottom)};
 `;
 
 export const OptionButton = styled(ButtonBase)`

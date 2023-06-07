@@ -42,14 +42,15 @@ export const Rating = ({
           <IconImdbLogo />
         </ImdbLink>
       )}
-
       <TmdbLink {...tmdbData}>
         <IconTmdbLogo size={height} title={tmdbUrl} />
       </TmdbLink>
 
-      <Stat>
-        <span>{truncateNumber(vote_count)}</span> votes
-      </Stat>
+      {vote_count > 0 && (
+        <Stat>
+          <span>{truncateNumber(vote_count)}</span> votes
+        </Stat>
+      )}
 
       {reviewsCount > 0 && (
         <ReviewsHashLink to="#reviews">

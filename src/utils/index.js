@@ -1,6 +1,7 @@
 export * from './toast';
 
 const toStr = Object.prototype.toString;
+const normId = id => `${id}`.replace(/[^$\w]/gi, '').replace(/^\d+/, '');
 
 //
 // prove
@@ -33,14 +34,50 @@ export const parseCSSValue = v => {
 let id = 0;
 export const getId = () => `id-${(id++).toString(16)}`;
 
-const normId = id => `${id}`.replace(/[^$\w]/gi, '').replace(/^\d+/, '');
-export const normalizeStr = s => s.trim().toLocaleLowerCase();
+export const normalizeStr = s => s && String(s).trim().toLocaleLowerCase();
+
 export const cap = v => (isStr(v) && v ? v[0].toUpperCase() + v.slice(1) : '');
 
 export function camelToSnake(str) {
   return normId(str)
     .replace(/(?<=[^A-Z])([A-Z])/g, (_, ch) => `_${ch.toLowerCase()}`)
     .replace(/_+/g, '_');
+}
+
+export function truncateNumber(v, fractDigits = 1) {
+  if (!isNum(v)) return '';
+  let res = String(v);
+
+  // целая часть
+  const digits = res.split('.')[0].length;
+  const map = { K: 3, M: 6, B: 9, T: 12 };
+
+  Object.entries(map).some(([suffix, power]) => {
+    const found = digits >= power + 1;
+    if (found) res = `${(v / 10 ** power).toFixed(fractDigits)}${suffix}`;
+    return found;
+  });
+
+  return res;
+}
+
+export function splitIntoTriads(v, splitter = ' ') {
+  // !! очень большие числа некорректно конвертит в строку
+  const str = String(v).replace(/\s/g, '');
+
+  // числа только в "обычном" формате (не научный и тп)
+  if (!/^\d+(\.\d+)?$/.test(str)) return '';
+
+  // разбиваем на триады только целую часть
+  const part = str.split('.');
+  const headLen = part[0].length % 3;
+
+  part[0] = part[0].replace(
+    RegExp(`(${headLen ? `^\\d{${headLen}}|` : ``}\\d{3})(?!$)`, `g`),
+    `$1${splitter}`
+  );
+
+  return part.join('.');
 }
 
 //
@@ -66,18 +103,4 @@ export function getProp(obj, path, splitter = '/') {
       .split(splitter)
       .reduce((ref, key) => ref[key], obj);
   } catch {}
-}
-
-//
-// number
-//
-
-export function truncateNumber(v) {
-  if (!isNum(v)) return '';
-  const digits = String(v).length;
-
-  if (digits >= 7) return `${(v / 10 ** 6).toFixed(1)}M`;
-  if (digits >= 4) return `${(v / 10 ** 3).toFixed(1)}K`;
-
-  return String(v);
 }

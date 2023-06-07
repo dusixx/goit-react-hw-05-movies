@@ -41,7 +41,8 @@ export const MovieCard = ({ data = {} }) => {
   };
 
   // имя фильма
-  let movieTitle = original_title || title;
+  // original_title - название на языке оригинала (например, китайский)
+  let movieTitle = title || original_title;
 
   // постер
   const posterData = {
@@ -55,7 +56,8 @@ export const MovieCard = ({ data = {} }) => {
   const reviewsCount = reviews?.total_results;
 
   //
-  console.log('reviews', reviews);
+  // console.log('reviews', reviews);
+  // console.log(reviewsCount);
   //
 
   return (
