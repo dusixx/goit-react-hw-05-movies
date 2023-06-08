@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { FlexCentered, LinkPrimary } from 'styles/shared';
+import { ButtonLink, FlexCentered, LinkPrimary } from 'styles/shared';
 
 export const Container = styled.div`
   padding: 20px;
@@ -64,7 +64,21 @@ export const SourceLink = styled(LinkPrimary)``;
 
 // pre чтобы сохранить оригинальное форматирование
 export const Content = styled.pre`
-  white-space: pre-wrap;
   font-family: inherit;
   line-height: 1.5;
+  white-space: pre-wrap;
+  overflow: hidden;
+`;
+
+export const Expander = styled(ButtonLink)`
+  display: block;
+  margin: 20px auto 0 auto;
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: -0.2px;
+  color: #a7a7a7;
+
+  @media screen and (min-width: 768px) {
+    margin: 20px 0 0 0;
+  }
 `;

@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { ButtonBase } from 'styles/shared';
+import { ButtonBase, TransitionBase } from 'styles/shared';
 
 export const Field = styled.label`
   width: ${({ width }) => width || '100%'};
@@ -25,23 +25,14 @@ export const Input = styled.input`
   font-size: inherit;
   background-color: white;
 
-  border-bottom-left-radius: var(--border-radius);
-  border-top-left-radius: var(--border-radius);
-
   border: unset;
   outline: none;
 
-  transition-property: background-color;
-  transition-duration: var(--trans-duration);
-  transition-timing-function: var(--trans-func);
+  ${TransitionBase()};
 
   &::placeholder {
-    opacity: 0.5;
+    opacity: 0.6;
     text-transform: capitalize;
-  }
-
-  &:focus-visible {
-    background-color: var(--color-accent-lighter);
   }
 `;
 

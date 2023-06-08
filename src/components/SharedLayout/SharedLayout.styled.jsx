@@ -25,15 +25,16 @@ export const HeaderContainer = styled(Container)`
 `;
 
 export const MainContainer = styled(Container)`
-  padding-top: 70px;
   padding-bottom: 40px;
+  padding-top: 50px;
 `;
 
 export const Main = styled.main`
+  /* background: linear-gradient(180deg, #ebebeb 0, transparent); */
   max-width: 1350px;
   min-height: 100vh;
   background-color: whitesmoke;
-  margin: 0 auto 0 auto;
+  margin: 58px auto 0 auto;
 `;
 
 export const GoBack = styled(GoBackLink)`
@@ -50,4 +51,16 @@ export const GoBack = styled(GoBackLink)`
   &:focus-visible {
     color: var(--color-blue);
   }
+`;
+
+export const SubHeader = styled.div`
+  position: absolute;
+  left: 0;
+  top: 58px;
+  display: flex;
+  width: 100%;
+  height: ${({ style }) => style?.height};
+  background-color: white;
+  border-bottom: 1px solid lightgray;
+  margin-bottom: 20px;
 `;

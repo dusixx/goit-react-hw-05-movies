@@ -21,7 +21,6 @@ export const GoBackLink = ({
 
   useEffect(() => {
     const { key, pathname, state } = location;
-    console.log(location);
     setPath(
       // key будет default даже в случае, если задали id в строке адреса и запрос был успешным
       // Поэтому на него нельзя ориентироваться

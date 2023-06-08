@@ -3,11 +3,11 @@ import { LinkPrimary } from 'styles/shared';
 import { PageTitle } from 'styles/shared';
 
 export const Container = styled.div`
+  margin-top: 20px;
   display: flex;
   flex-direction: column;
   text-align: center;
   align-items: center;
-  gap: 10px;
 `;
 
 export const GoHomeLink = styled(LinkPrimary)`
@@ -24,15 +24,15 @@ export const Message = styled.div`
 
 export const Caption = styled(PageTitle)`
   display: flex;
-  flex-direction: column;
   align-items: center;
+  gap: 10px;
 
-  font-size: 16px;
+  font-size: 26px;
   letter-spacing: unset;
 
   & span {
+    font-weight: 400;
     letter-spacing: -1px;
-    font-size: 80px;
   }
 `;
 

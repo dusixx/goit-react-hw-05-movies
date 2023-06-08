@@ -7,7 +7,8 @@ import {
   Main,
   HeaderContainer,
   MainContainer,
-  GoBack,
+  SubHeader,
+  // GoBack,
 } from './SharedLayout.styled';
 
 export const SharedLayout = () => {
@@ -20,8 +21,10 @@ export const SharedLayout = () => {
         </HeaderContainer>
       </Header>
       <Main>
+        {/* <GoBack>back</GoBack> */}
+        {/* <SubHeader style={{ height: 40 }} /> */}
         <MainContainer>
-          <GoBack>back</GoBack>
+          <SubHeader style={{ height: 40 }} />
           <Outlet />
         </MainContainer>
       </Main>

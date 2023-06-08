@@ -12,16 +12,6 @@ export const FlexCentered = cssProps => css`
   ${isStr(cssProps) ? css(cssProps) : { ...cssProps }}
 `;
 
-export const Disabled = css`
-  pointer-events: none;
-  filter: grayscale(1);
-  opacity: 0.4;
-`;
-
-/**
- * @param {string} propNames - список свойств через пробел или запятую
- * @returns
- */
 export const TransitionBase = propNames => {
   const list =
     isStr(propNames) && propNames
@@ -35,6 +25,11 @@ export const TransitionBase = propNames => {
   `;
 };
 
+export const Disabled = css`
+  pointer-events: none;
+  opacity: 0.5;
+`;
+
 // button
 
 export const ButtonBase = styled.button`
@@ -43,6 +38,7 @@ export const ButtonBase = styled.button`
 
   font-size: inherit;
   font-family: inherit;
+
   color: currentColor;
   background-color: transparent;
   border: none;
@@ -64,12 +60,11 @@ export const ButtonPrimary = styled(ButtonBase)`
   color: white;
   border-radius: var(--border-radius);
   background-color: var(--color-blue);
-
-  transition-property: background-color;
+  transition-property: filter;
 
   &:focus-visible,
   &:hover {
-    background-color: var(--color-blue-light);
+    filter: brightness(1.1);
   }
 `;
 
@@ -150,4 +145,13 @@ export const PageSubtitle = styled.h3`
   text-transform: capitalize;
   text-align: center;
   color: rgb(0 0 0 / 0.3);
+`;
+
+export const PageContainer = styled.div`
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto 0 auto;
+  padding: 0 20px 0 20px;
+  padding-bottom: 40px;
+  padding-top: 50px;
 `;

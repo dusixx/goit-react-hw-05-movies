@@ -94,18 +94,18 @@ export default class TmdbService {
    */
   async getTrendingMovies(period, params) {
     // сложнее кешировать - зависит от period (может быть несколько страниц)
-    const resp = await this.get(`trending/movie/${normalizeStr(period)}`);
-    return resp.data.results;
+    const { data } = await this.get(`trending/movie/${normalizeStr(period)}`);
+    return data;
   }
 
   async getTop20(period = 'day', params) {
     const cached = cache.get(`trending/movie/${period}`);
     if (cached) return cached;
 
-    const results = await this.getTrendingMovies(period, params);
-    cache.set(`trending/movie/${period}`, results);
+    const data = await this.getTrendingMovies(period, params);
+    cache.set(`trending/movie/${period}`, data);
 
-    return results;
+    return data;
   }
 
   /**
@@ -137,6 +137,11 @@ export default class TmdbService {
   // не кешируем - грузятся страницами
   async getMovieReviews(id, params) {
     const { data } = await this.get(`movie/${id}/reviews`, params);
+    return data;
+  }
+
+  async searchMovies(query, params) {
+    const { data } = await this.get(`search/movie`, { query, ...params });
     return data;
   }
 

@@ -1,7 +1,9 @@
 :root {
-  --color-blue: #1c66ee;
+  --color-blue-rgb: 27, 101, 238;
+  --color-orange-rgb: 237, 79, 52;
+  --color-blue: rgb(var(--color-blue-rgb));
   --color-blue-light: #296ff0;
-  --color-orange: #ed4f34;
+  --color-orange: rgb(var(--color-orange-rgb));
   --color-gray-lighter: #f1f1f1;
   --color-black: rgb(43, 43, 43);
   --color-text: var(--color-black);

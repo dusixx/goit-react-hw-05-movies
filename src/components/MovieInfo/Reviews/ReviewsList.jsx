@@ -2,7 +2,8 @@ import { useState, useRef } from 'react';
 import { showError } from 'utils';
 import TmdbService from 'services/tmdb/tmdbSrv';
 import { ReviewCard } from './ReviewCard';
-import { List, Container, Title, LoadMoreBtn } from './ReviewsList.styled';
+import { List, Container, Title } from './ReviewsList.styled';
+import { LoadMoreBtn } from 'components/LoadMoreBtn/LoadMoreBtn';
 
 const srv = new TmdbService();
 
@@ -35,7 +36,7 @@ export const ReviewList = ({ data: { id, results, total_pages } }) => {
         })}
       </List>
       {total_pages > 0 && page.current < total_pages && (
-        <LoadMoreBtn onClick={handleLoadMoreClick}>Load more</LoadMoreBtn>
+        <LoadMoreBtn onClick={handleLoadMoreClick} />
       )}
     </Container>
   );

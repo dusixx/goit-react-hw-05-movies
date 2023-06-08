@@ -1,5 +1,6 @@
-import TmdbService from 'services/tmdb/tmdbSrv';
+import { getAvatar } from 'services/tmdb/helpers';
 import { FaUserCircle as IconNoAvatar } from 'react-icons/fa';
+import { useRef, useEffect } from 'react';
 
 import {
   Container,
@@ -10,11 +11,12 @@ import {
   HeaderGroup,
   Content,
   SourceLink,
+  Expander,
 } from './ReviewCard.styled';
-
-const srv = new TmdbService();
+import { useState } from 'react';
 
 const AVATAR_WIDTH = 185;
+const CONTENT_MAX_HEIGHT = 100;
 const ICON_NO_AVATAR_SIZE = 60;
 const ICON_NO_AVATAR_COLOR = 'lightgray';
 const NEW_TAB = { target: '_blank', rel: 'noopener noreferrer' };
@@ -28,12 +30,13 @@ export const ReviewCard = ({
   updated_at,
   id,
 }) => {
-  const getAvatar = path =>
-    path
-      ? /http/i.test(path)
-        ? path.replace(/\//, '')
-        : srv.buildImageUrl(path, AVATAR_WIDTH)
-      : null;
+  const [showExpander, setShowExpander] = useState(false);
+  const contentRef = useRef(null);
+
+  useEffect(() => {
+    const contentHeight = contentRef.current.getBoundingClientRect().height;
+    setShowExpander(contentHeight > CONTENT_MAX_HEIGHT);
+  }, []);
 
   const createdDate = new Date(created_at).toLocaleString();
 
@@ -43,7 +46,10 @@ export const ReviewCard = ({
         <AvatarAndName>
           <AvatarThumb>
             {avatar_path ? (
-              <AvatarImage src={getAvatar(avatar_path)} alt={author} />
+              <AvatarImage
+                src={getAvatar(avatar_path, AVATAR_WIDTH)}
+                alt={author}
+              />
             ) : (
               <IconNoAvatar
                 size={ICON_NO_AVATAR_SIZE}
@@ -62,7 +68,18 @@ export const ReviewCard = ({
         </HeaderGroup>
       </Header>
       {/* В постах попадается разметка, ставим их в innerHTML */}
-      <Content dangerouslySetInnerHTML={{ __html: content }} />
+      <Content
+        ref={contentRef}
+        dangerouslySetInnerHTML={{ __html: content }}
+        style={showExpander ? { maxHeight: CONTENT_MAX_HEIGHT } : null}
+      />
+      {showExpander && (
+        <>
+          <Expander onClick={() => setShowExpander(false)}>
+            Show full review
+          </Expander>
+        </>
+      )}
     </Container>
   );
 };

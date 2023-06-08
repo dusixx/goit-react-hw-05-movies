@@ -44,7 +44,7 @@ export function camelToSnake(str) {
     .replace(/_+/g, '_');
 }
 
-export function truncateNumber(v, fractDigits = 1) {
+export function truncateNumber(v, fractDigits = 2) {
   if (!isNum(v)) return '';
   let res = String(v);
 

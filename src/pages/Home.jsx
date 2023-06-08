@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { Trends } from 'components/Trends/Trends';
-import { PageTitle } from 'styles/shared';
+import { MovieGallery } from 'components/MovieGallery/MovieGallery';
+import { PageTitle, PageContainer } from 'styles/shared';
 import { showError } from 'utils';
 import TmdbService from 'services/tmdb/tmdbSrv';
 import { OptionButtons } from 'components/OptionButtons/OptionButtons';
@@ -8,14 +8,17 @@ import { OptionButtons } from 'components/OptionButtons/OptionButtons';
 const btns = { week: 1, day: 0 };
 
 const srv = new TmdbService();
-const PAGE_TITLE = `TRENDS`;
+const PAGE_TITLE = `Trends`;
 
 export const Home = () => {
   const [active, setActive] = useState('week');
-  const [trends, setTrends] = useState([]);
+  const [trends, setTrends] = useState(null);
 
   useEffect(() => {
-    srv.getTop20(active).then(setTrends).catch(showError);
+    srv
+      .getTop20(active)
+      .then(({ results }) => setTrends(results))
+      .catch(showError);
   }, [active]);
 
   return (
@@ -28,7 +31,7 @@ export const Home = () => {
         onClick={name => setActive(name)}
         style={{ marginBottom: 30 }}
       />
-      <Trends data={trends} />
+      {trends && <MovieGallery data={trends} />}
     </>
   );
 };

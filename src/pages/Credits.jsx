@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { PageTitle } from 'styles/shared';
+import { PageTitle, PageContainer } from 'styles/shared';
 import { showError } from 'utils';
 import TmdbService from 'services/tmdb/tmdbSrv';
 import { CreditsInfo } from 'components/CreditsInfo/CreditsInfo';
@@ -23,7 +23,9 @@ export const Credits = () => {
   return (
     details && (
       <>
-        <PageTitle style={{ marginBottom: 30 }}>{details.title} </PageTitle>
+        <PageTitle style={{ marginBottom: 30, marginTop: 10 }}>
+          {details.title}{' '}
+        </PageTitle>
         <CreditsInfo data={details} />
       </>
     )

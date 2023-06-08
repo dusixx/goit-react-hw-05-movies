@@ -9,16 +9,16 @@ import {
   Overview,
   Rating,
   Genres,
-} from './TrendsItem.styled';
+} from './MovieGalleryItem.styled';
 
 const srv = new TmdbService();
 const DEF_POSTER_HEIGHT = 500;
 
 //
-// TrendsItem
+// MovieGalleryItem
 //
 
-export const TrendsItem = ({
+export const MovieGalleryItem = ({
   id,
   title,
   poster_path,
@@ -58,7 +58,7 @@ export const TrendsItem = ({
     <>
       {wasLoaded && <Rating title={`Votes: ${vote_count}`}>{rating}</Rating>}
 
-      <MovieLink to={`movies/${id}`}>
+      <MovieLink to={`/movies/${id}`}>
         <Poster
           {...posterData}
           onLoad={() => setWasLoaded(true)}

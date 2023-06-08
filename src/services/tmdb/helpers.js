@@ -1,4 +1,8 @@
 import { normalizeStr } from 'utils';
+import TmdbService from './tmdbSrv';
+
+const srv = new TmdbService();
+
 /**
  *
  * Убирает дублирование персон, сворачивая поле job в список
@@ -90,4 +94,12 @@ export const getCrewPreview = credits => {
   }, personsList);
 
   return personsCount ? data : null;
+};
+
+export const getAvatar = (path, width) => {
+  return path
+    ? /http/i.test(path)
+      ? path.replace(/\//, '')
+      : srv.buildImageUrl(path, width)
+    : null;
 };

@@ -3,13 +3,9 @@ import { OptionButtons } from '../OptionButtons/OptionButtons';
 import { PersonCard } from './PersonCard/PersonCard';
 import { normalizeCrewData } from 'services/tmdb/helpers';
 import { useEffect, useRef } from 'react';
+import { LoadMoreBtn } from 'components/LoadMoreBtn/LoadMoreBtn';
 
-import {
-  CreditsList,
-  CreditsListItem,
-  LoadMoreBtn,
-  Container,
-} from './CreditsInfo.styled';
+import { CreditsList, CreditsListItem, Container } from './CreditsInfo.styled';
 
 const CARDS_PER_PAGE = 30;
 const btns = { cast: 1, crew: 0 };
@@ -19,16 +15,16 @@ export const CreditsInfo = ({ data, sortKey = 'popularity' }) => {
   const [cards, setCards] = useState([]);
   const [page, setPage] = useState(1);
 
-  const sortedCredits = useRef(null);
-
   const credits = useRef({
     cast: data.credits.cast,
     crew: normalizeCrewData(data.credits.crew),
   });
 
+  const sortedCredits = useRef(null);
+
   useEffect(() => {
     const data = credits.current[active];
-    sortedCredits.current = [...data].sort((a, b) => b[sortKey] - a[sortKey]);
+    sortedCredits.current = data; //[...data].sort((a, b) => b[sortKey] - a[sortKey]);
   }, [active, sortKey]);
 
   useEffect(() => {
@@ -67,7 +63,10 @@ export const CreditsInfo = ({ data, sortKey = 'popularity' }) => {
       )}
 
       {showLoadMore && (
-        <LoadMoreBtn onClick={() => setPage(cur => cur + 1)}>
+        <LoadMoreBtn
+          onClick={() => setPage(cur => cur + 1)}
+          style={{ marginTop: 10 }}
+        >
           Load more
         </LoadMoreBtn>
       )}

@@ -24,7 +24,3 @@ export const List = styled.ul`
   flex-direction: column;
   gap: 40px;
 `;
-
-export const LoadMoreBtn = styled(ButtonSecondary)`
-  margin: 0 auto 0 auto;
-`;

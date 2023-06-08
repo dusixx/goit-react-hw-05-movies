@@ -18,7 +18,7 @@ export const PageNotFound = () => {
     <Container>
       <Message>
         <Caption>
-          <span>404</span>Page not found
+          404.<span>Page not found</span>
         </Caption>
         <Text>{TEXT}</Text>
       </Message>
