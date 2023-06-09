@@ -1,3 +1,4 @@
+import { Backtop } from 'components/etc/Backtop/Backtop';
 import { Outlet } from 'react-router-dom';
 import { HeaderNav } from './HeaderNav/HeaderNav';
 import { Logo } from './Logo/Logo';
@@ -28,6 +29,7 @@ export const SharedLayout = () => {
           <Outlet />
         </MainContainer>
       </Main>
+      <Backtop />
     </div>
   );
 };

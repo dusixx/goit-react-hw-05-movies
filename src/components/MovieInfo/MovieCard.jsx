@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import TmdbService from 'services/tmdb/tmdbSrv';
 import { Rating } from './Rating/Rating';
 import { AboutMovie } from './AboutMovie/AboutMovie';
 import Modal from 'components/etc/Modal';
 import { Spinner } from 'components/Loader';
 import { ReviewList } from './Reviews/ReviewsList';
+import TmdbService from 'services/tmdb/tmdbSrv';
 
 import {
   Info,
@@ -26,7 +26,7 @@ const COLOR_MODAL_BG = 'rgb(255 255 255 / 0.7)';
 //
 
 export const MovieCard = ({ data = {} }) => {
-  // деструктурируем инфу - делаем так,
+  // деструктурируем инфу тут,
   // чтобы не извлекать общие пропы для прокидывания кому надо
   // TODO: сделать нормально
   const { original_title, title, poster_path, credits, reviews, ...restProps } =
@@ -40,7 +40,6 @@ export const MovieCard = ({ data = {} }) => {
     setShowModal(true);
   };
 
-  // имя фильма
   // original_title - название на языке оригинала (например, китайский)
   let movieTitle = title || original_title;
 
@@ -54,11 +53,6 @@ export const MovieCard = ({ data = {} }) => {
   // год релиза
   const releaseYear = data.release_date?.substring(0, 4);
   const reviewsCount = reviews?.total_results;
-
-  //
-  // console.log('reviews', reviews);
-  // console.log(reviewsCount);
-  //
 
   return (
     <>

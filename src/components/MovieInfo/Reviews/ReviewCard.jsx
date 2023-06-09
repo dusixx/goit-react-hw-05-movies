@@ -1,6 +1,6 @@
 import { getAvatar } from 'services/tmdb/helpers';
 import { IconNoAvatar } from 'styles/icons';
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { makeLinks } from 'utils';
 
 import {
@@ -14,7 +14,6 @@ import {
   SourceLink,
   Expander,
 } from './ReviewCard.styled';
-import { useState } from 'react';
 
 const AVATAR_WIDTH = 185;
 const CONTENT_MAX_HEIGHT = 100;
