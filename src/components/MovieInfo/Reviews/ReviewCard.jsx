@@ -1,6 +1,7 @@
 import { getAvatar } from 'services/tmdb/helpers';
 import { IconNoAvatar } from 'styles/icons';
 import { useRef, useEffect } from 'react';
+import { makeLinks } from 'utils';
 
 import {
   Container,
@@ -19,7 +20,12 @@ const AVATAR_WIDTH = 185;
 const CONTENT_MAX_HEIGHT = 100;
 const ICON_NO_AVATAR_SIZE = 60;
 const ICON_NO_AVATAR_COLOR = 'lightgray';
+
 const NEW_TAB = { target: '_blank', rel: 'noopener noreferrer' };
+
+//
+// ReviewCard
+//
 
 export const ReviewCard = ({
   author_details: { avatar_path },
@@ -67,12 +73,14 @@ export const ReviewCard = ({
           </SourceLink>
         </HeaderGroup>
       </Header>
+
       <Content
         ref={contentRef}
         // В постах попадается разметка, ставим их в innerHTML
-        dangerouslySetInnerHTML={{ __html: content }}
+        dangerouslySetInnerHTML={{ __html: makeLinks(content) }}
         style={showExpander ? { maxHeight: CONTENT_MAX_HEIGHT } : null}
       />
+
       {showExpander && (
         <>
           <Expander onClick={() => setShowExpander(false)}>Show full</Expander>

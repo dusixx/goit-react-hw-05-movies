@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import Modal from 'components/Modal';
+import Modal from 'components/etc/Modal';
 import { Spinner } from 'components/Loader';
 import { IconNoPhoto } from 'styles/icons';
 import TmdbService from 'services/tmdb/tmdbSrv';

@@ -4,7 +4,7 @@ import { MovieGallery } from 'components/MovieGallery/MovieGallery';
 import { useSearchParams, useLocation } from 'react-router-dom';
 import TmdbService from 'services/tmdb/tmdbSrv';
 import { showError } from 'utils';
-import { LoadMoreBtn } from 'components/LoadMoreBtn/LoadMoreBtn';
+import { LoadMoreBtn } from 'components/etc/LoadMoreBtn/LoadMoreBtn';
 
 const srv = new TmdbService();
 const searchbarStyle = {

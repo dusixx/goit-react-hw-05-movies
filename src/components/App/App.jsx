@@ -4,7 +4,7 @@ import { Routes, Route } from 'react-router-dom';
 import { SharedLayout } from 'components/SharedLayout/SharedLayout';
 import { Home, Movies, Credits } from 'pages';
 import { MovieDetails } from 'pages/MovieDetails';
-import { ScrollToTop } from 'components/MovieInfo/Reviews/ScrollToTop/ScrollToTop';
+import { ScrollToTop } from 'components/etc/ScrollToTop/ScrollToTop';
 import { PageNotFound } from 'components/PageNotFound/PageNotFound';
 
 //

@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { ButtonLink, FlexCentered, LinkPrimary } from 'styles/shared';
+import { ButtonLink, FlexCentered, LinkBase, LinkPrimary } from 'styles/shared';
 
 export const Container = styled.div`
   padding: 20px;
@@ -68,6 +68,17 @@ export const Content = styled.pre`
   line-height: 1.5;
   white-space: pre-wrap;
   overflow: hidden;
+
+  /* Линк внутри поста с рецензией */
+  & a {
+    ${LinkBase};
+    color: var(--color-blue);
+
+    &:hover,
+    &:focus-visible {
+      color: var(--color-orange);
+    }
+  }
 `;
 
 export const Expander = styled(ButtonLink)`

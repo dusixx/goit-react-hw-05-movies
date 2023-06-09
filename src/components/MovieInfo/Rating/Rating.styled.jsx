@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import { Link } from 'react-router-dom';
 import { FlexCentered, TransitionBase } from 'styles/shared';
 import { calcCSSValue } from 'utils';
-import { HashLink } from '../../HashLink/HashLink';
+import { HashLink } from '../../etc/HashLink/HashLink';
 
 export const Ratings = styled.div`
   ${FlexCentered('gap: 15px; flex-wrap: wrap;')};

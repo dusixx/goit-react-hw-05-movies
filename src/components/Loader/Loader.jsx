@@ -1,6 +1,6 @@
 import { bool, string } from 'prop-types';
 import { RotatingLines } from 'react-loader-spinner';
-import Modal from 'components/Modal/Modal';
+import Modal from 'components/etc/Modal/Modal';
 
 const DEF_MODAL_BGCOLOR = 'rgb(255 255 255 / 0.8)';
 

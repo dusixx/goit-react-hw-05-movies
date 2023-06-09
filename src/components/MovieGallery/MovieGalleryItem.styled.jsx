@@ -183,7 +183,3 @@ export const Overview = styled.p`
     }
   }
 `;
-
-// export const ItemWrapper = styled.div`
-//   position: relative;
-// `;

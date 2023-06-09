@@ -3,7 +3,7 @@ import { oneOfType, string, number, func } from 'prop-types';
 import { IconSearch } from 'styles/icons';
 import { SearchBtn, SearchForm, Container } from './Searchbar.styled';
 import { useSearchParams } from 'react-router-dom';
-import TextField from 'components/TextField';
+import TextField from 'components/etc/TextField';
 
 // извлекаем onChange, чтобы не перебивал (1) при прокидывании restProps (2)
 const Searchbar = ({ style, onSubmit, onChange, ...restProps }) => {

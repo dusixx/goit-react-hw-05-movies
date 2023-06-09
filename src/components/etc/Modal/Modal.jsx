@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { func, string, bool } from 'prop-types';
 import { Backdrop, Container } from './Modal.styled';
-import BodyScrollLock from 'components/BodyScrollLock';
+import BodyScrollLock from 'components/etc/BodyScrollLock';
 import { Transition } from 'react-transition-group';
 
 const rootModal = document.querySelector('#root-modal');

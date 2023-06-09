@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { GoBackLink } from 'components/GoBackLink/GoBackLink';
+import { GoBackLink } from 'components/etc/GoBackLink/GoBackLink';
 
 export const Container = styled.div`
   width: 100%;

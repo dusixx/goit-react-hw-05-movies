@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
-import { OptionButtons } from '../OptionButtons/OptionButtons';
+import { OptionButtons } from '../etc/OptionButtons/OptionButtons';
 import { PersonCard } from './PersonCard/PersonCard';
 import { normalizeCrewData } from 'services/tmdb/helpers';
-import { LoadMoreBtn } from 'components/LoadMoreBtn/LoadMoreBtn';
+import { LoadMoreBtn } from 'components/etc/LoadMoreBtn/LoadMoreBtn';
 import { CreditsList, CreditsListItem, Container } from './CreditsInfo.styled';
 
 const CARDS_PER_PAGE = 30;

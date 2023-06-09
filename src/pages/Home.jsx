@@ -3,8 +3,8 @@ import { MovieGallery } from 'components/MovieGallery/MovieGallery';
 import { PageTitle } from 'styles/shared';
 import { showError } from 'utils';
 import TmdbService from 'services/tmdb/tmdbSrv';
-import { OptionButtons } from 'components/OptionButtons/OptionButtons';
-import { LoadMoreBtn } from 'components/LoadMoreBtn/LoadMoreBtn';
+import { OptionButtons } from 'components/etc/OptionButtons/OptionButtons';
+import { LoadMoreBtn } from 'components/etc/LoadMoreBtn/LoadMoreBtn';
 
 const srv = new TmdbService();
 

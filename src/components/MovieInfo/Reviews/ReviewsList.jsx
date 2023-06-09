@@ -3,7 +3,7 @@ import { showError } from 'utils';
 import TmdbService from 'services/tmdb/tmdbSrv';
 import { ReviewCard } from './ReviewCard';
 import { List, Container, Title } from './ReviewsList.styled';
-import { LoadMoreBtn } from 'components/LoadMoreBtn/LoadMoreBtn';
+import { LoadMoreBtn } from 'components/etc/LoadMoreBtn/LoadMoreBtn';
 
 const srv = new TmdbService();
 

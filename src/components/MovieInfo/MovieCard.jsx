@@ -2,7 +2,7 @@ import { useState } from 'react';
 import TmdbService from 'services/tmdb/tmdbSrv';
 import { Rating } from './Rating/Rating';
 import { AboutMovie } from './AboutMovie/AboutMovie';
-import Modal from 'components/Modal';
+import Modal from 'components/etc/Modal';
 import { Spinner } from 'components/Loader';
 import { ReviewList } from './Reviews/ReviewsList';
 

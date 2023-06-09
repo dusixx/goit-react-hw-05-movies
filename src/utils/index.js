@@ -89,6 +89,21 @@ export const getList = v => {
   }
 };
 
+export const makeLinks = (post, placeholder = 'Click here') => {
+  if (!post) return;
+  const link = post.match(/https?:\/\/[^\s]+/gi);
+  const formatted = link?.reduce((res, itm) => {
+    return (res = post.replace(
+      itm,
+      `<a href="${itm}" target='_blank', rel='noopener noreferrer'>${
+        placeholder || 'Link'
+      }</a>`
+    ));
+  }, post);
+
+  return formatted ?? post;
+};
+
 //
 // object
 //
