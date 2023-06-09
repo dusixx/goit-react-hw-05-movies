@@ -5,11 +5,22 @@ import { calcCSSValue } from 'utils';
 export const Button = styled(ButtonSecondary)`
   ${FlexCentered()};
 
+  /* width: 100%; */
+
   margin-left: ${({ centered }) => (centered ? 'auto' : 0)};
   margin-right: ${({ centered }) => (centered ? 'auto' : 0)};
 
-  width: ${({ width }) => calcCSSValue(width)};
-  height: ${({ height }) => calcCSSValue(height)};
+  /* без round при адаптивке переносится текст кнопки */
+  width: ${({ width }) => calcCSSValue(Math.round(width))};
+  height: ${({ height }) => calcCSSValue(Math.round(height))};
+
+  /* 
+    Пока кнопка со спинером - не убираем цвето фона
+    Иначе, спиннер сольется с фоном страницы
+    Можно сдлеать так, чтобы цвет спиннера менялся на прозрачном фоне
+  */
+  background-color: ${({ isLoading }) =>
+    isLoading ? 'var(--color-blue)' : 'transparent'};
 `;
 
 export const Spinner = styled.span`

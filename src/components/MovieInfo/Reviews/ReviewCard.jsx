@@ -1,5 +1,5 @@
 import { getAvatar } from 'services/tmdb/helpers';
-import { FaUserCircle as IconNoAvatar } from 'react-icons/fa';
+import { IconNoAvatar } from 'styles/icons';
 import { useRef, useEffect } from 'react';
 
 import {
@@ -67,17 +67,15 @@ export const ReviewCard = ({
           </SourceLink>
         </HeaderGroup>
       </Header>
-      {/* В постах попадается разметка, ставим их в innerHTML */}
       <Content
         ref={contentRef}
+        // В постах попадается разметка, ставим их в innerHTML
         dangerouslySetInnerHTML={{ __html: content }}
         style={showExpander ? { maxHeight: CONTENT_MAX_HEIGHT } : null}
       />
       {showExpander && (
         <>
-          <Expander onClick={() => setShowExpander(false)}>
-            Show full review
-          </Expander>
+          <Expander onClick={() => setShowExpander(false)}>Show full</Expander>
         </>
       )}
     </Container>

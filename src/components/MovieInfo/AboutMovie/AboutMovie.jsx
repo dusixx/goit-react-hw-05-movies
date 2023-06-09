@@ -1,7 +1,7 @@
 import { LinkPrimary } from 'styles/shared';
 import { Cast } from './AboutMovie.styled';
 import { getCrewPreview, getCastPreview } from 'services/tmdb/helpers';
-import { splitIntoTriads } from 'utils';
+import { splitNumIntoTriads } from 'utils';
 
 import {
   List,
@@ -102,14 +102,14 @@ export const AboutMovie = ({
           {budget > 0 && (
             <Item>
               <Label>budget</Label>
-              <span>${splitIntoTriads(budget)}</span>
+              <span>${splitNumIntoTriads(budget)}</span>
             </Item>
           )}
 
           {revenue > 0 && (
             <Item>
               <Label>revenue</Label>
-              <span>${splitIntoTriads(revenue)}</span>
+              <span>${splitNumIntoTriads(revenue)}</span>
             </Item>
           )}
 

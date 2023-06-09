@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Modal from 'components/Modal';
 import { Spinner } from 'components/Loader';
-import { FiCameraOff as IconNoPhoto } from 'react-icons/fi';
+import { IconNoPhoto } from 'styles/icons';
 import TmdbService from 'services/tmdb/tmdbSrv';
 import {
   Thumb,
@@ -47,11 +47,7 @@ export const PersonCard = ({ profile_path, name, character, job }) => {
       >
         <Thumb>
           {profile_path ? (
-            <ProfileImage
-              src={previewPhoto}
-              alt={name}
-              loading="lazy"
-            ></ProfileImage>
+            <ProfileImage src={previewPhoto} alt={name} loading="lazy" />
           ) : (
             <IconNoPhoto
               size={ICON_NO_PHOTO_SIZE}

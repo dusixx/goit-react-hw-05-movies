@@ -11,6 +11,7 @@ export const LoadMoreBtn = ({
   const btnRef = useRef(null);
   const btnRect = useRef(null);
   const observer = useRef(null);
+  const clickCount = useRef(1);
 
   useEffect(() => {
     const { current: ref } = btnRef;
@@ -18,7 +19,7 @@ export const LoadMoreBtn = ({
     observer.current.observe(ref);
 
     // фактический размер, чтобы спинер не менял габариты кнопки
-    // Иначе надо задавать размеры кнопки в стилях
+    // Иначе надо жестко задать размеры кнопки в стилях
     btnRect.current = btnRef.current.getBoundingClientRect();
 
     return () => observer.current.unobserve(ref);
@@ -26,14 +27,21 @@ export const LoadMoreBtn = ({
 
   const handleClick = e => {
     setShowLoader(true);
-    onClick && onClick(e);
+    clickCount.current += 1;
+    onClick && onClick(clickCount.current, e);
   };
 
   const { width, height } = btnRect.current || '';
   const rest = { width, height, ...restProps };
 
   return (
-    <Button ref={btnRef} onClick={handleClick} centered={centered} {...rest}>
+    <Button
+      ref={btnRef}
+      onClick={handleClick}
+      centered={centered}
+      isLoading={showLoader}
+      {...rest}
+    >
       {showLoader ? <Spinner size={height * 0.5} /> : 'Load more'}
     </Button>
   );

@@ -1,4 +1,3 @@
-// import { isNum } from 'utils';
 import { List, Item } from './MovieGallery.styled';
 import { MovieGalleryItem } from './MovieGalleryItem';
 

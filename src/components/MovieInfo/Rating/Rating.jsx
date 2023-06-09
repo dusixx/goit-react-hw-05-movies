@@ -1,6 +1,5 @@
-import { ReactComponent as IconImdbLogo } from '../../../images/imdbLogo.svg';
-import { SiThemoviedatabase as IconTmdbLogo } from 'react-icons/si';
-import { truncateNumber } from 'utils';
+import { IconImdbLogo, IconTmdbLogo } from 'styles/icons';
+import { shortenNum } from 'utils';
 import {
   VoteAverage,
   TmdbLink,
@@ -48,7 +47,7 @@ export const Rating = ({
 
       {vote_count > 0 && (
         <Stat>
-          <span>{truncateNumber(vote_count)}</span> votes
+          <span>{shortenNum(vote_count)}</span> votes
         </Stat>
       )}
 

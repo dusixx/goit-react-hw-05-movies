@@ -1,6 +1,7 @@
 import { showError } from 'utils';
 import { useState, useEffect } from 'react';
 import TmdbService from 'services/tmdb/tmdbSrv';
+
 import {
   Poster,
   MovieLink,
@@ -9,10 +10,11 @@ import {
   Overview,
   Rating,
   Genres,
+  AltTitle,
 } from './MovieGalleryItem.styled';
 
 const srv = new TmdbService();
-const DEF_POSTER_HEIGHT = 500;
+const DEF_POSTER_WIDTH = 500;
 
 //
 // MovieGalleryItem
@@ -22,7 +24,6 @@ export const MovieGalleryItem = ({
   id,
   title,
   poster_path,
-  posterSize = DEF_POSTER_HEIGHT,
   vote_average,
   vote_count,
   overview,
@@ -41,29 +42,31 @@ export const MovieGalleryItem = ({
       .catch(showError);
   }, [genre_ids]);
 
-  // рейтинг
-  let rating = Number(vote_average);
-  rating = rating ? rating.toFixed(1) : 'N/A';
-
-  // постер
-  const posterData = {
-    src: srv.buildImageUrl(poster_path, posterSize),
-    alt: title,
-  };
-
-  // год релиза
+  let rating = vote_average ? vote_average.toFixed(1) : 'N/A';
   const releaseYear = release_date?.substring(0, 4);
 
   return (
     <>
-      {wasLoaded && <Rating title={`Votes: ${vote_count}`}>{rating}</Rating>}
+      {(wasLoaded || !poster_path) && (
+        <Rating title={`Votes: ${vote_count}`}>{rating}</Rating>
+      )}
 
       <MovieLink to={`/movies/${id}`}>
-        <Poster
-          {...posterData}
-          onLoad={() => setWasLoaded(true)}
-          loading="lazy"
-        />
+        {!poster_path && (
+          <AltTitle>
+            {title}
+            {releaseYear && ` (${releaseYear})`}
+          </AltTitle>
+        )}
+
+        {poster_path && (
+          <Poster
+            src={srv.buildImageUrl(poster_path, DEF_POSTER_WIDTH)}
+            alt={title}
+            onLoad={() => setWasLoaded(true)}
+            loading="lazy"
+          />
+        )}
 
         <Overlay data-overlay>
           {title && (

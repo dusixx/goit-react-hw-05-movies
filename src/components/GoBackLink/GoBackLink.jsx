@@ -1,7 +1,7 @@
 import { LinkPrimary } from 'styles/shared';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { MdKeyboardArrowLeft as IconLeftArrow } from 'react-icons/md';
+import { IconLeftArrow } from 'styles/icons';
 
 const PREV_LOC = -1;
 const DEF_ICON_SIZE = 25;

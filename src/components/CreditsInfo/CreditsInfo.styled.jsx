@@ -1,5 +1,4 @@
 import styled from '@emotion/styled';
-import { ButtonSecondary } from 'styles/shared';
 
 export const Container = styled.div`
   display: flex;
@@ -11,7 +10,7 @@ export const CreditsList = styled.ul`
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 30px;
+  gap: 20px;
   width: 100%;
 `;
 

@@ -44,7 +44,7 @@ export function camelToSnake(str) {
     .replace(/_+/g, '_');
 }
 
-export function truncateNumber(v, fractDigits = 2) {
+export function shortenNum(v, fractDigits = 2) {
   if (!isNum(v)) return '';
   let res = String(v);
 
@@ -61,7 +61,7 @@ export function truncateNumber(v, fractDigits = 2) {
   return res;
 }
 
-export function splitIntoTriads(v, splitter = ' ') {
+export function splitNumIntoTriads(v, splitter = ' ') {
   // !! очень большие числа некорректно конвертит в строку
   const str = String(v).replace(/\s/g, '');
 
@@ -79,6 +79,15 @@ export function splitIntoTriads(v, splitter = ' ') {
 
   return part.join('.');
 }
+
+export const getList = v => {
+  if (isStr(v)) return v.split(/\s*,\s*|\s+/);
+  try {
+    return [...v];
+  } catch {
+    return [];
+  }
+};
 
 //
 // object

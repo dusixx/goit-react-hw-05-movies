@@ -13,13 +13,8 @@ export const FlexCentered = cssProps => css`
 `;
 
 export const TransitionBase = propNames => {
-  const list =
-    isStr(propNames) && propNames
-      ? propNames.split(/[,\s]/).join(', ')
-      : 'unset';
-
   return css`
-    transition-property: ${list};
+    transition-property: ${propNames};
     transition-duration: var(--trans-duration);
     transition-timing-function: var(--trans-func);
   `;

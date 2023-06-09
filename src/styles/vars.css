@@ -16,9 +16,6 @@
   --border-radius: 8px;
   --header-height: 60px;
 
-  --gallery-items-gap: 15px;
-  --gallery-items-per-row: 1;
-
   --trans-func: ease;
   --trans-duration: 250ms;
 }

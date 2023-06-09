@@ -1,19 +1,18 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { OptionButtons } from '../OptionButtons/OptionButtons';
 import { PersonCard } from './PersonCard/PersonCard';
 import { normalizeCrewData } from 'services/tmdb/helpers';
-import { useEffect, useRef } from 'react';
 import { LoadMoreBtn } from 'components/LoadMoreBtn/LoadMoreBtn';
-
 import { CreditsList, CreditsListItem, Container } from './CreditsInfo.styled';
 
 const CARDS_PER_PAGE = 30;
-const btns = { cast: 1, crew: 0 };
 
 export const CreditsInfo = ({ data, sortKey = 'popularity' }) => {
   const [active, setActive] = useState('cast');
   const [cards, setCards] = useState([]);
   const [page, setPage] = useState(1);
+
+  // console.log('render');
 
   const credits = useRef({
     cast: data.credits.cast,
@@ -28,9 +27,14 @@ export const CreditsInfo = ({ data, sortKey = 'popularity' }) => {
   }, [active, sortKey]);
 
   useEffect(() => {
+    // const t0 = performance.now();
+
     const start = (page - 1) * CARDS_PER_PAGE;
     const end = start + CARDS_PER_PAGE;
     setCards(cur => [...cur, ...sortedCredits.current.slice(start, end)]);
+
+    // const t1 = performance.now();
+    // console.log(`elapsed ${t1 - t0} ms`);
   }, [page, active]);
 
   const handleClickOption = name => {
@@ -46,7 +50,11 @@ export const CreditsInfo = ({ data, sortKey = 'popularity' }) => {
 
   return (
     <Container>
-      <OptionButtons items={btns} onClick={handleClickOption} />
+      <OptionButtons
+        items={'cast crew'}
+        onClick={handleClickOption}
+        value={active}
+      />
 
       {cards.length > 0 && (
         <CreditsList>

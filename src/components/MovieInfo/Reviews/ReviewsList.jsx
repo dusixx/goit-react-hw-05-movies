@@ -11,10 +11,8 @@ export const ReviewList = ({ data: { id, results, total_pages } }) => {
   const [reviews, setReviews] = useState(results);
   const page = useRef(1);
 
-  // useEffect(() => window.scrollBy({ top: 500, behavior: 'smooth' }), [reviews]);
-
-  const handleLoadMoreClick = () => {
-    page.current += 1;
+  const handleLoadMoreClick = clickCount => {
+    page.current = clickCount;
     srv
       .getMovieReviews(id, { page: page.current })
       .then(({ results }) => {

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { oneOfType, string, number, func } from 'prop-types';
-import { BiSearch as IconSearch } from 'react-icons/bi';
+import { IconSearch } from 'styles/icons';
 import { SearchBtn, SearchForm, Container } from './Searchbar.styled';
 import { useSearchParams } from 'react-router-dom';
 import TextField from 'components/TextField';
@@ -11,18 +11,21 @@ const Searchbar = ({ style, onSubmit, onChange, ...restProps }) => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   // синхронизация со строкой запроса
+  // При изменении ее вручную и нажатии Enter -
+  // изменится запрос в поле поиска
   useEffect(() => {
-    setQuery(searchParams.get('query'));
+    setQuery(searchParams.get('query') ?? '');
   }, [searchParams]);
 
+  // можно менять ?query в запросе тут, но надо делать debounce
   const handleSearchQueryChange = e => {
     const query = e?.target.value.trim() || '';
-    if (!query) setSearchParams({ query });
     setQuery(query);
     onChange && onChange(query, e);
   };
 
   // синхронизация со строкой запроса
+  // Менеям ?query только при сабмите.
   const handleFormSubmit = e => {
     e.preventDefault();
     setSearchParams({ query });

@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import { Link } from 'react-router-dom';
-import { FlexCentered } from 'styles/shared';
+import { FlexCentered, TransitionBase } from 'styles/shared';
+import { bgiMovieLogo } from 'styles/icons';
 
 export const MovieLink = styled(Link)`
   position: relative;
@@ -12,6 +13,12 @@ export const MovieLink = styled(Link)`
   color: var(--color-gray-lighter);
   border-radius: var(--border-radius);
   overflow: hidden;
+
+  /* Где-то перебивается - без !important не работает */
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background: linear-gradient(0deg, #e0e0e0 0, transparent),
+    linear-gradient(180deg, #e0e0e0 0, transparent), url(${bgiMovieLogo});
 
   &:hover,
   &:focus-visible {
@@ -44,7 +51,7 @@ export const Rating = styled.span`
     (min-width: 500px) and (max-width: 650px),
     (min-width: 800px) and (max-width: 900px) {
     font-size: 14px;
-    padding: 0px 4px 0px 4px;
+    padding: 0 4px 0 4px;
   }
 
   background-color: var(--color-orange);
@@ -90,23 +97,7 @@ export const Overlay = styled.div`
   background-color: rgb(0 0 0 / 0.8);
   opacity: 0;
 
-  /* border-bottom: 6px solid var(--color-orange); */
-
-  /*   &::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-
-    display: block;
-    width: 100%;
-    height: 5px;
-    background-color: var(--color-orange);
-  } */
-
-  transition-property: opacity;
-  transition-timing-function: var(--trans-func);
-  transition-duration: var(--trans-duration);
+  ${TransitionBase('opacity')};
 `;
 
 //
@@ -119,6 +110,21 @@ export const Title = styled.h2`
   font-size: 26px;
   line-height: 1.1;
   letter-spacing: -0.2px;
+
+  @media screen and (max-width: 320px),
+    (min-width: 500px) and (max-width: 650px),
+    (min-width: 800px) and (max-width: 900px) {
+    font-size: 16px;
+  }
+`;
+
+export const AltTitle = styled.h3`
+  font-family: Arial Black;
+  padding: 20px;
+  font-size: 18px;
+  padding-right: 50px;
+  color: rgb(0 0 0 / 0.2);
+  letter-spacing: -0.5px;
 
   @media screen and (max-width: 320px),
     (min-width: 500px) and (max-width: 650px),

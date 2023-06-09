@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import { Link } from 'react-router-dom';
 import { FlexCentered } from 'styles/shared';
-import { RiMovie2Line } from 'react-icons/ri';
+import { IconMovieLogo } from 'styles/icons';
 
 export const LogoLink = styled(Link)`
   ${FlexCentered(`gap: 10px`)};
@@ -21,7 +21,7 @@ export const LogoLink = styled(Link)`
   }
 `;
 
-export const LogoImage = styled(RiMovie2Line)`
+export const LogoImage = styled(IconMovieLogo)`
   width: 30px;
   height: 30px;
   color: var(--color-blue);
