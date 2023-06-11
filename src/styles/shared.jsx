@@ -132,7 +132,7 @@ export const LinkButton = styled(Link)`
 
   border: 2px solid var(--color-blue);
   border-radius: var(--border-radius);
-  transition-property: color, background-color;
+  ${TransitionBase('color, background-color')};
 
   &:focus-visible,
   &:hover {

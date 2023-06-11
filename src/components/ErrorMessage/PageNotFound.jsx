@@ -1,6 +1,6 @@
 import { useLocation } from 'react-router-dom';
 import { LinkButton } from 'styles/shared';
-import { Container, Caption, Text } from './PageNotFound.styled';
+import { Caption, Container, Text } from './ErrorMessage.styled';
 
 const TEXT =
   'It may have been moved, or you may have simply mistyped the page address.';

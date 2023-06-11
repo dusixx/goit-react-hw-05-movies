@@ -2,7 +2,7 @@ import { useState, useRef } from 'react';
 import { showError } from 'utils';
 import TmdbService from 'services/tmdb/tmdbSrv';
 import { ReviewCard } from './ReviewCard';
-import { List, Container, Title } from './ReviewsList.styled';
+import { List, Container, Title, Item } from './ReviewsList.styled';
 import { LoadMoreBtn } from 'components/etc/LoadMoreBtn/LoadMoreBtn';
 
 const srv = new TmdbService();
@@ -27,9 +27,9 @@ export const ReviewList = ({ data: { id, results, total_pages } }) => {
       <List id="reviews">
         {reviews.map(({ id, ...rest }) => {
           return (
-            <li key={id}>
+            <Item key={id}>
               <ReviewCard {...rest} />
-            </li>
+            </Item>
           );
         })}
       </List>

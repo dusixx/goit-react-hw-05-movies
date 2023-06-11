@@ -1,8 +1,10 @@
 import styled from '@emotion/styled';
 import { ButtonLink, FlexCentered, LinkBase, LinkPrimary } from 'styles/shared';
 
+// movies/860623
 export const Container = styled.article`
   padding: 20px;
+  width: 100%;
   background: linear-gradient(180deg, #ebebeb 0, transparent);
 `;
 

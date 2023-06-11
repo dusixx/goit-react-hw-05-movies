@@ -1,6 +1,7 @@
 import { lazy } from 'react';
 export * from './toast';
 
+const NEW_TAB = `target='_blank', rel='noopener noreferrer'`;
 const URL_RE = new RegExp(
   '(http[s]?:\\/\\/(www\\.)?|ftp:\\/\\/(www\\.)?|www\\.){1}([0-9A-Za-z-\\.@:%_+~#=]+)+((\\.[a-zA-Z]{2,3})+)(/(.)*)?(\\?(.)*)?',
   'gi'
@@ -119,13 +120,13 @@ export const markupLinks = (
   { newTab = true, text = 'Click here' } = {}
 ) => {
   const links = post?.match(URL_RE);
-  const strNewTab = newTab ? `target='_blank', rel='noopener noreferrer'` : '';
+  const strNewTab = newTab ? NEW_TAB : '';
 
   const link = url =>
     `<a href="${url}" title="${url}" ${strNewTab}>${text || 'Link'}</a>`;
 
   const formatted = links?.reduce((res, itm) => {
-    // если не добавить протокол - сделает лин относительным текущему хосту
+    // если не добавить протокол - сделает линк относительным текущему хосту
     const url = /^http.*/i.test(itm) ? itm : `https://${itm}`;
     return (res = post.replace(itm, link(url)));
   }, post);
@@ -184,25 +185,25 @@ export function getProp(obj, path, splitter = '/') {
  * @returns
  */
 export const sortObj = (col, { key, ascending = true } = {}) => {
-  if (!Array.isArray(col) || !col.length) return [];
+  if (!isArray(col) || !col.length) return [];
   if (!col[0].hasOwnProperty(key)) return [...col];
 
-  const order = +Boolean(ascending) || -1;
+  const order = +!!ascending || -1;
 
-  if (isNum(col[0][key]))
-    return [...col].sort((a, b) => (a[key] - b[key]) * order);
+  const compareFn = isNum(col[0][key])
+    ? (a, b) => (a[key] - b[key]) * order
+    : (a, b) => a.localeCompare(b) * order;
 
-  if (isStr(col[0][key]))
-    return [...col].sort((a, b) => a.localeCompare(b) * order);
+  return [...col].sort(compareFn);
 };
 
 //
 // misc
 //
 
-// export const lazyImport = async path => {
-//   return await lazy(() => import(path));
-// };
+export const lazyImport = path => {
+  return lazy(() => import(`/src/${path}`));
+};
 
 export const isVScrollBarVisible = () => {
   const { body } = document;

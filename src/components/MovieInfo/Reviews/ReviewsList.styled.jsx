@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { ButtonSecondary, Subtitle } from 'styles/shared';
+import { Subtitle } from 'styles/shared';
 
 export const Container = styled.div`
   display: flex;
@@ -19,8 +19,13 @@ export const Title = styled(Subtitle)`
   margin-top: 30px;
 `;
 
+export const Item = styled.li`
+  width: 100%;
+`;
+
 export const List = styled.ul`
   display: flex;
   flex-direction: column;
   gap: 40px;
+  width: 100%;
 `;

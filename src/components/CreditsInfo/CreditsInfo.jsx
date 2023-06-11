@@ -4,13 +4,16 @@ import { PersonCard } from './PersonCard/PersonCard';
 import { normalizeCrewData } from 'services/tmdb/helpers';
 import { LoadMoreBtn } from 'components/etc/LoadMoreBtn/LoadMoreBtn';
 import { CreditsList, CreditsListItem, Container } from './CreditsInfo.styled';
+import { sortObj } from 'utils';
 
 const CARDS_PER_PAGE = 30;
+const DEF_SORT_OPTIONS = { key: 'popularity', ascending: false };
 
-// TODO: по-хорошему надо скрывать crew|cast кнопки, если нет данных
-// Для этого надо дописывать компонент OptionButtons
+//
+// CreditsInfo
+//
 
-export const CreditsInfo = ({ data, sortKey = 'popularity' }) => {
+export const CreditsInfo = ({ data, sortOptions = DEF_SORT_OPTIONS }) => {
   const [active, setActive] = useState('cast');
   const [cards, setCards] = useState([]);
   const [page, setPage] = useState(1);
@@ -24,8 +27,8 @@ export const CreditsInfo = ({ data, sortKey = 'popularity' }) => {
 
   useEffect(() => {
     const data = credits.current[active];
-    sortedCredits.current = data; //[...data].sort((a, b) => b[sortKey] - a[sortKey]);
-  }, [active, sortKey]);
+    sortedCredits.current = sortObj(data, sortOptions);
+  }, [active, sortOptions]);
 
   useEffect(() => {
     const start = (page - 1) * CARDS_PER_PAGE;
@@ -56,7 +59,7 @@ export const CreditsInfo = ({ data, sortKey = 'popularity' }) => {
         <CreditsList>
           {cards.map(({ id, ...rest }) => (
             <CreditsListItem key={id}>
-              {/* NOTE: при большом кол-ве тормозит - 
+              {/* !! при большом кол-ве тормозит - 
                 возможно из-за большого кол-ва styled component
                 в разметке PersonCard
               */}
