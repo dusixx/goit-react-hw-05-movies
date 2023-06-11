@@ -5,6 +5,7 @@ import { useSearchParams, useLocation } from 'react-router-dom';
 import TmdbService from 'services/tmdb/tmdbSrv';
 import { LoadMoreBtn } from 'components/etc/LoadMoreBtn/LoadMoreBtn';
 import { ErrorMessage } from 'components/ErrorMessage/ErrorMessage';
+import { LoaderBar } from 'components/LoaderBar/LoaderBar';
 
 const srv = new TmdbService();
 const searchbarStyle = {
@@ -16,8 +17,9 @@ const searchbarStyle = {
 // TODO: сохранять результаты поиска в ЛС и восстанавливать их если пришли с дочерней страницы
 // Например - смотрели детали фильма. Иначе очищать ЛС. Не скролить в топ!
 
-const Movies = () => {
+const Movies = ({ loader }) => {
   const [error, setError] = useState(null);
+  const [wasLoaded, setWasLoaded] = useState(false);
   const [results, setResults] = useState([]);
   const [query, setQuery] = useState(null);
   const [searchParams, setSearchParams] = useSearchParams();
@@ -75,6 +77,9 @@ const Movies = () => {
     setQuery({ text, time: Date.now() });
   };
 
+  const showLoadMoreBtn =
+    wasLoaded && totalPages.current > 0 && page.current < totalPages.current;
+
   return error ? (
     <ErrorMessage error={error} />
   ) : (
@@ -85,9 +90,15 @@ const Movies = () => {
         onChange={handleQueryChange}
       />
 
-      {results && results.length > 0 && <MovieGallery data={results} />}
+      {results?.length > 0 && (
+        <MovieGallery
+          data={results}
+          loader={loader}
+          onLoad={() => setWasLoaded(true)}
+        />
+      )}
 
-      {totalPages.current > 0 && page.current < totalPages.current && (
+      {showLoadMoreBtn && (
         <LoadMoreBtn onClick={handleLoadMoreClick} style={{ marginTop: 30 }} />
       )}
     </>

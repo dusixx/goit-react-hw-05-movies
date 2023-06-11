@@ -217,3 +217,16 @@ export const isVScrollBarVisible = () => {
     body.style.overflow = curBodyOverflow;
   }
 };
+
+/**
+ *
+ * @param {*} img
+ * @param {*} callback
+ * @returns
+ */
+export const onImageLoad = (img, callback) => {
+  if (!img) return;
+  const image = new Image();
+  image.src = isStr(img) ? img : img.src;
+  image.onload = callback;
+};

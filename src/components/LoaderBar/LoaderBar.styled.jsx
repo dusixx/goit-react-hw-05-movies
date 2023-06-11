@@ -10,10 +10,10 @@ export const BarContainer = styled.div`
 `;
 
 export const Bar = styled.div`
+  position: relative;
   width: 100%;
   height: 100%;
-  position: relative;
-  background: lightgray;
+  background: white;
   overflow: hidden;
 
   &::after {
@@ -22,8 +22,8 @@ export const Bar = styled.div`
     top: 0;
     left: 0;
 
-    width: 192px;
-    height: 3px;
+    height: 100%;
+    width: 50%;
 
     background: var(--color-orange);
     animation: animloader 2s linear infinite;

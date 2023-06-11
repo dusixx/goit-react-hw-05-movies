@@ -5,18 +5,20 @@ import TmdbService from 'services/tmdb/tmdbSrv';
 import { OptionButtons } from 'components/etc/OptionButtons/OptionButtons';
 import { LoadMoreBtn } from 'components/etc/LoadMoreBtn/LoadMoreBtn';
 import { ErrorMessage } from 'components/ErrorMessage/ErrorMessage';
+import { LoaderBar } from 'components/LoaderBar/LoaderBar';
 
 const srv = new TmdbService();
 
 const PAGE_TITLE = `Trends`;
 const DEF_PARAM_VALUE = 'week';
 
-const Home = () => {
+const Home = ({ loader }) => {
+  const [active, setActive] = useState(DEF_PARAM_VALUE);
   const [error, setError] = useState(null);
   const [trends, setTrends] = useState([]);
-  const [active, setActive] = useState(DEF_PARAM_VALUE);
+  const [wasLoaded, setWasLoaded] = useState(false);
   const totalPages = useRef(1);
-  let page = useRef(1);
+  const page = useRef(1);
 
   useEffect(() => {
     srv
@@ -38,6 +40,9 @@ const Home = () => {
       .catch(setError);
   };
 
+  const showLoadMoreBtn =
+    wasLoaded && totalPages.current > 0 && page.current < totalPages.current;
+
   return (
     <>
       {error && <ErrorMessage error={error} />}
@@ -54,9 +59,13 @@ const Home = () => {
             value={active}
           />
 
-          <MovieGallery data={trends} />
+          <MovieGallery
+            data={trends}
+            loader={loader}
+            onLoad={() => setWasLoaded(true)}
+          />
 
-          {totalPages.current > 0 && page.current < totalPages.current && (
+          {showLoadMoreBtn && (
             <LoadMoreBtn
               onClick={handleLoadMoreClick}
               style={{ marginTop: 30 }}

@@ -3,6 +3,7 @@ import { Container } from './App.styled';
 import { Routes, Route } from 'react-router-dom';
 import { SharedLayout } from 'components/SharedLayout/SharedLayout';
 import { PageNotFound } from 'components/ErrorMessage/PageNotFound';
+import { LoaderBar } from 'components/LoaderBar/LoaderBar';
 import { lazyImport } from 'utils';
 
 const Home = lazyImport('pages/Home');
@@ -14,15 +15,18 @@ const MovieDetails = lazyImport('pages/MovieDetails');
 // App
 //
 
-export const App = () => {
+export const App = ({ loader = <LoaderBar /> }) => {
   return (
     <>
       <Container>
         <Routes>
           <Route path="/" element={<SharedLayout />}>
-            <Route index element={<Home />}></Route>
-            <Route path="movies" element={<Movies />}></Route>
-            <Route path="movies/:movieId" element={<MovieDetails />}></Route>
+            <Route index element={<Home loader={loader} />}></Route>
+            <Route path="movies" element={<Movies loader={loader} />}></Route>
+            <Route
+              path="movies/:movieId"
+              element={<MovieDetails loader={loader} />}
+            ></Route>
             <Route path="movies/:movieId/credits" element={<Credits />}></Route>
             <Route path="*" element={<PageNotFound />} />
           </Route>

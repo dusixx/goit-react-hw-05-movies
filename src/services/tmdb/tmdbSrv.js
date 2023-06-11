@@ -93,23 +93,14 @@ export default class TmdbService {
    * @returns
    */
   async getTrendingMovies(period, params) {
-    // сложнее кешировать - зависит от period (может быть несколько страниц)
+    // не кешируем - грузятся страницами
     const { data } = await this.get(
       `trending/movie/${normalizeStr(period)}`,
       params
     );
+
     return data;
   }
-
-  // async getTrends(period = 'day', params) {
-  //   const cached = cache.get(`trending/movie/${period}`);
-  //   if (cached) return cached;
-
-  //   const data = await this.getTrendingMovies(period, params);
-  //   cache.set(`trending/movie/${period}`, data);
-
-  //   return data;
-  // }
 
   /**
    *

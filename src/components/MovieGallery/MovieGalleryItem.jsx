@@ -1,5 +1,6 @@
 import { showError } from 'utils';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import { func, arrayOf, number } from 'prop-types';
 import TmdbService from 'services/tmdb/tmdbSrv';
 
 import {
@@ -15,6 +16,7 @@ import {
 
 const srv = new TmdbService();
 const DEF_POSTER_WIDTH = 500;
+const STR_NA = 'N/A';
 
 //
 // MovieGalleryItem
@@ -34,6 +36,8 @@ export const MovieGalleryItem = ({
 }) => {
   const [wasLoaded, setWasLoaded] = useState(false);
   const [genres, setGenres] = useState(null);
+  const imgRef = useRef(null);
+  const onLoadRef = useRef(onLoad);
 
   // имена жанров
   useEffect(() => {
@@ -41,14 +45,19 @@ export const MovieGalleryItem = ({
       .getGenres(genre_ids)
       .then(res => setGenres(res.join(', ')))
       .catch(showError);
-  }, [genre_ids]);
+  }, [genre_ids, id, wasLoaded]);
 
-  let rating = vote_average ? vote_average.toFixed(1) : 'N/A';
+  // !! Без onLoadRef придется указать зависимость [onLoad]
+  // Но, если передать onLoad = {()=> {... }} инлайн -
+  // onLoad будет меняться каждый раз, что вызовет ошибку
+  useEffect(() => {
+    if (wasLoaded || !poster_path) {
+      onLoadRef.current && onLoadRef.current(imgRef.current);
+    }
+  }, [wasLoaded, poster_path]);
+
+  let rating = vote_average ? vote_average.toFixed(1) : STR_NA;
   const releaseYear = release_date?.substring(0, 4);
-
-  const handleImageLoad = e => {
-    setWasLoaded(true);
-  };
 
   return (
     <>
@@ -66,10 +75,10 @@ export const MovieGalleryItem = ({
 
         {poster_path && (
           <Poster
+            ref={imgRef}
             src={srv.buildImageUrl(poster_path, DEF_POSTER_WIDTH)}
             alt={title}
-            onLoad={handleImageLoad}
-            scrollPosition={0}
+            onLoad={() => setWasLoaded(true)}
           />
         )}
 
@@ -86,4 +95,9 @@ export const MovieGalleryItem = ({
       </MovieLink>
     </>
   );
+};
+
+MovieGalleryItem.propTypes = {
+  onLoad: func,
+  genre_ids: arrayOf(number),
 };
