@@ -2,10 +2,15 @@ import { ToastContainer } from 'react-toastify';
 import { Container } from './App.styled';
 import { Routes, Route } from 'react-router-dom';
 import { SharedLayout } from 'components/SharedLayout/SharedLayout';
-import { Home, Movies, Credits } from 'pages';
-import { MovieDetails } from 'pages/MovieDetails';
-import { ScrollToTop } from 'components/etc/ScrollToTop/ScrollToTop';
 import { PageNotFound } from 'components/PageNotFound/PageNotFound';
+import { lazy } from 'react';
+
+// pages
+
+const Home = lazy(() => import('pages/Home'));
+const Movies = lazy(() => import('pages/Movies'));
+const Credits = lazy(() => import('pages/Credits'));
+const MovieDetails = lazy(() => import('pages/MovieDetails'));
 
 //
 // App
@@ -14,7 +19,6 @@ import { PageNotFound } from 'components/PageNotFound/PageNotFound';
 export const App = () => {
   return (
     <>
-      <ScrollToTop />
       <Container>
         <Routes>
           <Route path="/" element={<SharedLayout />}>

@@ -12,7 +12,12 @@ const DEF_SCROLL_OPTS = {
  *  @param to - любой валидный селектор
  *  @param scrollOptions - параметры для scrollIntoView
  */
-export const HashLink = ({ to, scrollOptions = DEF_SCROLL_OPTS, children }) => {
+export const HashLink = ({
+  to,
+  scrollOptions = DEF_SCROLL_OPTS,
+  children,
+  ...restProps
+}) => {
   const target = useRef(null);
 
   useEffect(() => {
@@ -20,7 +25,10 @@ export const HashLink = ({ to, scrollOptions = DEF_SCROLL_OPTS, children }) => {
   }, [to]);
 
   return (
-    <ButtonLink onClick={() => target.current?.scrollIntoView(scrollOptions)}>
+    <ButtonLink
+      onClick={() => target.current?.scrollIntoView(scrollOptions)}
+      {...restProps}
+    >
       {children}
     </ButtonLink>
   );

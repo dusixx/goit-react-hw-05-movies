@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { isVScrollBarVisible } from 'utils';
 
 const { body } = document;
 const root = document.documentElement;
@@ -7,15 +8,13 @@ export const BodyScrollLock = () => {
   useEffect(() => {
     const top = window.scrollY;
     const bodyCSSText = body.style.cssText;
-    // NOTE: может не всегда работать
-    const hasVScrollBar = body.clientHeight > root.clientHeight;
 
     body.style.cssText = `
         ${bodyCSSText};
         position: fixed;
         top: -${top}px;
         width: 100%;
-        overflow-y: ${hasVScrollBar ? `scroll` : `hidden`};
+        overflow-y: ${isVScrollBarVisible() ? `scroll` : `hidden`};
       `;
 
     return () => {

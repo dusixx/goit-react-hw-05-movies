@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import { ButtonLink, FlexCentered, LinkBase, LinkPrimary } from 'styles/shared';
 
-export const Container = styled.div`
+export const Container = styled.article`
   padding: 20px;
   background: linear-gradient(180deg, #ebebeb 0, transparent);
 `;
@@ -23,6 +23,7 @@ export const AvatarThumb = styled.div`
   height: 60px;
 
   border-radius: 50%;
+  border: 1px solid rgb(0 0 0 / 0.15);
   overflow: hidden;
 `;
 
@@ -83,13 +84,15 @@ export const Content = styled.pre`
 
 export const Expander = styled(ButtonLink)`
   display: block;
-  margin: 20px auto 0 auto;
+  margin: 10px auto 0 auto;
+  padding: 10px 10px 10px 0;
+
   font-size: 12px;
   font-weight: bold;
   letter-spacing: -0.2px;
   color: #a7a7a7;
 
   @media screen and (min-width: 768px) {
-    margin: 20px 0 0 0;
+    margin: 10px 0 0 0;
   }
 `;

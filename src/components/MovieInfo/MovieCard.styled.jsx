@@ -1,7 +1,11 @@
 import styled from '@emotion/styled';
 import { Link } from 'react-router-dom';
-import { Title, TransitionBase } from 'styles/shared';
-import { FlexCentered } from 'styles/shared';
+import { Title, TransitionBase, FlexCentered, NoPosterBg } from 'styles/shared';
+
+const HEADER_HEIGHT = '58px';
+const POSTER_HMULT = 1.5;
+
+export const Card = styled.article``;
 
 export const Info = styled.div`
   display: flex;
@@ -20,24 +24,34 @@ export const Info = styled.div`
 export const PosterLink = styled(Link)`
   position: relative;
   flex-shrink: 0;
-  height: max-content;
+
+  cursor: ${({ clickable }) => (clickable ? 'pointer' : 'auto')};
+  pointer-events: ${({ clickable }) => (clickable ? 'all' : 'none')};
+
+  width: 90vw;
+  height: calc(90vw * ${POSTER_HMULT});
+
+  border-radius: var(--border-radius);
+  overflow: hidden;
+
+  ${NoPosterBg}
 
   @media screen and (min-width: 768px) {
     position: sticky;
-    top: 58px;
+    top: 0; // ${HEADER_HEIGHT};
     width: 330px;
-  }
-
-  ${TransitionBase('filter')};
-
-  &:hover,
-  &:focus-visible {
-    filter: brightness(1.1);
+    height: calc(330px * ${POSTER_HMULT});
   }
 `;
 
 export const Poster = styled.img`
-  border-radius: var(--border-radius);
+  ${TransitionBase('filter')};
+
+  /* Сюда вместо ссылки - чтобы не cработывало для заглушек */
+  &:hover,
+  &:focus-visible {
+    filter: brightness(1.1);
+  }
 `;
 
 export const Desc = styled.div`
@@ -50,8 +64,14 @@ export const Desc = styled.div`
   }
 `;
 
-export const MovieTitle = styled(Title)`
+export const MovieTitle = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
   margin-bottom: 30px;
+`;
+
+export const WellKnownTitle = styled(Title)`
   font-size: 38px;
   text-align: center;
 
@@ -61,7 +81,13 @@ export const MovieTitle = styled(Title)`
   }
 `;
 
-export const Container = styled.div`
+export const OriginalTitle = styled.h3`
+  color: rgb(0 0 0 / 0.3);
+  font-size: 15px;
+  letter-spacing: -0.3px;
+`;
+
+export const ModalContainer = styled.div`
   position: relative;
   ${FlexCentered()};
 

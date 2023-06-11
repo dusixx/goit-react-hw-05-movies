@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Modal from 'components/etc/Modal';
-import { Spinner } from 'components/Loader';
+import { Spinner } from 'components/etc/Loader';
 import { IconNoPhoto } from 'styles/icons';
 import TmdbService from 'services/tmdb/tmdbSrv';
 import {
@@ -12,7 +12,7 @@ import {
   ModalContainer,
   ModalThumb,
   ProfileLink,
-  Container,
+  Card,
 } from './PersonCard.styled';
 
 const srv = new TmdbService();
@@ -30,9 +30,9 @@ export const PersonCard = ({ profile_path, name, character, job }) => {
   const [showModal, setShowModal] = useState(false);
   const [wasModalImageLoaded, setWasModalImageLoaded] = useState(false);
 
-  const handleImageClick = (e, path) => {
+  const handleImageClick = e => {
     e.preventDefault();
-    if (!path) return;
+
     setShowModal(true);
   };
 
@@ -40,14 +40,15 @@ export const PersonCard = ({ profile_path, name, character, job }) => {
   const originalPhoto = srv.buildImageUrl(profile_path);
 
   return (
-    <Container>
+    <Card>
       <ProfileLink
         to={originalPhoto}
-        onClick={e => handleImageClick(e, profile_path)}
+        onClick={handleImageClick}
+        clickable={profile_path}
       >
         <Thumb>
           {profile_path ? (
-            <ProfileImage src={previewPhoto} alt={name} loading="lazy" />
+            <ProfileImage src={previewPhoto} alt={name} />
           ) : (
             <IconNoPhoto
               size={ICON_NO_PHOTO_SIZE}
@@ -79,6 +80,6 @@ export const PersonCard = ({ profile_path, name, character, job }) => {
           </ModalThumb>
         </ModalContainer>
       </Modal>
-    </Container>
+    </Card>
   );
 };

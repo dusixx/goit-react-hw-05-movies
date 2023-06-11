@@ -1,12 +1,12 @@
 import { IconImdbLogo, IconTmdbLogo } from 'styles/icons';
 import { shortenNum } from 'utils';
+import { HashLink } from 'components/etc/HashLink/HashLink';
 import {
   VoteAverage,
   TmdbLink,
   ImdbLink,
   Ratings,
   Stat,
-  ReviewsHashLink,
 } from './Rating.styled';
 
 const DEF_HEIGHT = 40;
@@ -52,9 +52,9 @@ export const Rating = ({
       )}
 
       {reviewsCount > 0 && (
-        <ReviewsHashLink to="#reviews">
+        <HashLink to="#reviews" style={{ padding: '5px 5px 5px 0' }}>
           <span>{reviewsCount}</span> review(s)
-        </ReviewsHashLink>
+        </HashLink>
       )}
     </Ratings>
   );

@@ -1,10 +1,10 @@
 import Searchbar from 'components/Searchbar/Searchbar';
 import { useEffect, useState, useRef } from 'react';
-import { MovieGallery } from 'components/MovieGallery/MovieGallery';
+import MovieGallery from 'components/MovieGallery/MovieGallery';
 import { useSearchParams, useLocation } from 'react-router-dom';
 import TmdbService from 'services/tmdb/tmdbSrv';
-import { showError } from 'utils';
 import { LoadMoreBtn } from 'components/etc/LoadMoreBtn/LoadMoreBtn';
+import { ErrorMessage } from 'components/ErrorMessage/ErrorMessage';
 
 const srv = new TmdbService();
 const searchbarStyle = {
@@ -16,7 +16,8 @@ const searchbarStyle = {
 // TODO: сохранять результаты поиска в ЛС и восстанавливать их если пришли с дочерней страницы
 // Например - смотрели детали фильма. Иначе очищать ЛС. Не скролить в топ!
 
-export const Movies = () => {
+const Movies = () => {
+  const [error, setError] = useState(null);
   const [results, setResults] = useState([]);
   const [query, setQuery] = useState(null);
   const [searchParams, setSearchParams] = useSearchParams();
@@ -33,7 +34,10 @@ export const Movies = () => {
 
   useEffect(() => {
     if (!query) return;
+
     const { text } = query;
+    // TODO исправить тут - не исчезает Load More кнопка
+    // if (!text) return;
 
     srv
       .searchMovies(text)
@@ -41,7 +45,7 @@ export const Movies = () => {
         setResults(data.results);
         totalPages.current = data.total_pages;
       })
-      .catch(showError);
+      .catch(setError);
   }, [query]);
 
   const handleLoadMoreClick = clickCount => {
@@ -53,14 +57,17 @@ export const Movies = () => {
       .then(({ results }) => {
         setResults(cur => [...cur, ...results]);
       })
-      .catch(showError);
+      .catch(setError);
   };
 
   // для простоты - очищаем строку запроса. В свою очередь произойдет
   // установка query, поиск по пустому запросу вернет пустой массив и
   // очистится галерея найденных ранее
   const handleQueryChange = query => {
-    if (!query) setSearchParams({ query });
+    if (!query) {
+      setResults([]);
+      setSearchParams({ query });
+    }
   };
 
   const handleSearchbarSubmit = text => {
@@ -68,7 +75,9 @@ export const Movies = () => {
     setQuery({ text, time: Date.now() });
   };
 
-  return (
+  return error ? (
+    <ErrorMessage error={error} />
+  ) : (
     <>
       <Searchbar
         style={searchbarStyle}
@@ -84,3 +93,5 @@ export const Movies = () => {
     </>
   );
 };
+
+export default Movies;

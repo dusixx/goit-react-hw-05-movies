@@ -16,6 +16,9 @@ body {
   color: var(--color-black);
   background-color: var(--color-background);
 
+  /* Чтобы не прыгал скрол, показываем его всегда */
+  overflow-y: scroll;
+
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

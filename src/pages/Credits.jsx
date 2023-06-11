@@ -1,15 +1,16 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { PageTitle } from 'styles/shared';
-import { showError } from 'utils';
 import TmdbService from 'services/tmdb/tmdbSrv';
 import { CreditsInfo } from 'components/CreditsInfo/CreditsInfo';
+import { ErrorMessage } from 'components/ErrorMessage/ErrorMessage';
 
 const srv = new TmdbService();
 
-export const Credits = () => {
+const Credits = () => {
   const { movieId } = useParams();
 
+  const [error, setError] = useState(null);
   const [details, setDetails] = useState(null);
 
   useEffect(() => {
@@ -17,17 +18,22 @@ export const Credits = () => {
       .then(([movieDetails, credits]) => {
         setDetails({ ...movieDetails, credits });
       })
-      .catch(showError);
+      .catch(setError);
   }, [movieId]);
 
   return (
-    details && (
-      <>
-        <PageTitle style={{ marginBottom: 30, marginTop: 10 }}>
-          {details.title}{' '}
-        </PageTitle>
-        <CreditsInfo data={details} />
-      </>
-    )
+    <>
+      {!error && details && (
+        <>
+          <PageTitle style={{ marginBottom: 30, marginTop: 10 }}>
+            {details.title}{' '}
+          </PageTitle>
+          <CreditsInfo data={details} />
+        </>
+      )}
+      {error && <ErrorMessage error={error} />}
+    </>
   );
 };
+
+export default Credits;

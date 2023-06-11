@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 import { css } from '@emotion/react';
 import { Link } from 'react-router-dom';
 import { isStr, calcCSSValue } from 'utils';
+import { bgiMovieLogo } from './icons';
 
 // utils
 
@@ -12,17 +13,28 @@ export const FlexCentered = cssProps => css`
   ${isStr(cssProps) ? css(cssProps) : { ...cssProps }}
 `;
 
-export const TransitionBase = propNames => {
+export const TransitionBase = (propNames, duration, func) => {
+  const dur = parseFloat(duration);
+  const tf = isStr(func) && func ? func : `var(--trans-func)`;
+
   return css`
     transition-property: ${propNames};
-    transition-duration: var(--trans-duration);
-    transition-timing-function: var(--trans-func);
+    transition-duration: ${dur ? `${dur}ms` : `var(--trans-duration)`};
+    transition-timing-function: ${tf};
   `;
 };
 
 export const Disabled = css`
   pointer-events: none;
   opacity: 0.5;
+`;
+
+export const NoPosterBg = css`
+  /* Где-то перебивается - без !important не работает */
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background: linear-gradient(0deg, #e0e0e0 0, transparent),
+    linear-gradient(180deg, #e0e0e0 0, transparent), url(${bgiMovieLogo});
 `;
 
 // button
@@ -48,9 +60,9 @@ export const ButtonBase = styled.button`
 `;
 
 export const ButtonPrimary = styled(ButtonBase)`
-  padding: 10px;
-  padding-left: ${({ paddingSide }) => calcCSSValue(paddingSide) || '20px'};
-  padding-right: ${({ paddingSide }) => calcCSSValue(paddingSide) || '20px'};
+  padding: 10px 20px 10px 20px;
+  padding-left: ${({ paddingSide }) => calcCSSValue(paddingSide)};
+  padding-right: ${({ paddingSide }) => calcCSSValue(paddingSide)};
 
   color: white;
   border-radius: var(--border-radius);
@@ -109,6 +121,23 @@ export const LinkPrimary = styled(Link)`
   &:hover,
   &:focus-visible {
     color: var(--color-orange);
+  }
+`;
+
+export const LinkButton = styled(Link)`
+  padding: 10px 20px 10px 20px;
+
+  color: var(--color-blue);
+  background-color: transparent;
+
+  border: 2px solid var(--color-blue);
+  border-radius: var(--border-radius);
+  transition-property: color, background-color;
+
+  &:focus-visible,
+  &:hover {
+    background-color: var(--color-blue);
+    color: white;
   }
 `;
 

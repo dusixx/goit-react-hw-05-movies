@@ -1,19 +1,22 @@
 import { useState } from 'react';
 import { Rating } from './Rating/Rating';
-import { AboutMovie } from './AboutMovie/AboutMovie';
+import { About } from './About/About';
 import Modal from 'components/etc/Modal';
-import { Spinner } from 'components/Loader';
+import { Spinner } from 'components/etc/Loader';
 import { ReviewList } from './Reviews/ReviewsList';
 import TmdbService from 'services/tmdb/tmdbSrv';
 
 import {
+  Card,
   Info,
   PosterLink,
   Poster,
   Desc,
   MovieTitle,
-  Container,
+  ModalContainer,
   Thumb,
+  OriginalTitle,
+  WellKnownTitle,
 } from './MovieCard.styled';
 
 const srv = new TmdbService();
@@ -35,7 +38,7 @@ export const MovieCard = ({ data = {} }) => {
   const [showModal, setShowModal] = useState(false);
   const [wasModalImageLoaded, setWasModalImageLoaded] = useState(false);
 
-  const handleImageClick = e => {
+  const handleImageClick = (e, path) => {
     e.preventDefault();
     setShowModal(true);
   };
@@ -55,22 +58,33 @@ export const MovieCard = ({ data = {} }) => {
   const reviewsCount = reviews?.total_results;
 
   return (
-    <>
+    <Card>
       <Info>
-        <PosterLink to={posterData.original} onClick={handleImageClick}>
-          <Poster {...posterData} />
+        <PosterLink
+          to={posterData.original}
+          onClick={handleImageClick}
+          clickable={poster_path}
+        >
+          {poster_path && <Poster {...posterData} />}
         </PosterLink>
 
         {movieTitle && (
           <Desc>
             <MovieTitle>
-              {movieTitle}
-              {releaseYear && ` (${releaseYear})`}
+              <WellKnownTitle>
+                {movieTitle}
+                {releaseYear && ` (${releaseYear})`}
+              </WellKnownTitle>
+
+              {/* Например, id(107406) id(569938) */}
+              {movieTitle !== original_title && (
+                <OriginalTitle> {original_title}</OriginalTitle>
+              )}
             </MovieTitle>
 
             <Rating reviewsCount={reviewsCount} {...restProps} />
 
-            <AboutMovie credits={credits} {...restProps} />
+            <About credits={credits} {...restProps} />
           </Desc>
         )}
       </Info>
@@ -82,7 +96,7 @@ export const MovieCard = ({ data = {} }) => {
         bgColor={COLOR_MODAL_BG}
         visible={showModal}
       >
-        <Container>
+        <ModalContainer>
           <Spinner width={40} visible={!wasModalImageLoaded} />
           <Thumb>
             <img
@@ -91,8 +105,8 @@ export const MovieCard = ({ data = {} }) => {
               onLoad={() => setWasModalImageLoaded(true)}
             />
           </Thumb>
-        </Container>
+        </ModalContainer>
       </Modal>
-    </>
+    </Card>
   );
 };

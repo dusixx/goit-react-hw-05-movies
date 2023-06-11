@@ -1,17 +1,18 @@
 import { useEffect, useState, useRef } from 'react';
-import { MovieGallery } from 'components/MovieGallery/MovieGallery';
+import MovieGallery from 'components/MovieGallery';
 import { PageTitle } from 'styles/shared';
-import { showError } from 'utils';
 import TmdbService from 'services/tmdb/tmdbSrv';
 import { OptionButtons } from 'components/etc/OptionButtons/OptionButtons';
 import { LoadMoreBtn } from 'components/etc/LoadMoreBtn/LoadMoreBtn';
+import { ErrorMessage } from 'components/ErrorMessage/ErrorMessage';
 
 const srv = new TmdbService();
 
 const PAGE_TITLE = `Trends`;
 const DEF_PARAM_VALUE = 'week';
 
-export const Home = () => {
+const Home = () => {
+  const [error, setError] = useState(null);
   const [trends, setTrends] = useState([]);
   const [active, setActive] = useState(DEF_PARAM_VALUE);
   const totalPages = useRef(1);
@@ -24,7 +25,7 @@ export const Home = () => {
         setTrends(data.results);
         totalPages.current = data.total_pages;
       })
-      .catch(showError);
+      .catch(setError);
   }, [active]);
 
   const handleLoadMoreClick = clickCount => {
@@ -34,26 +35,37 @@ export const Home = () => {
       .then(({ results }) => {
         setTrends(cur => [...cur, ...results]);
       })
-      .catch(showError);
+      .catch(setError);
   };
 
   return (
     <>
-      <PageTitle style={{ marginBottom: 30, marginTop: 10 }}>
-        {PAGE_TITLE}
-      </PageTitle>
-      <OptionButtons
-        items={'week day'}
-        onClick={name => setActive(name)}
-        style={{ marginBottom: 30 }}
-        value={active}
-      />
+      {error && <ErrorMessage error={error} />}
+      {!error && trends?.length > 0 && (
+        <>
+          <PageTitle style={{ marginBottom: 30, marginTop: 10 }}>
+            {PAGE_TITLE}
+          </PageTitle>
 
-      {trends && trends.length > 0 && <MovieGallery data={trends} />}
+          <OptionButtons
+            items={'week day'}
+            onClick={setActive}
+            style={{ marginBottom: 30 }}
+            value={active}
+          />
 
-      {totalPages.current > 0 && page.current < totalPages.current && (
-        <LoadMoreBtn onClick={handleLoadMoreClick} style={{ marginTop: 30 }} />
+          <MovieGallery data={trends} />
+
+          {totalPages.current > 0 && page.current < totalPages.current && (
+            <LoadMoreBtn
+              onClick={handleLoadMoreClick}
+              style={{ marginTop: 30 }}
+            />
+          )}
+        </>
       )}
     </>
   );
 };
+
+export default Home;

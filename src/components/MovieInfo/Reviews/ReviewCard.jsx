@@ -1,7 +1,7 @@
 import { getAvatar } from 'services/tmdb/helpers';
 import { IconNoAvatar } from 'styles/icons';
 import { useRef, useEffect, useState } from 'react';
-import { makeLinks } from 'utils';
+import { markupLinks } from 'utils';
 
 import {
   Container,
@@ -76,7 +76,7 @@ export const ReviewCard = ({
       <Content
         ref={contentRef}
         // В постах попадается разметка, ставим их в innerHTML
-        dangerouslySetInnerHTML={{ __html: makeLinks(content) }}
+        dangerouslySetInnerHTML={{ __html: markupLinks(content) }}
         style={showExpander ? { maxHeight: CONTENT_MAX_HEIGHT } : null}
       />
 

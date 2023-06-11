@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import TmdbService from 'services/tmdb/tmdbSrv';
 import { MovieCard } from 'components/MovieInfo/MovieCard';
-import { showError } from 'utils';
+import { ErrorMessage } from 'components/ErrorMessage/ErrorMessage';
+
 // import Loader from 'components/Loader';
 
 const srv = new TmdbService();
@@ -11,7 +12,8 @@ const srv = new TmdbService();
 // более актуальная чем при запросе деталей того же фильма
 // Например - рейтинг и кол-во голосов
 
-export const MovieDetails = () => {
+const MovieDetails = () => {
+  const [error, setError] = useState(null);
   const { movieId } = useParams();
   const [details, setDetails] = useState(null);
 
@@ -24,14 +26,17 @@ export const MovieDetails = () => {
       .then(([movieDetails, reviews, credits]) => {
         setDetails({ ...movieDetails, reviews, credits });
       })
-      .catch(showError);
+      .catch(setError);
   }, [movieId]);
 
   return (
     <>
       {/* мельтешит и по сути бесполезен */}
       {/* <Loader visible={!details} /> */}
-      {details && <MovieCard data={details} />}
+      {!error && details && <MovieCard data={details} />}
+      {error && <ErrorMessage error={error} />}
     </>
   );
 };
+
+export default MovieDetails;

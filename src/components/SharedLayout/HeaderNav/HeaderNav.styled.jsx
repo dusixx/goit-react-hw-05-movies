@@ -19,7 +19,7 @@ export const StyledNavLink = styled(NavLink)`
   font-size: 15px;
 
   @media screen and (min-width: 320px) {
-    padding: 20px 0 20px 0;
+    padding: 20px 0 19px 0;
     font-size: 16px;
   }
 
@@ -29,11 +29,11 @@ export const StyledNavLink = styled(NavLink)`
 
     position: absolute;
     left: 0;
-    bottom: 0;
+    bottom: -1px;
 
     display: block;
     width: 100%;
-    height: 5px;
+    height: 6px;
 
     background-color: transparent;
     ${TransitionBase('background-color')};

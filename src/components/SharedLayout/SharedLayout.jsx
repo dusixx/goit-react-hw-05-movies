@@ -2,19 +2,15 @@ import { Backtop } from 'components/etc/Backtop/Backtop';
 import { Outlet } from 'react-router-dom';
 import { HeaderNav } from './HeaderNav/HeaderNav';
 import { Logo } from './Logo/Logo';
-
-import {
-  Header,
-  Main,
-  HeaderContainer,
-  MainContainer,
-  SubHeader,
-  // GoBack,
-} from './SharedLayout.styled';
+import { Header } from './Header/Header';
+import { Suspense } from 'react';
+import { Main, HeaderContainer, MainContainer } from './SharedLayout.styled';
+import { LoaderBar } from 'components/LoaderBar/LoaderBar';
 
 export const SharedLayout = () => {
   return (
     <div>
+      {/* <ScrollToTop /> */}
       <Header>
         <HeaderContainer>
           <Logo />
@@ -22,12 +18,13 @@ export const SharedLayout = () => {
         </HeaderContainer>
       </Header>
       <Main>
-        {/* <GoBack>back</GoBack> */}
-        {/* <SubHeader style={{ height: 40 }} /> */}
-        <MainContainer>
-          <SubHeader style={{ height: 40 }} />
-          <Outlet />
-        </MainContainer>
+        <section>
+          <MainContainer>
+            <Suspense fallback={<LoaderBar />}>
+              <Outlet />
+            </Suspense>
+          </MainContainer>
+        </section>
       </Main>
       <Backtop />
     </div>

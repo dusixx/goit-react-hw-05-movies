@@ -6,7 +6,7 @@ export const Container = styled.div`
   width: ${({ style }) => style?.width || '100%'};
   margin: 0 auto 0 auto;
 
-  border: 1px solid rgb(var(--color-blue-rgb), 0.3);
+  border: 1px solid rgb(var(--color-blue-rgb), 0.5);
   border-radius: var(--border-radius);
   overflow: hidden;
 
@@ -14,7 +14,7 @@ export const Container = styled.div`
 
   &:focus-within {
     box-shadow: 0 0 0 0.25rem rgb(var(--color-blue-rgb), 0.2);
-    border-color: rgb(var(--color-blue-rgb), 0.5);
+    border-color: rgb(var(--color-blue-rgb), 0.7);
   }
 
   @media screen and (min-width: 768px) {

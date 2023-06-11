@@ -7,12 +7,13 @@ import { CreditsList, CreditsListItem, Container } from './CreditsInfo.styled';
 
 const CARDS_PER_PAGE = 30;
 
+// TODO: по-хорошему надо скрывать crew|cast кнопки, если нет данных
+// Для этого надо дописывать компонент OptionButtons
+
 export const CreditsInfo = ({ data, sortKey = 'popularity' }) => {
   const [active, setActive] = useState('cast');
   const [cards, setCards] = useState([]);
   const [page, setPage] = useState(1);
-
-  // console.log('render');
 
   const credits = useRef({
     cast: data.credits.cast,
@@ -27,14 +28,9 @@ export const CreditsInfo = ({ data, sortKey = 'popularity' }) => {
   }, [active, sortKey]);
 
   useEffect(() => {
-    // const t0 = performance.now();
-
     const start = (page - 1) * CARDS_PER_PAGE;
     const end = start + CARDS_PER_PAGE;
     setCards(cur => [...cur, ...sortedCredits.current.slice(start, end)]);
-
-    // const t1 = performance.now();
-    // console.log(`elapsed ${t1 - t0} ms`);
   }, [page, active]);
 
   const handleClickOption = name => {

@@ -2,7 +2,6 @@ import styled from '@emotion/styled';
 import { PageTitle } from 'styles/shared';
 
 export const Container = styled.div`
-  /* margin-top: 20px; */
   display: flex;
   flex-direction: column;
   text-align: center;

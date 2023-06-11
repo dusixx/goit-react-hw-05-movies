@@ -2,7 +2,6 @@ import styled from '@emotion/styled';
 import { Link } from 'react-router-dom';
 import { FlexCentered, TransitionBase } from 'styles/shared';
 import { calcCSSValue } from 'utils';
-import { HashLink } from '../../etc/HashLink/HashLink';
 
 export const Ratings = styled.div`
   ${FlexCentered('gap: 15px; flex-wrap: wrap;')};
@@ -24,11 +23,6 @@ const Tag = styled(Link)`
   &:focus-visible {
     filter: brightness(1.05);
   }
-`;
-
-export const ReviewsHashLink = styled(HashLink)`
-  padding: 5px;
-  padding-left: 0;
 `;
 
 export const VoteAverage = styled(Tag)`

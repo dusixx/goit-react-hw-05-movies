@@ -1,7 +1,6 @@
 import styled from '@emotion/styled';
 import { Link } from 'react-router-dom';
-import { FlexCentered, TransitionBase } from 'styles/shared';
-import { bgiMovieLogo } from 'styles/icons';
+import { FlexCentered, NoPosterBg, TransitionBase } from 'styles/shared';
 
 export const MovieLink = styled(Link)`
   position: relative;
@@ -14,11 +13,7 @@ export const MovieLink = styled(Link)`
   border-radius: var(--border-radius);
   overflow: hidden;
 
-  /* Где-то перебивается - без !important не работает */
-  background-repeat: no-repeat !important;
-  background-position: center !important;
-  background: linear-gradient(0deg, #e0e0e0 0, transparent),
-    linear-gradient(180deg, #e0e0e0 0, transparent), url(${bgiMovieLogo});
+  ${NoPosterBg}
 
   &:hover,
   &:focus-visible {
@@ -105,11 +100,13 @@ export const Overlay = styled.div`
 //
 
 export const Title = styled.h2`
-  padding-right: 20px;
+  padding-right: 25px;
 
-  font-size: 26px;
+  font-size: 24px;
   line-height: 1.1;
   letter-spacing: -0.2px;
+
+  overflow-wrap: break-word;
 
   @media screen and (max-width: 320px),
     (min-width: 500px) and (max-width: 650px),
@@ -119,12 +116,15 @@ export const Title = styled.h2`
 `;
 
 export const AltTitle = styled.h3`
-  font-family: Arial Black;
   padding: 20px;
-  font-size: 18px;
   padding-right: 50px;
-  color: rgb(0 0 0 / 0.2);
+
+  font-family: Arial Black;
+  font-size: 18px;
   letter-spacing: -0.5px;
+
+  color: rgb(0 0 0 / 0.2);
+  overflow-wrap: break-word;
 
   @media screen and (max-width: 320px),
     (min-width: 500px) and (max-width: 650px),

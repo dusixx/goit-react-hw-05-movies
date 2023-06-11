@@ -2,25 +2,32 @@ import styled from '@emotion/styled';
 import { ButtonBase, FlexCentered, TransitionBase } from 'styles/shared';
 import { calcCSSValue } from 'utils';
 
+const DEF_OFFSET = 15;
+const DEF_SIZE = 50;
+const DEF_OPACITY = 0.4;
+
+const visibility = (offset = DEF_OFFSET, show = false) => {
+  return show ? `unset` : `translate(0, calc(100% + ${offset}px))`;
+};
+
 export const BacktopBtn = styled(ButtonBase)`
   ${FlexCentered()};
 
-  display: ${({ visible }) => (visible ? 'flex' : 'none')};
-
   position: fixed;
-  bottom: ${({ offset }) => calcCSSValue(offset) || '20px'};
-  right: ${({ offset }) => calcCSSValue(offset) || '20px'};
+  bottom: ${({ offset = DEF_OFFSET }) => calcCSSValue(offset)};
+  right: ${({ offset = DEF_OFFSET }) => calcCSSValue(offset)};
   z-index: 99;
 
-  width: ${({ size }) => calcCSSValue(size) || '50px'};
-  height: ${({ size }) => calcCSSValue(size) || '50px'};
+  width: ${({ size = DEF_SIZE }) => calcCSSValue(size)};
+  height: ${({ size = DEF_SIZE }) => calcCSSValue(size)};
 
   color: white;
   background-color: var(--color-blue);
   border-radius: 50%;
+  opacity: ${DEF_OPACITY};
 
-  opacity: 0.4;
-  ${TransitionBase('opacity')};
+  ${(TransitionBase('opacity transform'), 150)};
+  transform: ${({ visible, offset }) => visibility(offset, visible)};
 
   &:hover,
   &:focus-visible {

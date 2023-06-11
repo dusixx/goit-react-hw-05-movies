@@ -29,6 +29,7 @@ export const MovieGalleryItem = ({
   overview,
   release_date,
   genre_ids,
+  onLoad,
   ...restProps
 }) => {
   const [wasLoaded, setWasLoaded] = useState(false);
@@ -44,6 +45,10 @@ export const MovieGalleryItem = ({
 
   let rating = vote_average ? vote_average.toFixed(1) : 'N/A';
   const releaseYear = release_date?.substring(0, 4);
+
+  const handleImageLoad = e => {
+    setWasLoaded(true);
+  };
 
   return (
     <>
@@ -63,8 +68,8 @@ export const MovieGalleryItem = ({
           <Poster
             src={srv.buildImageUrl(poster_path, DEF_POSTER_WIDTH)}
             alt={title}
-            onLoad={() => setWasLoaded(true)}
-            loading="lazy"
+            onLoad={handleImageLoad}
+            scrollPosition={0}
           />
         )}
 

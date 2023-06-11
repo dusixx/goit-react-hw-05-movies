@@ -2,13 +2,16 @@ import styled from '@emotion/styled';
 import { FlexCentered, TransitionBase } from 'styles/shared';
 import { Link } from 'react-router-dom';
 
-export const Container = styled.div`
+export const Card = styled.div`
   line-height: 1.2;
 `;
 
 export const ProfileLink = styled(Link)`
   position: relative;
   /* height: 100%; */
+
+  cursor: ${({ clickable }) => (clickable ? 'pointer' : 'auto')};
+  pointer-events: ${({ clickable }) => (clickable ? 'all' : 'none')};
 `;
 
 export const Thumb = styled.div`

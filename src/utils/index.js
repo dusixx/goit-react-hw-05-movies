@@ -1,4 +1,10 @@
+import { lazy } from 'react';
 export * from './toast';
+
+const URL_RE = new RegExp(
+  '(http[s]?:\\/\\/(www\\.)?|ftp:\\/\\/(www\\.)?|www\\.){1}([0-9A-Za-z-\\.@:%_+~#=]+)+((\\.[a-zA-Z]{2,3})+)(/(.)*)?(\\?(.)*)?',
+  'gi'
+);
 
 const toStr = Object.prototype.toString;
 const normId = id => `${id}`.replace(/[^$\w]/gi, '').replace(/^\d+/, '');
@@ -31,8 +37,10 @@ export const parseCSSValue = v => {
 // string
 //
 
-let id = 0;
-export const getId = () => `id-${(id++).toString(16)}`;
+export const getIdGenerator = initial => {
+  if (!isNum(initial)) initial = 0;
+  return () => `${(initial++).toString(24)}`;
+};
 
 export const normalizeStr = s => s && String(s).trim().toLocaleLowerCase();
 
@@ -44,10 +52,15 @@ export function camelToSnake(str) {
     .replace(/_+/g, '_');
 }
 
+/**
+ *
+ * @param {*} v
+ * @param {*} fractDigits
+ * @returns
+ */
 export function shortenNum(v, fractDigits = 2) {
   if (!isNum(v)) return '';
   let res = String(v);
-
   // целая часть
   const digits = res.split('.')[0].length;
   const map = { K: 3, M: 6, B: 9, T: 12 };
@@ -61,6 +74,12 @@ export function shortenNum(v, fractDigits = 2) {
   return res;
 }
 
+/**
+ *
+ * @param {*} v
+ * @param {*} splitter
+ * @returns
+ */
 export function splitNumIntoTriads(v, splitter = ' ') {
   // !! очень большие числа некорректно конвертит в строку
   const str = String(v).replace(/\s/g, '');
@@ -89,19 +108,26 @@ export const getList = v => {
   }
 };
 
-export const makeLinks = (
+/**
+ *
+ * @param {*} post
+ * @param {*} param1
+ * @returns
+ */
+export const markupLinks = (
   post,
   { newTab = true, text = 'Click here' } = {}
 ) => {
-  const links = post?.match(/(?<!(<a\s+.+?))https?:\/\/[^\s]+/gi);
+  const links = post?.match(URL_RE);
+  const strNewTab = newTab ? `target='_blank', rel='noopener noreferrer'` : '';
+
+  const link = url =>
+    `<a href="${url}" title="${url}" ${strNewTab}>${text || 'Link'}</a>`;
 
   const formatted = links?.reduce((res, itm) => {
-    return (res = post.replace(
-      itm,
-      `<a href="${itm}" title="${itm}" ${
-        newTab ? `target='_blank', rel='noopener noreferrer'` : ''
-      }>${text || 'Link'}</a>`
-    ));
+    // если не добавить протокол - сделает лин относительным текущему хосту
+    const url = /^http.*/i.test(itm) ? itm : `https://${itm}`;
+    return (res = post.replace(itm, link(url)));
   }, post);
 
   return formatted ?? post ?? '';
@@ -111,6 +137,14 @@ export const makeLinks = (
 // object
 //
 
+/**
+ *
+ * @param {*} obj
+ * @param {*} path
+ * @param {*} value
+ * @param {*} splitter
+ * @returns
+ */
 export function setProp(obj, path, value, splitter = '/') {
   if (typeof obj !== 'object') return;
 
@@ -124,6 +158,13 @@ export function setProp(obj, path, value, splitter = '/') {
     }, obj);
 }
 
+/**
+ *
+ * @param {*} obj
+ * @param {*} path
+ * @param {*} splitter
+ * @returns
+ */
 export function getProp(obj, path, splitter = '/') {
   try {
     return String(path)
@@ -131,3 +172,47 @@ export function getProp(obj, path, splitter = '/') {
       .reduce((ref, key) => ref[key], obj);
   } catch {}
 }
+
+//
+// collection
+//
+
+/**
+ *
+ * @param {array} col
+ * @param {*} param1
+ * @returns
+ */
+export const sortObj = (col, { key, ascending = true } = {}) => {
+  if (!Array.isArray(col) || !col.length) return [];
+  if (!col[0].hasOwnProperty(key)) return [...col];
+
+  const order = +Boolean(ascending) || -1;
+
+  if (isNum(col[0][key]))
+    return [...col].sort((a, b) => (a[key] - b[key]) * order);
+
+  if (isStr(col[0][key]))
+    return [...col].sort((a, b) => a.localeCompare(b) * order);
+};
+
+//
+// misc
+//
+
+// export const lazyImport = async path => {
+//   return await lazy(() => import(path));
+// };
+
+export const isVScrollBarVisible = () => {
+  const { body } = document;
+  const curClientWidth = body.clientWidth;
+  const curBodyOverflow = body.style.overflow;
+
+  try {
+    body.style.overflow = 'hidden';
+    return curClientWidth !== body.clientWidth;
+  } finally {
+    body.style.overflow = curBodyOverflow;
+  }
+};
