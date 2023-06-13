@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import TmdbService from 'services/tmdb/tmdbSrv';
-import { MovieCard } from 'components/MovieInfo/MovieCard';
+import { MovieCard } from 'components/MovieCard/MovieCard';
 import { ErrorMessage } from 'components/ErrorMessage/ErrorMessage';
 import { func } from 'prop-types';
 
@@ -19,6 +19,7 @@ const MovieDetails = ({ loader: Loader }) => {
 
   useEffect(() => {
     setShowLoader(true);
+
     Promise.all([
       srv.getMovieDetails(movieId),
       srv.getMovieReviews(movieId),

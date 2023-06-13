@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import { NavLink } from 'react-router-dom';
 import { LinkBase, TransitionBase } from 'styles/shared';
 
-export const Nav = styled.nav`
+export const NavStyled = styled.nav`
   display: flex;
   align-items: center;
   gap: 20px;

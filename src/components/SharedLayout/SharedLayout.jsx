@@ -1,6 +1,6 @@
 import { Backtop } from 'components/etc/Backtop/Backtop';
 import { Outlet } from 'react-router-dom';
-import { HeaderNav } from './HeaderNav/HeaderNav';
+import { Nav } from './Nav/Nav';
 import { Logo } from './Logo/Logo';
 import { Header } from './Header/Header';
 import { Suspense } from 'react';
@@ -25,7 +25,7 @@ export const SharedLayout = ({ setSubheaderMiddle }) => {
         <Header>
           <HeaderContainer>
             <Logo />
-            <HeaderNav />
+            <Nav />
           </HeaderContainer>
         </Header>
       </HeaderWrapper>

@@ -1,1 +1,1 @@
-export * from './SharedLayout';
+export { SharedLayout as default } from './SharedLayout';

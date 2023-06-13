@@ -3,7 +3,7 @@ import { Rating } from './Rating/Rating';
 import { About } from './About/About';
 import Modal from 'components/etc/Modal';
 import { Spinner } from 'components/etc/Loader';
-import { ReviewList } from './Reviews/ReviewsList';
+import { Reviews } from './Reviews/Reviews';
 import TmdbService from 'services/tmdb/tmdbSrv';
 import { getCrewPreview, getCastPreview } from 'services/tmdb/helpers';
 
@@ -126,7 +126,7 @@ export const MovieCard = ({ data = {} }) => {
         )}
       </Info>
 
-      {reviewsCount > 0 && <ReviewList data={reviews} />}
+      {reviewsCount > 0 && <Reviews data={reviews} />}
 
       <Modal
         onClose={() => setShowModal(false)}

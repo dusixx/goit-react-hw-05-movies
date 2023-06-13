@@ -35,7 +35,6 @@ export const About = ({
     .substr(11, 5)
     .replace(':', 'h ')}m`;
 
-  // !! как-то проще?
   const haveAnyDataAbout =
     releaseDate ||
     countries ||
@@ -47,8 +46,6 @@ export const About = ({
 
   return (
     <Container>
-      {/* {haveAnyDataAbout && <Title>About</Title>} */}
-
       {haveAnyDataAbout && (
         <>
           <Title>About</Title>

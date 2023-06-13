@@ -1,13 +1,13 @@
 import { useState, useRef } from 'react';
 import { showError } from 'utils';
 import TmdbService from 'services/tmdb/tmdbSrv';
-import { ReviewCard } from './ReviewCard';
-import { List, Container, Title, Item } from './ReviewsList.styled';
+import { ReviewItem } from './ReviewItem/ReviewItem';
+import { List, Container, Title, Item } from './Reviews.styled';
 import { LoadMoreBtn } from 'components/etc/LoadMoreBtn/LoadMoreBtn';
 
 const srv = new TmdbService();
 
-export const ReviewList = ({ data: { id, results, total_pages } }) => {
+export const Reviews = ({ data: { id, results, total_pages } }) => {
   const [reviews, setReviews] = useState(results);
   const page = useRef(1);
 
@@ -28,7 +28,7 @@ export const ReviewList = ({ data: { id, results, total_pages } }) => {
         {reviews.map(({ id, ...rest }) => {
           return (
             <Item key={id}>
-              <ReviewCard {...rest} />
+              <ReviewItem {...rest} />
             </Item>
           );
         })}

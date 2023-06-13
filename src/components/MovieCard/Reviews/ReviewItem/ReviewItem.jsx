@@ -13,7 +13,7 @@ import {
   Content,
   SourceLink,
   Expander,
-} from './ReviewCard.styled';
+} from './ReviewItem.styled';
 
 const AVATAR_WIDTH = 185;
 const CONTENT_MAX_HEIGHT = 100;
@@ -26,7 +26,7 @@ const NEW_TAB = { target: '_blank', rel: 'noopener noreferrer' };
 // ReviewCard
 //
 
-export const ReviewCard = ({
+export const ReviewItem = ({
   author_details: { avatar_path },
   author,
   content,
