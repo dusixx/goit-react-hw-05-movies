@@ -56,7 +56,7 @@ const Home = ({ loader, fromOutlet }) => {
             />
           </SubHeader>
 
-          <PageTitle style={{ marginBottom: 30 }}>{PAGE_TITLE}</PageTitle>
+          <PageTitle style={{ marginBottom: 35 }}>{PAGE_TITLE}</PageTitle>
 
           <MovieGallery
             data={trends}

@@ -2,11 +2,12 @@ import { Bar, BarContainer } from './LoaderBar.styled';
 import { createPortal } from 'react-dom';
 
 const rootLoader = document.querySelector('#root-loader');
+const DEF_HEIGHT = 2;
 
-export const LoaderBar = () => {
+export const LoaderBar = ({ height = DEF_HEIGHT }) => {
   return createPortal(
     <>
-      <BarContainer>
+      <BarContainer height={height}>
         <Bar />
       </BarContainer>
     </>,

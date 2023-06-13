@@ -6,6 +6,7 @@ import { LoadMoreBtn } from 'components/etc/LoadMoreBtn/LoadMoreBtn';
 import { CreditsList, CreditsListItem, Container } from './CreditsInfo.styled';
 import { SubHeader } from 'components/SubHeader/SubHeader';
 import { sortObj } from 'utils';
+import { useAutoScroll } from './useAutoScroll';
 
 const CARDS_PER_PAGE = 30;
 const DEF_SORT_OPTIONS = { key: 'popularity', ascending: false };
@@ -14,10 +15,16 @@ const DEF_SORT_OPTIONS = { key: 'popularity', ascending: false };
 // CreditsInfo
 //
 
-export const CreditsInfo = ({ data, sortOptions = DEF_SORT_OPTIONS }) => {
+export const CreditsInfo = ({
+  data,
+  sortOptions = DEF_SORT_OPTIONS,
+  scrollBy,
+}) => {
   const [active, setActive] = useState('cast');
   const [cards, setCards] = useState([]);
   const [page, setPage] = useState(1);
+  const listRef = useRef(null);
+  useAutoScroll(listRef, cards, scrollBy);
 
   const credits = useRef({
     cast: data.credits.cast,
@@ -59,7 +66,7 @@ export const CreditsInfo = ({ data, sortOptions = DEF_SORT_OPTIONS }) => {
       </SubHeader>
 
       {cards.length > 0 && (
-        <CreditsList>
+        <CreditsList ref={listRef}>
           {cards.map(({ id, ...rest }) => (
             <CreditsListItem key={id}>
               {/* !! при большом кол-ве тормозит - 

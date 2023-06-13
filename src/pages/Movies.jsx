@@ -41,8 +41,6 @@ const Movies = ({ loader }) => {
     const { text } = query;
     if (!text) return;
 
-    console.log(text);
-
     srv
       .searchMovies(text)
       .then(({ results, total_pages, total_results }) => {

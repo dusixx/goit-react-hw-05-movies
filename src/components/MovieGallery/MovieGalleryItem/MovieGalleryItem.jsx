@@ -47,9 +47,6 @@ export const MovieGalleryItem = ({
       .catch(showError);
   }, [genre_ids, id, wasLoaded]);
 
-  // !! Без onLoadRef придется указать зависимость [onLoad]
-  // Но, если передать onLoad = {()=> {... }} инлайн -
-  // onLoad будет меняться каждый раз, что вызовет ошибку
   useEffect(() => {
     if (wasLoaded || !poster_path) {
       onLoadRef.current && onLoadRef.current(imgRef.current);

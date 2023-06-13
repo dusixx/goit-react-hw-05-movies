@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { calcCSSValue } from 'utils';
 
 export const BarContainer = styled.div`
   position: fixed;
@@ -6,7 +7,7 @@ export const BarContainer = styled.div`
   left: 0;
   z-index: 999;
   width: 100vw;
-  height: 3px;
+  height: ${({ height }) => calcCSSValue(height)};
 `;
 
 export const Bar = styled.div`
@@ -26,7 +27,7 @@ export const Bar = styled.div`
     width: 50%;
 
     background: var(--color-orange);
-    animation: animloader 2s linear infinite;
+    animation: animloader 2s ease-in infinite;
   }
 
   @keyframes animloader {

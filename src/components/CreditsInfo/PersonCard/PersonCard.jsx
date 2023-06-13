@@ -32,23 +32,22 @@ export const PersonCard = ({ profile_path, name, character, job }) => {
 
   const handleImageClick = e => {
     e.preventDefault();
-
     setShowModal(true);
   };
 
-  const previewPhoto = srv.buildImageUrl(profile_path, PROFILE_WIDTH);
-  const originalPhoto = srv.buildImageUrl(profile_path);
+  const photoPreview = srv.buildImageUrl(profile_path, PROFILE_WIDTH);
+  const photoOriginal = srv.buildImageUrl(profile_path);
 
   return (
     <Card>
       <ProfileLink
-        to={originalPhoto}
+        to={photoOriginal}
         onClick={handleImageClick}
         clickable={profile_path}
       >
         <Thumb>
           {profile_path ? (
-            <ProfileImage src={previewPhoto} alt={name} />
+            <ProfileImage src={photoPreview} alt={name} />
           ) : (
             <IconNoPhoto
               size={ICON_NO_PHOTO_SIZE}
@@ -73,7 +72,7 @@ export const PersonCard = ({ profile_path, name, character, job }) => {
           <Spinner width={40} visible={!wasModalImageLoaded} />
           <ModalThumb>
             <img
-              src={originalPhoto}
+              src={photoOriginal}
               alt={name}
               onLoad={() => setWasModalImageLoaded(true)}
             />

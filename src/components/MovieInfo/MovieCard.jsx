@@ -5,6 +5,7 @@ import Modal from 'components/etc/Modal';
 import { Spinner } from 'components/etc/Loader';
 import { ReviewList } from './Reviews/ReviewsList';
 import TmdbService from 'services/tmdb/tmdbSrv';
+import { getCrewPreview, getCastPreview } from 'services/tmdb/helpers';
 
 import {
   Card,
@@ -17,12 +18,18 @@ import {
   ModalThumb,
   OriginalTitle,
   WellKnownTitle,
+  CastAndCrewLink,
+  Title,
+  Text,
+  Homepage,
+  Overview,
 } from './MovieCard.styled';
 
 const srv = new TmdbService();
 
 const POSTER_WIDTH = 500;
 const COLOR_MODAL_BG = 'rgb(255 255 255 / 0.7)';
+const NEW_TAB = { target: '_blank', rel: 'noopener noreferrer' };
 
 //
 // Movie card
@@ -32,8 +39,16 @@ export const MovieCard = ({ data = {} }) => {
   // деструктурируем инфу тут,
   // чтобы не извлекать общие пропы для прокидывания кому надо
   // TODO: сделать нормально
-  const { original_title, title, poster_path, credits, reviews, ...restProps } =
-    data;
+  const {
+    original_title,
+    title,
+    poster_path,
+    credits,
+    reviews,
+    homepage,
+    overview,
+    ...restProps
+  } = data;
 
   const [showModal, setShowModal] = useState(false);
   const [wasModalImageLoaded, setWasModalImageLoaded] = useState(false);
@@ -56,6 +71,9 @@ export const MovieCard = ({ data = {} }) => {
   // год релиза
   const releaseYear = data.release_date?.substring(0, 4);
   const reviewsCount = reviews?.total_results;
+
+  const cast = getCastPreview(credits);
+  const crew = getCrewPreview(credits);
 
   return (
     <Card>
@@ -85,7 +103,25 @@ export const MovieCard = ({ data = {} }) => {
 
             <Rating reviewsCount={reviewsCount} {...restProps} />
 
-            <About credits={credits} {...restProps} />
+            <About cast={cast} crew={crew} {...restProps} />
+
+            {/* Пример без credits id(874156) */}
+            {(cast || crew) && (
+              <CastAndCrewLink to="credits">Full cast & crew</CastAndCrewLink>
+            )}
+
+            {homepage && (
+              <Homepage to={homepage} title={homepage} {...NEW_TAB}>
+                Official website
+              </Homepage>
+            )}
+
+            {overview && (
+              <Overview>
+                <Title>Overview</Title>
+                <Text>{overview}</Text>
+              </Overview>
+            )}
           </Desc>
         )}
       </Info>

@@ -22,7 +22,7 @@ export const MainContainer = styled(Container)`
   padding-top: 90px;
 
   @media screen and (min-width: 320px) {
-    padding-top: 120px;
+    padding-top: 130px;
   }
 `;
 

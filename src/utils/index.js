@@ -203,15 +203,14 @@ export const lazyImport = path => {
 
 export const isVScrollBarVisible = () => {
   const { body } = document;
-  const curClientWidth = body.clientWidth;
+  const curBodyClientWidth = body.clientWidth;
   const curBodyOverflow = body.style.overflow;
 
-  try {
-    body.style.overflow = 'hidden';
-    return curClientWidth !== body.clientWidth;
-  } finally {
-    body.style.overflow = curBodyOverflow;
-  }
+  body.style.overflow = 'hidden';
+  const res = curBodyClientWidth !== body.clientWidth;
+  body.style.overflow = curBodyOverflow;
+
+  return res;
 };
 
 /**

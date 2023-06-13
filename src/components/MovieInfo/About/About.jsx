@@ -1,22 +1,8 @@
 import { LinkPrimary } from 'styles/shared';
 import { Cast } from './About.styled';
-import { getCrewPreview, getCastPreview } from 'services/tmdb/helpers';
 import { splitNumIntoTriads } from 'utils';
 
-import {
-  List,
-  Item,
-  Homepage,
-  Container,
-  Title,
-  Overview,
-  Text,
-  CastAndCrewLink,
-  Tagline,
-  Label,
-} from './About.styled';
-
-const NEW_TAB = { target: '_blank', rel: 'noopener noreferrer' };
+import { List, Item, Container, Title, Tagline, Label } from './About.styled';
 
 export const About = ({
   budget,
@@ -27,7 +13,8 @@ export const About = ({
   overview,
   release_date,
   tagline,
-  credits,
+  crew,
+  cast,
   runtime,
   ...restProps
 }) => {
@@ -43,9 +30,6 @@ export const About = ({
     ? new Date(release_date).toLocaleDateString()
     : null;
 
-  const castData = getCastPreview(credits);
-  const crewData = getCrewPreview(credits);
-
   const runtimeHHMM = `${new Date(runtime * 60000)
     .toISOString()
     .substr(11, 5)
@@ -59,8 +43,6 @@ export const About = ({
     tagline ||
     budget > 0 ||
     revenue > 0 ||
-    castData ||
-    crewData ||
     runtimeHHMM;
 
   return (
@@ -116,8 +98,8 @@ export const About = ({
               </Item>
             )}
 
-            {crewData &&
-              Object.entries(crewData).map(([jobName, persons]) => {
+            {crew &&
+              Object.entries(crew).map(([jobName, persons]) => {
                 return (
                   persons.length > 0 && (
                     <Item key={jobName}>
@@ -128,12 +110,12 @@ export const About = ({
                 );
               })}
 
-            {castData && (
+            {cast && (
               <Item>
                 <Label>cast</Label>
                 <Cast>
-                  {castData.preview}
-                  <LinkPrimary to="credits">{castData.remaining}</LinkPrimary>
+                  {cast.preview}
+                  <LinkPrimary to="credits">{cast.remaining}</LinkPrimary>
                 </Cast>
               </Item>
             )}
@@ -146,24 +128,6 @@ export const About = ({
             )}
           </List>
         </>
-      )}
-
-      {/* Пример без credits id(874156) */}
-      {(castData || crewData) && (
-        <CastAndCrewLink to="credits">Full cast & crew</CastAndCrewLink>
-      )}
-
-      {homepage && (
-        <Homepage to={homepage} title={homepage} {...NEW_TAB}>
-          Official website
-        </Homepage>
-      )}
-
-      {overview && (
-        <Overview>
-          <Title>Overview</Title>
-          <Text>{overview}</Text>
-        </Overview>
       )}
     </Container>
   );

@@ -25,9 +25,7 @@ const Credits = () => {
     <>
       {!error && details && (
         <>
-          <PageTitle style={{ marginBottom: 30, marginTop: 10 }}>
-            {details.title}{' '}
-          </PageTitle>
+          <PageTitle style={{ marginBottom: 35 }}>{details.title} </PageTitle>
           <CreditsInfo data={details} />
         </>
       )}
