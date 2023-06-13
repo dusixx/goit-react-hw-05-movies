@@ -1,11 +1,10 @@
 import { useState } from 'react';
 import { Rating } from './Rating/Rating';
 import { About } from './About/About';
-import Modal from 'components/etc/Modal';
-import { Spinner } from 'components/etc/Loader';
 import { Reviews } from './Reviews/Reviews';
 import TmdbService from 'services/tmdb/tmdbSrv';
 import { getCrewPreview, getCastPreview } from 'services/tmdb/helpers';
+import { ModalImage } from 'components/etc/ModalImage/ModalImage';
 
 import {
   Card,
@@ -14,8 +13,6 @@ import {
   Poster,
   Desc,
   MovieTitle,
-  ModalContainer,
-  ModalThumb,
   OriginalTitle,
   WellKnownTitle,
   CastAndCrewLink,
@@ -28,7 +25,6 @@ import {
 const srv = new TmdbService();
 
 const POSTER_WIDTH = 500;
-const COLOR_MODAL_BG = 'rgb(255 255 255 / 0.7)';
 const NEW_TAB = { target: '_blank', rel: 'noopener noreferrer' };
 
 //
@@ -51,7 +47,6 @@ export const MovieCard = ({ data = {} }) => {
   } = data;
 
   const [showModal, setShowModal] = useState(false);
-  const [wasModalImageLoaded, setWasModalImageLoaded] = useState(false);
 
   const handleImageClick = (e, path) => {
     e.preventDefault();
@@ -128,22 +123,12 @@ export const MovieCard = ({ data = {} }) => {
 
       {reviewsCount > 0 && <Reviews data={reviews} />}
 
-      <Modal
-        onClose={() => setShowModal(false)}
-        bgColor={COLOR_MODAL_BG}
+      <ModalImage
         visible={showModal}
-      >
-        <ModalContainer>
-          <Spinner width={40} visible={!wasModalImageLoaded} />
-          <ModalThumb>
-            <img
-              src={posterData.original}
-              alt={posterData.alt}
-              onLoad={() => setWasModalImageLoaded(true)}
-            />
-          </ModalThumb>
-        </ModalContainer>
-      </Modal>
+        onClose={() => setShowModal(false)}
+        src={posterData.original}
+        alt={posterData.alt}
+      />
     </Card>
   );
 };

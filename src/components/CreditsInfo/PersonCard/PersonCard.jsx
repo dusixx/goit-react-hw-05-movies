@@ -1,16 +1,14 @@
 import { useState } from 'react';
-import Modal from 'components/etc/Modal';
-import { Spinner } from 'components/etc/Loader';
 import { IconNoPhoto } from 'styles/icons';
 import TmdbService from 'services/tmdb/tmdbSrv';
+import { ModalImage } from 'components/etc/ModalImage/ModalImage';
+
 import {
   Thumb,
   ProfileImage,
   Desc,
   Name,
   Job,
-  ModalContainer,
-  ModalThumb,
   ProfileLink,
   Card,
 } from './PersonCard.styled';
@@ -21,14 +19,12 @@ const PROFILE_WIDTH = 185;
 const ICON_NO_PHOTO_COLOR = 'lightgray';
 const ICON_NO_PHOTO_SIZE = 50;
 const STR_NA = 'n/a';
-const COLOR_MODAL_BG = 'rgb(255 255 255 / 0.7)';
 
 // для crew вместо character доступно поле job
 // В остальном для crew и cast все рендерится единообразно
 
 export const PersonCard = ({ profile_path, name, character, job }) => {
   const [showModal, setShowModal] = useState(false);
-  const [wasModalImageLoaded, setWasModalImageLoaded] = useState(false);
 
   const handleImageClick = e => {
     e.preventDefault();
@@ -63,22 +59,12 @@ export const PersonCard = ({ profile_path, name, character, job }) => {
         <Job>{job || character || STR_NA}</Job>
       </Desc>
 
-      <Modal
-        onClose={() => setShowModal(false)}
-        bgColor={COLOR_MODAL_BG}
+      <ModalImage
         visible={showModal}
-      >
-        <ModalContainer>
-          <Spinner width={40} visible={!wasModalImageLoaded} />
-          <ModalThumb>
-            <img
-              src={photoOriginal}
-              alt={name}
-              onLoad={() => setWasModalImageLoaded(true)}
-            />
-          </ModalThumb>
-        </ModalContainer>
-      </Modal>
+        onClose={() => setShowModal(false)}
+        src={photoOriginal}
+        alt={name}
+      />
     </Card>
   );
 };
