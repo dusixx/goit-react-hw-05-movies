@@ -24,6 +24,7 @@ export const CreditsInfo = ({
   const [cards, setCards] = useState([]);
   const [page, setPage] = useState(1);
   const listRef = useRef(null);
+
   useAutoScroll(listRef, cards, scrollBy);
 
   const credits = useRef({

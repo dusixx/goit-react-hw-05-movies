@@ -12,7 +12,7 @@ export const useMovieGallery = ({ listRef, onLoad, data, scrollBy }) => {
 
   useEffect(() => {
     listItemHeight.current =
-      listRef.current.firstElementChild?.getBoundingClientRect().height;
+      listRef.current?.firstElementChild?.getBoundingClientRect().height;
   }, [listRef]);
 
   // полагаем, галерея загружена,
@@ -26,6 +26,7 @@ export const useMovieGallery = ({ listRef, onLoad, data, scrollBy }) => {
 
       // тут, в колбеке уже будут равны (curDataLen.current === data.length)
       const shouldAutoscroll = curDataLen.current < data.length;
+      const shouldScrollToTop = curDataLen.current === data.length;
 
       onImageLoad(lastImage, () => {
         setShowLoader(false);
@@ -35,11 +36,18 @@ export const useMovieGallery = ({ listRef, onLoad, data, scrollBy }) => {
         const listTop = listRef.current?.getBoundingClientRect().top;
 
         // полагаем, высота всех изображений в галерее одинаковая
-        if (listTop < 0 && shouldAutoscroll) {
-          window.scrollBy({
-            top: listItemHeight.current * (parseInt(scrollBy) || DEF_SCROLL_BY),
-            behavior: DEF_SCROLL_BEHAVIOR,
-          });
+        if (listTop < 0) {
+          if (shouldScrollToTop)
+            return listRef.current.scrollIntoView({
+              behavior: DEF_SCROLL_BEHAVIOR,
+            });
+
+          if (shouldAutoscroll)
+            window.scrollBy({
+              top:
+                listItemHeight.current * (parseInt(scrollBy) || DEF_SCROLL_BY),
+              behavior: DEF_SCROLL_BEHAVIOR,
+            });
         }
       });
     }
