@@ -4,6 +4,7 @@ import { PersonCard } from './PersonCard/PersonCard';
 import { normalizeCrewData } from 'services/tmdb/helpers';
 import { LoadMoreBtn } from 'components/etc/LoadMoreBtn/LoadMoreBtn';
 import { CreditsList, CreditsListItem, Container } from './CreditsInfo.styled';
+import { SubHeader } from 'components/SubHeader/SubHeader';
 import { sortObj } from 'utils';
 
 const CARDS_PER_PAGE = 30;
@@ -49,11 +50,13 @@ export const CreditsInfo = ({ data, sortOptions = DEF_SORT_OPTIONS }) => {
 
   return (
     <Container>
-      <OptionButtons
-        items={'cast crew'}
-        onClick={handleClickOption}
-        value={active}
-      />
+      <SubHeader>
+        <OptionButtons
+          items={'cast crew'}
+          onClick={handleClickOption}
+          value={active}
+        />
+      </SubHeader>
 
       {cards.length > 0 && (
         <CreditsList>
@@ -72,7 +75,7 @@ export const CreditsInfo = ({ data, sortOptions = DEF_SORT_OPTIONS }) => {
       {showLoadMore && (
         <LoadMoreBtn
           onClick={() => setPage(cur => cur + 1)}
-          style={{ marginTop: 10 }}
+          style={{ marginTop: 15 }}
         >
           Load more
         </LoadMoreBtn>

@@ -51,12 +51,7 @@ export const Stat = styled.span`
 
 export const TmdbLink = styled(Tag)`
   padding: 0 7px 0 7px;
-
-  background: linear-gradient(
-    to right,
-    var(--color-tmdb-green) 0%,
-    var(--color-tmdb-blue) 100%
-  );
+  background: var(--color-tmdb-gradient);
 
   & svg {
     height: 100%;

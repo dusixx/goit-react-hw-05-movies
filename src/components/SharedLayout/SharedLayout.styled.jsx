@@ -8,6 +8,10 @@ export const Container = styled.div`
   padding: 0 20px 0 20px;
 `;
 
+export const HeaderWrapper = styled.div`
+  position: relative;
+`;
+
 export const HeaderContainer = styled(Container)`
   display: flex;
   align-items: center;
@@ -15,7 +19,11 @@ export const HeaderContainer = styled(Container)`
 
 export const MainContainer = styled(Container)`
   padding-bottom: 40px;
-  padding-top: 110px;
+  padding-top: 90px;
+
+  @media screen and (min-width: 320px) {
+    padding-top: 120px;
+  }
 `;
 
 export const Main = styled.main`

@@ -32,7 +32,7 @@ export const LoadMoreBtn = ({
   };
 
   const { width, height } = btnRect.current || '';
-  const rest = { width, height, ...restProps };
+  const btnProps = { width, height, ...restProps };
 
   return (
     <Button
@@ -40,7 +40,7 @@ export const LoadMoreBtn = ({
       onClick={handleClick}
       centered={centered}
       isLoading={showLoader}
-      {...rest}
+      {...btnProps}
     >
       {showLoader ? <Spinner size={height * 0.5} /> : 'Load more'}
     </Button>

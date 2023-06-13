@@ -4,29 +4,41 @@ import { HeaderNav } from './HeaderNav/HeaderNav';
 import { Logo } from './Logo/Logo';
 import { Header } from './Header/Header';
 import { Suspense } from 'react';
-import { Main, HeaderContainer, MainContainer } from './SharedLayout.styled';
 import { LoaderBar } from 'components/LoaderBar/LoaderBar';
+import {
+  Main,
+  HeaderContainer,
+  MainContainer,
+  HeaderWrapper,
+} from './SharedLayout.styled';
+import { SubHeader } from 'components/SubHeader/SubHeader';
 
-export const SharedLayout = () => {
+export const SharedLayout = ({ setSubheaderMiddle }) => {
+  // const [subHeaderContent, setSubHeaderContent] = useState(null);
+
   return (
-    <div>
-      {/* <ScrollToTop /> */}
-      <Header>
-        <HeaderContainer>
-          <Logo />
-          <HeaderNav />
-        </HeaderContainer>
-      </Header>
+    <>
+      <HeaderWrapper>
+        {/* <SubHeader leftContent={<GoBackLink />} {...subHeaderContent} /> */}
+        {/* На страницах может дублироваться, так проще чем через контекст */}
+        <SubHeader />
+        <Header>
+          <HeaderContainer>
+            <Logo />
+            <HeaderNav />
+          </HeaderContainer>
+        </Header>
+      </HeaderWrapper>
       <Main>
         <section>
           <MainContainer>
             <Suspense fallback={<LoaderBar />}>
-              <Outlet />
+              <Outlet /* context={setSubHeaderContent} */ />
             </Suspense>
           </MainContainer>
         </section>
       </Main>
       <Backtop />
-    </div>
+    </>
   );
 };

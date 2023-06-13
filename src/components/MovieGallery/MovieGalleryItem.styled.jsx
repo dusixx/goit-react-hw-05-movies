@@ -43,7 +43,7 @@ export const Rating = styled.span`
   line-height: 0;
 
   @media screen and (max-width: 320px),
-    (min-width: 500px) and (max-width: 650px),
+    (min-width: 555px) and (max-width: 650px),
     (min-width: 800px) and (max-width: 900px) {
     font-size: 14px;
     padding: 0 4px 0 4px;
@@ -84,7 +84,7 @@ export const Overlay = styled.div`
   padding-bottom: 30px;
 
   @media screen and (max-width: 320px),
-    (min-width: 500px) and (max-width: 650px),
+    (min-width: 555px) and (max-width: 650px),
     (min-width: 800px) and (max-width: 900px) {
     gap: 10px;
   }
@@ -109,7 +109,7 @@ export const Title = styled.h2`
   overflow-wrap: break-word;
 
   @media screen and (max-width: 320px),
-    (min-width: 500px) and (max-width: 650px),
+    (min-width: 555px) and (max-width: 650px),
     (min-width: 800px) and (max-width: 900px) {
     font-size: 16px;
   }
@@ -127,7 +127,7 @@ export const AltTitle = styled.h3`
   overflow-wrap: break-word;
 
   @media screen and (max-width: 320px),
-    (min-width: 500px) and (max-width: 650px),
+    (min-width: 555px) and (max-width: 650px),
     (min-width: 800px) and (max-width: 900px) {
     font-size: 16px;
   }
@@ -142,7 +142,7 @@ export const Genres = styled.p`
   color: var(--color-orange);
 
   @media screen and (max-width: 320px),
-    (min-width: 500px) and (max-width: 650px),
+    (min-width: 555px) and (max-width: 650px),
     (min-width: 800px) and (max-width: 900px) {
     font-size: 12px;
   }
@@ -160,7 +160,7 @@ export const Overview = styled.p`
   line-height: 1.1;
 
   @media screen and (max-width: 320px),
-    (min-width: 500px) and (max-width: 650px),
+    (min-width: 555px) and (max-width: 650px),
     (min-width: 800px) and (max-width: 900px) {
     font-size: 11px;
   }

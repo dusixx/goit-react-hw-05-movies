@@ -1,7 +1,7 @@
 import { useLocation } from 'react-router-dom';
 import { LinkButton } from 'styles/shared';
 import { Caption, Container, Text } from './ErrorMessage.styled';
-import { BiMessageRoundedError as IconError } from 'react-icons/bi';
+import { IconError } from 'styles/icons';
 
 const TEXT =
   'It may have been moved, or you may have simply mistyped the page address.';

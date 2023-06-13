@@ -5,14 +5,14 @@ import TmdbService from 'services/tmdb/tmdbSrv';
 import { OptionButtons } from 'components/etc/OptionButtons/OptionButtons';
 import { LoadMoreBtn } from 'components/etc/LoadMoreBtn/LoadMoreBtn';
 import { ErrorMessage } from 'components/ErrorMessage/ErrorMessage';
-import { LoaderBar } from 'components/LoaderBar/LoaderBar';
+import { SubHeader } from 'components/SubHeader/SubHeader';
 
 const srv = new TmdbService();
 
 const PAGE_TITLE = `Trends`;
 const DEF_PARAM_VALUE = 'week';
 
-const Home = ({ loader }) => {
+const Home = ({ loader, fromOutlet }) => {
   const [active, setActive] = useState(DEF_PARAM_VALUE);
   const [error, setError] = useState(null);
   const [trends, setTrends] = useState([]);
@@ -48,16 +48,15 @@ const Home = ({ loader }) => {
       {error && <ErrorMessage error={error} />}
       {!error && trends?.length > 0 && (
         <>
-          <PageTitle style={{ marginBottom: 30, marginTop: 10 }}>
-            {PAGE_TITLE}
-          </PageTitle>
+          <SubHeader>
+            <OptionButtons
+              items={'week day'}
+              onClick={setActive}
+              value={active}
+            />
+          </SubHeader>
 
-          <OptionButtons
-            items={'week day'}
-            onClick={setActive}
-            style={{ marginBottom: 30 }}
-            value={active}
-          />
+          <PageTitle style={{ marginBottom: 30 }}>{PAGE_TITLE}</PageTitle>
 
           <MovieGallery
             data={trends}
@@ -68,7 +67,7 @@ const Home = ({ loader }) => {
           {showLoadMoreBtn && (
             <LoadMoreBtn
               onClick={handleLoadMoreClick}
-              style={{ marginTop: 30 }}
+              style={{ marginTop: 40 }}
             />
           )}
         </>

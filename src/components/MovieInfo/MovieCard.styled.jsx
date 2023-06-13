@@ -38,7 +38,7 @@ export const PosterLink = styled(Link)`
 
   @media screen and (min-width: 768px) {
     position: sticky;
-    top: 0; // ${HEADER_HEIGHT};
+    top: 40px; // ${HEADER_HEIGHT};
     width: 330px;
     height: calc(330px * ${POSTER_HMULT});
   }
@@ -46,6 +46,10 @@ export const PosterLink = styled(Link)`
 
 export const Poster = styled.img`
   ${TransitionBase('filter')};
+
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 
   /* Сюда вместо ссылки - чтобы не cработывало для заглушек */
   &:hover,
@@ -98,7 +102,7 @@ export const ModalContainer = styled.div`
   }
 `;
 
-export const Thumb = styled.div`
+export const ModalThumb = styled.div`
   position: absolute;
 
   & img {

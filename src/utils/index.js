@@ -100,13 +100,9 @@ export function splitNumIntoTriads(v, splitter = ' ') {
   return part.join('.');
 }
 
-export const getList = v => {
-  if (isStr(v)) return v.split(/\s*,\s*|\s+/);
-  try {
-    return [...v];
-  } catch {
-    return [];
-  }
+export const getList = (v, splitter) => {
+  let ret = isStr(v) ? v.split(/\s*,\s*|\s+/) : isArray(v) ? v : [];
+  return isStr(splitter) ? ret.join(splitter) : ret;
 };
 
 /**
@@ -226,7 +222,8 @@ export const isVScrollBarVisible = () => {
  */
 export const onImageLoad = (img, callback) => {
   if (!img) return;
+
   const image = new Image();
-  image.src = isStr(img) ? img : img.src;
+  image.src = img.src || img;
   image.onload = callback;
 };

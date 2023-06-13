@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import { ButtonBase, FlexCentered, TransitionBase } from 'styles/shared';
 import { calcCSSValue } from 'utils';
 
-const DEF_OFFSET = 15;
+const DEF_OFFSET = 10;
 const DEF_SIZE = 50;
 const DEF_OPACITY = 0.4;
 

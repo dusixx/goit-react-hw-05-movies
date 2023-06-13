@@ -1,41 +1,34 @@
-import { LinkPrimary } from 'styles/shared';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { IconLeftArrow } from 'styles/icons';
+import { LinkStyled } from './GoBackLink.styled';
+import { BiArrowBack as IconArrowBack } from 'react-icons/bi';
 
 const PREV_LOC = -1;
 const DEF_ICON_SIZE = 25;
 
-const style = {
-  display: 'inline-flex',
-  alignItems: 'center',
-};
-
 export const GoBackLink = ({
   children,
-  icon: Icon = IconLeftArrow,
-  ...rest
+  icon: Icon = IconArrowBack,
+  ...restProps
 }) => {
   const location = useLocation();
-  const [path, setPath] = useState(PREV_LOC);
+  const [path, setPath] = useState(null);
 
   useEffect(() => {
-    const { key, pathname, state } = location;
-    setPath(
-      // key будет default даже в случае, если задали id в строке адреса и запрос был успешным
-      // Поэтому на него нельзя ориентироваться
-      pathname === '/' || (key === 'default' && state?.PAGE_NOT_FOUND)
-        ? null
-        : state?.from ?? PREV_LOC
-    );
+    const { pathname, state } = location;
+
+    let wayback = PREV_LOC;
+    if (/movies(\/[^/]+)?$/.test(pathname)) wayback = '/';
+
+    setPath(pathname === '/' ? null : state?.from ?? wayback);
   }, [location]);
 
   return (
     path && (
-      <LinkPrimary to={path} style={style} {...rest}>
+      <LinkStyled to={path} title="Go Back" {...restProps}>
         <Icon size={DEF_ICON_SIZE} />
         {children}
-      </LinkPrimary>
+      </LinkStyled>
     )
   );
 };

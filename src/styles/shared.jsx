@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
 import { Link } from 'react-router-dom';
-import { isStr, calcCSSValue } from 'utils';
+import { isStr, calcCSSValue, getList } from 'utils';
 import { bgiMovieLogo } from './icons';
 
 // utils
@@ -18,7 +18,7 @@ export const TransitionBase = (propNames, duration, func) => {
   const tf = isStr(func) && func ? func : `var(--trans-func)`;
 
   return css`
-    transition-property: ${propNames};
+    transition-property: ${getList(propNames, ',')};
     transition-duration: ${dur ? `${dur}ms` : `var(--trans-duration)`};
     transition-timing-function: ${tf};
   `;

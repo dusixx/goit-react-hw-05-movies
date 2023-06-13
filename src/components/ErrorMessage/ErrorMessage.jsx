@@ -1,6 +1,6 @@
 import { LinkButton } from 'styles/shared';
 import { Caption, Container, Text } from './ErrorMessage.styled';
-import { BiMessageRoundedError as IconError } from 'react-icons/bi';
+import { IconError } from 'styles/icons';
 
 export const ErrorMessage = ({ error }) => {
   console.error(error);

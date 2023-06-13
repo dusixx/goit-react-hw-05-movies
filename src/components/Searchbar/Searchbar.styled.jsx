@@ -1,9 +1,10 @@
 import styled from '@emotion/styled';
 import { ButtonPrimary, FlexCentered, TransitionBase } from 'styles/shared';
+import { calcCSSValue } from 'utils';
 
 export const Container = styled.div`
-  height: ${({ style }) => style?.height || '100%'};
-  width: ${({ style }) => style?.width || '100%'};
+  height: ${({ height }) => calcCSSValue(height) || '100%'};
+  width: ${({ width }) => calcCSSValue(width) || '100%'};
   margin: 0 auto 0 auto;
 
   border: 1px solid rgb(var(--color-blue-rgb), 0.5);
@@ -13,7 +14,7 @@ export const Container = styled.div`
   ${TransitionBase(['box-shadow', 'border-color'])};
 
   &:focus-within {
-    box-shadow: 0 0 0 0.25rem rgb(var(--color-blue-rgb), 0.2);
+    box-shadow: 0 0 0 0.3rem rgb(var(--color-blue-rgb), 0.2);
     border-color: rgb(var(--color-blue-rgb), 0.7);
   }
 

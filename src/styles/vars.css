@@ -11,6 +11,11 @@
   --color-imdb-yellow: #f6c700;
   --color-tmdb-green: #14b18c;
   --color-tmdb-blue: #01a4e4;
+  --color-tmdb-gradient: linear-gradient(
+    to right,
+    var(--color-tmdb-green) 0%,
+    var(--color-tmdb-blue) 100%
+  );
 
   --box-shadow: 0 1px 1px 1px rgb(202, 202, 202);
   --border-radius: 8px;

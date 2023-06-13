@@ -14,7 +14,7 @@ import {
   Desc,
   MovieTitle,
   ModalContainer,
-  Thumb,
+  ModalThumb,
   OriginalTitle,
   WellKnownTitle,
 } from './MovieCard.styled';
@@ -60,6 +60,7 @@ export const MovieCard = ({ data = {} }) => {
   return (
     <Card>
       <Info>
+        {/* !! id(359246) изображение не втиснуто */}
         <PosterLink
           to={posterData.original}
           onClick={handleImageClick}
@@ -98,13 +99,13 @@ export const MovieCard = ({ data = {} }) => {
       >
         <ModalContainer>
           <Spinner width={40} visible={!wasModalImageLoaded} />
-          <Thumb>
+          <ModalThumb>
             <img
               src={posterData.original}
               alt={posterData.alt}
               onLoad={() => setWasModalImageLoaded(true)}
             />
-          </Thumb>
+          </ModalThumb>
         </ModalContainer>
       </Modal>
     </Card>

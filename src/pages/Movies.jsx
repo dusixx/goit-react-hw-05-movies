@@ -5,11 +5,13 @@ import { useSearchParams, useLocation } from 'react-router-dom';
 import TmdbService from 'services/tmdb/tmdbSrv';
 import { LoadMoreBtn } from 'components/etc/LoadMoreBtn/LoadMoreBtn';
 import { ErrorMessage } from 'components/ErrorMessage/ErrorMessage';
-import { LoaderBar } from 'components/LoaderBar/LoaderBar';
+import { showInfo } from 'utils';
+import { SubHeader } from 'components/SubHeader/SubHeader';
 
 const srv = new TmdbService();
+const NO_SEARCH_RESULTS = 'No search results matching your query';
 const searchbarStyle = {
-  height: 40,
+  height: 45,
   marginBottom: 40,
   marginTop: 20,
 };
@@ -33,19 +35,22 @@ const Movies = ({ loader }) => {
 
   // Добавляем в query текущее время, чтобы запрос всегда был уникален
   // Тогда при повторном нажатии на кнопку поиска - будет запрос
-
   useEffect(() => {
     if (!query) return;
 
     const { text } = query;
-    // TODO исправить тут - не исчезает Load More кнопка
-    // if (!text) return;
+    if (!text) return;
+
+    console.log(text);
 
     srv
       .searchMovies(text)
-      .then(data => {
-        setResults(data.results);
-        totalPages.current = data.total_pages;
+      .then(({ results, total_pages, total_results }) => {
+        if (!total_results) {
+          return showInfo(NO_SEARCH_RESULTS);
+        }
+        setResults(results);
+        totalPages.current = total_pages;
       })
       .catch(setError);
   }, [query]);
@@ -69,6 +74,7 @@ const Movies = ({ loader }) => {
     if (!query) {
       setResults([]);
       setSearchParams({ query });
+      setWasLoaded(false);
     }
   };
 
@@ -84,6 +90,7 @@ const Movies = ({ loader }) => {
     <ErrorMessage error={error} />
   ) : (
     <>
+      <SubHeader />
       <Searchbar
         style={searchbarStyle}
         onSubmit={handleSearchbarSubmit}
@@ -99,7 +106,7 @@ const Movies = ({ loader }) => {
       )}
 
       {showLoadMoreBtn && (
-        <LoadMoreBtn onClick={handleLoadMoreClick} style={{ marginTop: 30 }} />
+        <LoadMoreBtn onClick={handleLoadMoreClick} style={{ marginTop: 40 }} />
       )}
     </>
   );

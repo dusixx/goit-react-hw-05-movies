@@ -23,7 +23,9 @@ export const Header = ({ children }) => {
   }, []);
 
   return (
-    <StyledHeader visible={onTop || visible} style={{ opacity: onTop || 0.9 }}>
+    <StyledHeader
+      visible={onTop || visible} /* style={{ opacity: onTop || 0.9 }} */
+    >
       {children}
     </StyledHeader>
   );
