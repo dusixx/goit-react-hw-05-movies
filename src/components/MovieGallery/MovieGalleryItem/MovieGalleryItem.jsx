@@ -73,7 +73,7 @@ export const MovieGalleryItem = ({
         {poster_path && (
           <Poster
             ref={imgRef}
-            src={srv.buildImageUrl(poster_path, DEF_POSTER_WIDTH)}
+            src={srv.getImageUrl(poster_path, DEF_POSTER_WIDTH)}
             alt={title}
             onLoad={() => setWasLoaded(true)}
           />

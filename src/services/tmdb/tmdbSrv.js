@@ -30,7 +30,7 @@ export default class TmdbService {
    * @param {*} size
    * @returns
    */
-  buildImageUrl(relPath, size) {
+  getImageUrl(relPath, size) {
     const sz = isNaN(parseInt(size)) ? 'original' : `w${size}`;
     return `${data.IMAGE_BASE_URL}/${sz}/${relPath}`;
   }

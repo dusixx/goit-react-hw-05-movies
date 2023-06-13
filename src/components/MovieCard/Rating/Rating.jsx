@@ -1,6 +1,6 @@
 import { IconImdbLogo, IconTmdbLogo } from 'styles/icons';
 import { shortenNum } from 'utils';
-import { HashLink } from 'components/etc/HashLink/HashLink';
+import { HashBtnLink } from 'components/etc/HashBtnLink/HashBtnLink';
 import {
   VoteAverage,
   TmdbLink,
@@ -52,9 +52,9 @@ export const Rating = ({
       )}
 
       {reviewsCount > 0 && (
-        <HashLink to="#reviews" style={{ padding: '5px 5px 5px 0' }}>
+        <HashBtnLink to="#reviews" style={{ padding: '5px 5px 5px 0' }}>
           <span>{reviewsCount}</span> review(s)
-        </HashLink>
+        </HashBtnLink>
       )}
     </Ratings>
   );

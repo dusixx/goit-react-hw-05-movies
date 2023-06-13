@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { OptionButtons } from '../etc/OptionButtons/OptionButtons';
 import { PersonCard } from './PersonCard/PersonCard';
-import { normalizeCrewData } from 'services/tmdb/helpers';
+import { normalizeCrewData, normalizeCastData } from 'services/tmdb/helpers';
 import { LoadMoreBtn } from 'components/etc/LoadMoreBtn/LoadMoreBtn';
 import { CreditsList, CreditsListItem, Container } from './CreditsInfo.styled';
 import { SubHeader } from 'components/SubHeader/SubHeader';
@@ -28,9 +28,11 @@ export const CreditsInfo = ({
   useAutoScroll(listRef, cards, scrollBy);
 
   const credits = useRef({
-    cast: data.credits.cast,
+    cast: normalizeCastData(data.credits.cast),
     crew: normalizeCrewData(data.credits.crew),
   });
+
+  // console.log(data.credits.cast);
 
   const sortedCredits = useRef(null);
 
@@ -65,6 +67,8 @@ export const CreditsInfo = ({
           value={active}
         />
       </SubHeader>
+
+      {/* !! id(798286) 2 роли на 1 человека */}
 
       {cards.length > 0 && (
         <CreditsList ref={listRef}>

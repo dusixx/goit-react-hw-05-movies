@@ -4,9 +4,9 @@ import throttle from 'lodash.throttle';
 import { GoBackLink } from 'components/etc/GoBackLink/GoBackLink';
 import {
   Container,
-  LeftColumn,
-  MiddleColumn,
-  RightColumn,
+  Left,
+  Middle,
+  Right,
   InnerContainer,
 } from './SubHeader.styled';
 
@@ -38,9 +38,9 @@ export const SubHeader = ({
   return createPortal(
     <Container visible={onTop || visible}>
       <InnerContainer>
-        <LeftColumn>{leftContent}</LeftColumn>
-        <MiddleColumn>{children}</MiddleColumn>
-        <RightColumn>{rightContent}</RightColumn>
+        <Left>{leftContent}</Left>
+        <Middle>{children}</Middle>
+        <Right>{rightContent}</Right>
       </InnerContainer>
     </Container>,
     rootModal

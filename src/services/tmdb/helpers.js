@@ -5,23 +5,37 @@ const srv = new TmdbService();
 
 /**
  *
- * Убирает дублирование персон, сворачивая поле job в список
- * @param {array} crew - массив данных (объектов) о съмочной группе
+ * Убирает дублирование персон, сворачивая поле [fieldName] в список
+ * @param {array} data - массив данных (объектов) о съмочной группе
  * @returns - массив объектов без дублирования
  */
-export const normalizeCrewData = crew => {
-  const hash = crew.reduce((res, { id, job, ...rest }) => {
-    if (res[id]) res[id].job.push(job);
-    else res[id] = { ...rest, id, job: [job] };
+const normalizeCredits = (data, fieldName) => {
+  const hash = data.reduce((res, personData) => {
+    const { id } = personData;
+    const fieldValue = personData[fieldName];
+
+    if (res[id]) {
+      res[id][fieldName].push(fieldValue);
+    } else {
+      res[id] = { ...personData, [fieldName]: [fieldValue] };
+    }
 
     return res;
   }, {});
 
-  //   преобразуем job в строку, чтобы не делать это в целевом компоненте
-  return Object.values(hash).map(({ job, ...rest }) => ({
-    ...rest,
-    job: job.join(', '),
+  //   преобразуем в строку, чтобы не делать это в целевом компоненте
+  return Object.values(hash).map(obj => ({
+    ...obj,
+    [fieldName]: obj[fieldName].join(', '),
   }));
+};
+
+export const normalizeCrewData = crew => {
+  return normalizeCredits(crew, 'job');
+};
+
+export const normalizeCastData = cast => {
+  return normalizeCredits(cast, 'character');
 };
 
 /**
@@ -100,6 +114,6 @@ export const getAvatar = (path, width) => {
   return path
     ? /http/i.test(path)
       ? path.replace(/\//, '')
-      : srv.buildImageUrl(path, width)
+      : srv.getImageUrl(path, width)
     : null;
 };

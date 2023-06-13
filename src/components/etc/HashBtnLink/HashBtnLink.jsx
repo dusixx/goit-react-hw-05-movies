@@ -12,7 +12,7 @@ const DEF_SCROLL_OPTS = {
  *  @param to - любой валидный селектор
  *  @param scrollOptions - параметры для scrollIntoView
  */
-export const HashLink = ({
+export const HashBtnLink = ({
   to,
   scrollOptions = DEF_SCROLL_OPTS,
   children,

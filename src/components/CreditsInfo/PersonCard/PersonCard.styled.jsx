@@ -16,6 +16,7 @@ export const ProfileLink = styled(Link)`
 
 export const Thumb = styled.div`
   ${FlexCentered()};
+
   height: calc(150px * 1.5);
   width: 100%;
 `;
@@ -47,11 +48,11 @@ export const Job = styled.span`
 `;
 
 export const ProfileImage = styled.img`
+  ${TransitionBase('filter')};
+
   width: 100%;
   height: 100%;
   object-fit: cover;
-
-  ${TransitionBase('filter')};
 
   /* Сюда вместо ссылки - чтобы не cработывало для заглушек */
   &:hover,
@@ -61,8 +62,9 @@ export const ProfileImage = styled.img`
 `;
 
 export const ModalContainer = styled.div`
-  position: relative;
   ${FlexCentered()};
+
+  position: relative;
 
   & :nth-of-type() {
     position: absolute;

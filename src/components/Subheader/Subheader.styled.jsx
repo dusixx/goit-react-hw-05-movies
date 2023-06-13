@@ -38,16 +38,16 @@ export const Column = styled.div`
   height: 100%;
 `;
 
-export const MiddleColumn = styled(Column)`
+export const Middle = styled(Column)`
   ${FlexCentered()};
   width: 80%;
 `;
 
-export const LeftColumn = styled(Column)`
+export const Left = styled(Column)`
   width: 10%;
 `;
 
-export const RightColumn = styled(Column)`
+export const Right = styled(Column)`
   justify-content: flex-end;
   width: 10%;
 `;

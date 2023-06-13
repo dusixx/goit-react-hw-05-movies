@@ -31,8 +31,8 @@ export const PersonCard = ({ profile_path, name, character, job }) => {
     setShowModal(true);
   };
 
-  const photoPreview = srv.buildImageUrl(profile_path, PROFILE_WIDTH);
-  const photoOriginal = srv.buildImageUrl(profile_path);
+  const photoPreview = srv.getImageUrl(profile_path, PROFILE_WIDTH);
+  const photoOriginal = srv.getImageUrl(profile_path);
 
   return (
     <Card>

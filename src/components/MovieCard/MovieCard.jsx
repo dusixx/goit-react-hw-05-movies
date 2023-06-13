@@ -58,8 +58,8 @@ export const MovieCard = ({ data = {} }) => {
 
   // постер
   const posterData = {
-    original: srv.buildImageUrl(poster_path),
-    src: srv.buildImageUrl(poster_path, POSTER_WIDTH),
+    original: srv.getImageUrl(poster_path),
+    src: srv.getImageUrl(poster_path, POSTER_WIDTH),
     alt: movieTitle,
   };
 
