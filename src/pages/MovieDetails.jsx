@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import TmdbService from 'services/tmdb/tmdbSrv';
 import { MovieCard } from 'components/MovieCard/MovieCard';
 import { ErrorMessage } from 'components/ErrorMessage/ErrorMessage';
+import { useWillUnmount } from './useWillUnmount';
 import { func } from 'prop-types';
 
 const srv = new TmdbService();
@@ -16,6 +17,9 @@ const MovieDetails = ({ loader: Loader }) => {
   const [showLoader, setShowLoader] = useState(false);
   const { movieId } = useParams();
   const [details, setDetails] = useState(null);
+
+  // cleanup
+  useWillUnmount(srv.abort);
 
   useEffect(() => {
     setShowLoader(true);

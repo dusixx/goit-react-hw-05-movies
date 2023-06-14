@@ -30,13 +30,8 @@ const normalizeCredits = (data, fieldName) => {
   }));
 };
 
-export const normalizeCrewData = crew => {
-  return normalizeCredits(crew, 'job');
-};
-
-export const normalizeCastData = cast => {
-  return normalizeCredits(cast, 'character');
-};
+export const normalizeCrewData = crew => normalizeCredits(crew, 'job');
+export const normalizeCastData = cast => normalizeCredits(cast, 'character');
 
 /**
  * Информация об актерах

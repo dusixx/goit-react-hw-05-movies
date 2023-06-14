@@ -4,14 +4,17 @@ import { PageTitle } from 'styles/shared';
 import TmdbService from 'services/tmdb/tmdbSrv';
 import { CreditsInfo } from 'components/CreditsInfo/CreditsInfo';
 import { ErrorMessage } from 'components/ErrorMessage/ErrorMessage';
+import { useWillUnmount } from './useWillUnmount';
 
 const srv = new TmdbService();
 
 const Credits = () => {
   const { movieId } = useParams();
-
   const [error, setError] = useState(null);
   const [details, setDetails] = useState(null);
+
+  // cleanup
+  useWillUnmount(srv.abort);
 
   useEffect(() => {
     Promise.all([srv.getMovieDetails(movieId), srv.getMovieCredits(movieId)])

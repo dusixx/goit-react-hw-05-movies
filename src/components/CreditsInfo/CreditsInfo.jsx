@@ -10,6 +10,8 @@ import { useAutoScroll } from './useAutoScroll';
 
 const CARDS_PER_PAGE = 30;
 const DEF_SORT_OPTIONS = { key: 'popularity', ascending: false };
+const DEF_OPTION_VALUE = 'cast';
+const OPTION_ITEMS = 'cast crew';
 
 //
 // CreditsInfo
@@ -20,7 +22,7 @@ export const CreditsInfo = ({
   sortOptions = DEF_SORT_OPTIONS,
   scrollBy,
 }) => {
-  const [active, setActive] = useState('cast');
+  const [active, setActive] = useState(DEF_OPTION_VALUE);
   const [cards, setCards] = useState([]);
   const [page, setPage] = useState(1);
   const listRef = useRef(null);
@@ -62,7 +64,7 @@ export const CreditsInfo = ({
     <Container>
       <SubHeader>
         <OptionButtons
-          items={'cast crew'}
+          items={OPTION_ITEMS}
           onClick={handleClickOption}
           value={active}
         />

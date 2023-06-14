@@ -2,8 +2,9 @@ import axios from 'axios';
 import { isObj, isArray, camelToSnake, normalizeStr } from '../../utils';
 import Cache from './cache';
 
-const controller = new AbortController();
+// const controller = new AbortController();
 const cache = new Cache();
+let controller;
 
 const data = {
   API_BASE_URL: 'https://api.themoviedb.org/3',
@@ -41,6 +42,7 @@ export default class TmdbService {
    * @returns
    */
   async fetch(url) {
+    controller = new AbortController();
     const { signal } = controller;
 
     try {

@@ -18,7 +18,7 @@ export const GoBackLink = ({
     const { pathname, state } = location;
 
     let wayback = PREV_LOC;
-    if (/movies(\/[^/]+)?$/.test(pathname)) wayback = '/';
+    //if (/movies(\/[^/]+)?$/.test(pathname)) wayback = '/';
 
     setPath(pathname === '/' ? null : state?.from ?? wayback);
   }, [location]);

@@ -1,7 +1,6 @@
 import { getAvatar } from 'services/tmdb/helpers';
 import { IconNoAvatar } from 'styles/icons';
-import { useRef, useEffect, useState } from 'react';
-import { markupLinks } from 'utils';
+import { ExpandableFormattedContent } from 'components/etc/ExpandableFormattedContent';
 
 import {
   Container,
@@ -10,13 +9,11 @@ import {
   AvatarAndName,
   Header,
   HeaderGroup,
-  Content,
   SourceLink,
-  Expander,
 } from './ReviewItem.styled';
 
 const AVATAR_WIDTH = 185;
-const CONTENT_MAX_HEIGHT = 100;
+const CONTENT_COLLAPSED_HEIGHT = 100;
 const ICON_NO_AVATAR_SIZE = 60;
 const ICON_NO_AVATAR_COLOR = 'lightgray';
 
@@ -35,14 +32,6 @@ export const ReviewItem = ({
   updated_at,
   id,
 }) => {
-  const [showExpander, setShowExpander] = useState(false);
-  const contentRef = useRef(null);
-
-  useEffect(() => {
-    const contentHeight = contentRef.current.getBoundingClientRect().height;
-    setShowExpander(contentHeight > CONTENT_MAX_HEIGHT);
-  }, []);
-
   const createdDate = new Date(created_at).toLocaleString();
 
   return (
@@ -73,18 +62,10 @@ export const ReviewItem = ({
         </HeaderGroup>
       </Header>
 
-      <Content
-        ref={contentRef}
-        // В постах попадается разметка, ставим их в innerHTML
-        dangerouslySetInnerHTML={{ __html: markupLinks(content) }}
-        style={showExpander ? { maxHeight: CONTENT_MAX_HEIGHT } : null}
+      <ExpandableFormattedContent
+        content={content}
+        collapsedHeight={CONTENT_COLLAPSED_HEIGHT}
       />
-
-      {showExpander && (
-        <>
-          <Expander onClick={() => setShowExpander(false)}>Show full</Expander>
-        </>
-      )}
     </Container>
   );
 };

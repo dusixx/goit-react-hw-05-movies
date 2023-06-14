@@ -21,6 +21,7 @@ import {
   Homepage,
   Overview,
 } from './MovieCard.styled';
+import { ExpandableFormattedContent } from 'components/etc/ExpandableFormattedContent';
 
 const srv = new TmdbService();
 
@@ -114,7 +115,11 @@ export const MovieCard = ({ data = {} }) => {
             {overview && (
               <Overview>
                 <Title>Overview</Title>
-                <Text>{overview}</Text>
+                {/* <Text>{overview}</Text> */}
+                <ExpandableFormattedContent
+                  content={overview}
+                  collapsedHeight={100}
+                />
               </Overview>
             )}
           </Desc>

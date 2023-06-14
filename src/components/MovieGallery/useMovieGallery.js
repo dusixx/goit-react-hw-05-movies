@@ -26,7 +26,7 @@ export const useMovieGallery = ({ listRef, onLoad, data, scrollBy }) => {
 
       // тут, в колбеке уже будут равны (curDataLen.current === data.length)
       const shouldAutoscroll = curDataLen.current < data.length;
-      const shouldScrollToTop = curDataLen.current === data.length;
+      const shouldScrollToTop = curDataLen.current >= data.length;
 
       onImageLoad(lastImage, () => {
         setShowLoader(false);

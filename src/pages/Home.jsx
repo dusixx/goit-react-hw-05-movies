@@ -6,19 +6,24 @@ import { OptionButtons } from 'components/etc/OptionButtons/OptionButtons';
 import { LoadMoreBtn } from 'components/etc/LoadMoreBtn/LoadMoreBtn';
 import { ErrorMessage } from 'components/ErrorMessage/ErrorMessage';
 import { SubHeader } from 'components/SubHeader/SubHeader';
+import { useWillUnmount } from './useWillUnmount';
 
 const srv = new TmdbService();
 
 const PAGE_TITLE = `Trends`;
-const DEF_PARAM_VALUE = 'week';
+const DEF_OPTION_VALUE = 'day';
+const OPTION_ITEMS = 'day week';
 
 const Home = ({ loader, fromOutlet }) => {
-  const [active, setActive] = useState(DEF_PARAM_VALUE);
+  const [active, setActive] = useState(DEF_OPTION_VALUE);
   const [error, setError] = useState(null);
   const [trends, setTrends] = useState([]);
   const [wasLoaded, setWasLoaded] = useState(false);
   const totalPages = useRef(1);
   const page = useRef(1);
+
+  // cleanup
+  useWillUnmount(srv.abort);
 
   useEffect(() => {
     srv
@@ -27,7 +32,12 @@ const Home = ({ loader, fromOutlet }) => {
         setTrends(data.results);
         totalPages.current = data.total_pages;
       })
-      .catch(setError);
+      .catch(err => {
+        setError(err);
+        console.log(err);
+      });
+
+    return () => srv.abort();
   }, [active]);
 
   const handleLoadMoreClick = clickCount => {
@@ -50,7 +60,7 @@ const Home = ({ loader, fromOutlet }) => {
         <>
           <SubHeader>
             <OptionButtons
-              items={'week day'}
+              items={OPTION_ITEMS}
               onClick={setActive}
               value={active}
             />
