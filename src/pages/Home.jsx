@@ -4,7 +4,7 @@ import { PageTitle } from 'styles/shared';
 import { OptionButtons } from 'components/etc/OptionButtons/OptionButtons';
 import { LoadMoreBtn } from 'components/etc/LoadMoreBtn/LoadMoreBtn';
 import { ErrorMessage } from 'components/ErrorMessage/ErrorMessage';
-import { SubHeader } from 'components/SubHeader/SubHeader';
+import { SubHeader } from 'components/Subheader/Subheader';
 import { useWillUnmount } from 'hooks/useWillUnmount';
 import TmdbService from 'services/tmdb/tmdbSrv';
 

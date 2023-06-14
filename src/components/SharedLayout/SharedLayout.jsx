@@ -4,7 +4,7 @@ import { Nav } from './Nav/Nav';
 import { Logo } from './Logo/Logo';
 import { Header } from './Header/Header';
 import { LoaderBar } from 'components/LoaderBar/LoaderBar';
-import { SubHeader } from 'components/SubHeader/SubHeader';
+import { SubHeader } from 'components/Subheader/Subheader';
 import { Backtop } from 'components/etc/Backtop/Backtop';
 
 import {
