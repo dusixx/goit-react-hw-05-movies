@@ -5,6 +5,9 @@ import { Reviews } from './Reviews/Reviews';
 import TmdbService from 'services/tmdb/tmdbSrv';
 import { getCrewPreview, getCastPreview } from 'services/tmdb/helpers';
 import { ModalImage } from 'components/etc/ModalImage/ModalImage';
+import { ExpandableContent } from 'components/etc/ExpandableContent';
+import { Spinner } from 'components/etc/Loader';
+import { SpinnerWrapper } from 'styles/shared';
 
 import {
   Card,
@@ -17,15 +20,14 @@ import {
   WellKnownTitle,
   CastAndCrewLink,
   Title,
-  Text,
   Homepage,
   Overview,
 } from './MovieCard.styled';
-import { ExpandableFormattedContent } from 'components/etc/ExpandableFormattedContent';
 
 const srv = new TmdbService();
 
 const POSTER_WIDTH = 500;
+const OVERVIEW_MAX_HEIGHT = 100;
 const NEW_TAB = { target: '_blank', rel: 'noopener noreferrer' };
 
 //
@@ -48,6 +50,7 @@ export const MovieCard = ({ data = {} }) => {
   } = data;
 
   const [showModal, setShowModal] = useState(false);
+  const [wasLoaded, setWasLoaded] = useState(false);
 
   const handleImageClick = (e, path) => {
     e.preventDefault();
@@ -80,7 +83,16 @@ export const MovieCard = ({ data = {} }) => {
           onClick={handleImageClick}
           clickable={poster_path}
         >
-          {poster_path && <Poster {...posterData} />}
+          {poster_path && (
+            <>
+              {!wasLoaded && (
+                <SpinnerWrapper>
+                  <Spinner spinnerWidth={40} />
+                </SpinnerWrapper>
+              )}
+              <Poster {...posterData} onLoad={() => setWasLoaded(true)} />
+            </>
+          )}
         </PosterLink>
 
         {movieTitle && (
@@ -115,10 +127,9 @@ export const MovieCard = ({ data = {} }) => {
             {overview && (
               <Overview>
                 <Title>Overview</Title>
-                {/* <Text>{overview}</Text> */}
-                <ExpandableFormattedContent
+                <ExpandableContent
                   content={overview}
-                  collapsedHeight={100}
+                  maxHeight={OVERVIEW_MAX_HEIGHT}
                 />
               </Overview>
             )}

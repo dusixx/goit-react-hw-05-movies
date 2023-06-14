@@ -9,12 +9,12 @@ import { func } from 'prop-types';
 const srv = new TmdbService();
 
 // !! некоторая информация для фильмов из списка трендов
-// более актуальная чем при запросе деталей того же фильма
-// Например - рейтинг и кол-во голосов
+// более актуальная, чем при запросе деталей того же фильма
+// Например, рейтинг и кол-во голосов
 
 const MovieDetails = ({ loader: Loader }) => {
   const [error, setError] = useState(null);
-  const [showLoader, setShowLoader] = useState(false);
+  const [showLoader, setShowLoader] = useState(true);
   const { movieId } = useParams();
   const [details, setDetails] = useState(null);
 
@@ -24,6 +24,9 @@ const MovieDetails = ({ loader: Loader }) => {
   useEffect(() => {
     setShowLoader(true);
 
+    // TODO: лучше загружать постепенно,
+    // показывая загрузчик для, например, списка рецензий
+    // Можно начинать загрузку рецензий при скроле в область видимости
     Promise.all([
       srv.getMovieDetails(movieId),
       srv.getMovieReviews(movieId),

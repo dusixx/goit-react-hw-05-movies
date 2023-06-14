@@ -1,11 +1,11 @@
 import { useRef, useState, useEffect, useCallback } from 'react';
-import { Content, Expander } from './ExpandableFormattedContent.styled';
+import { Content, Expander } from './ExpandableContent.styled';
 import { markupLinks } from 'utils';
 import debounce from 'lodash.debounce';
 
 const DEBOUNCE_DELAY = 100;
 
-export const ExpandableFormattedContent = ({ content, collapsedHeight }) => {
+export const ExpandableContent = ({ content, maxHeight = Infinity }) => {
   const [showExpander, setShowExpander] = useState(false);
   const contentRef = useRef(null);
 
@@ -17,8 +17,8 @@ export const ExpandableFormattedContent = ({ content, collapsedHeight }) => {
     const { height } = ref.getBoundingClientRect();
     ref.style.maxHeight = null;
 
-    return height > collapsedHeight;
-  }, [collapsedHeight]);
+    return height > maxHeight;
+  }, [maxHeight]);
 
   useEffect(() => {
     setShowExpander(contentShouldBeCollapsed());
@@ -38,7 +38,7 @@ export const ExpandableFormattedContent = ({ content, collapsedHeight }) => {
         ref={contentRef}
         // В постах попадается разметка, ставим в innerHTML
         dangerouslySetInnerHTML={{ __html: markupLinks(content) }}
-        maxHeight={showExpander ? collapsedHeight : 'max-content'}
+        maxHeight={showExpander ? maxHeight : 'max-content'}
       />
       {showExpander && (
         <Expander onClick={() => setShowExpander(false)}>Show full</Expander>

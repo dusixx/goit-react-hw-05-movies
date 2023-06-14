@@ -1,6 +1,6 @@
 import { getAvatar } from 'services/tmdb/helpers';
 import { IconNoAvatar } from 'styles/icons';
-import { ExpandableFormattedContent } from 'components/etc/ExpandableFormattedContent';
+import { ExpandableContent } from 'components/etc/ExpandableContent';
 
 import {
   Container,
@@ -13,7 +13,7 @@ import {
 } from './ReviewItem.styled';
 
 const AVATAR_WIDTH = 185;
-const CONTENT_COLLAPSED_HEIGHT = 100;
+const CONTENT_MAX_HEIGHT = 100;
 const ICON_NO_AVATAR_SIZE = 60;
 const ICON_NO_AVATAR_COLOR = 'lightgray';
 
@@ -62,9 +62,9 @@ export const ReviewItem = ({
         </HeaderGroup>
       </Header>
 
-      <ExpandableFormattedContent
+      <ExpandableContent
         content={content}
-        collapsedHeight={CONTENT_COLLAPSED_HEIGHT}
+        maxHeight={CONTENT_MAX_HEIGHT}
       />
     </Container>
   );

@@ -4,17 +4,18 @@ import { calcCSSValue } from 'utils';
 
 // pre чтобы сохранить оригинальное форматирование
 export const Content = styled.pre`
-  font-family: inherit;
-  line-height: 1.5;
-  white-space: pre-wrap;
-  overflow: hidden;
   max-height: ${({ maxHeight }) => calcCSSValue(maxHeight)};
 
-  /* Линк внутри поста с рецензией */
+  font-family: inherit;
+  line-height: 1.5;
+
+  white-space: pre-wrap;
+  overflow: hidden;
+
+  /* Линки внутри поста */
   & a {
     ${LinkBase};
     color: var(--color-blue);
-
     &:hover,
     &:focus-visible {
       color: var(--color-orange);

@@ -34,13 +34,11 @@ export const CreditsInfo = ({
     crew: normalizeCrewData(data.credits.crew),
   });
 
-  // console.log(data.credits.cast);
-
   const sortedCredits = useRef(null);
 
   useEffect(() => {
-    const data = credits.current[active];
-    sortedCredits.current = sortObj(data, sortOptions);
+    const arr = credits.current[active];
+    sortedCredits.current = sortObj(arr, sortOptions);
   }, [active, sortOptions]);
 
   useEffect(() => {

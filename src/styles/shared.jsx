@@ -3,6 +3,7 @@ import { css } from '@emotion/react';
 import { Link } from 'react-router-dom';
 import { isStr, calcCSSValue, getList } from 'utils';
 import { bgiMovieLogo } from './icons';
+import { VscColorMode } from 'react-icons/vsc';
 
 // utils
 
@@ -178,4 +179,40 @@ export const PageContainer = styled.div`
   padding: 0 20px 0 20px;
   padding-bottom: 40px;
   padding-top: 50px;
+`;
+
+export const SpinnerCircle = styled.span`
+  display: inline-block;
+  width: ${({ size }) => calcCSSValue(size)};
+  height: ${({ size }) => calcCSSValue(size)};
+
+  border: 2px solid ${({ color }) => color ?? 'var(--color-black)'};
+  border-bottom-color: transparent;
+  border-radius: 50%;
+
+  animation: rotation 0.7s linear infinite;
+  opacity: 0.6;
+
+  @keyframes rotation {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+`;
+
+export const SpinnerWrapper = styled.div`
+  ${FlexCentered()};
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  width: 110%;
+  height: 110%;
+
+  background: linear-gradient(180deg, #ebebeb 0, #ebebeb);
+  transform: translate(-50%, -50%);
 `;

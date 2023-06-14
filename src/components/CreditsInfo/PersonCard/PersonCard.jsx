@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { IconNoPhoto } from 'styles/icons';
 import TmdbService from 'services/tmdb/tmdbSrv';
 import { ModalImage } from 'components/etc/ModalImage/ModalImage';
+import { Spinner } from 'components/etc/Loader';
+import { SpinnerWrapper } from 'styles/shared';
 
 import {
   Thumb,
@@ -25,6 +27,7 @@ const STR_NA = 'n/a';
 
 export const PersonCard = ({ profile_path, name, character, job }) => {
   const [showModal, setShowModal] = useState(false);
+  const [imgWasLoaded, setImgWasLoaded] = useState(false);
 
   const handleImageClick = e => {
     e.preventDefault();
@@ -42,9 +45,23 @@ export const PersonCard = ({ profile_path, name, character, job }) => {
         clickable={profile_path}
       >
         <Thumb>
-          {profile_path ? (
-            <ProfileImage src={photoPreview} alt={name} />
-          ) : (
+          {profile_path && (
+            <>
+              {!imgWasLoaded && (
+                <SpinnerWrapper>
+                  <Spinner spinnerWidth={30} />
+                  {/* <SpinnerCircle size={25} /> */}
+                </SpinnerWrapper>
+              )}
+              <ProfileImage
+                src={photoPreview}
+                alt={name}
+                onLoad={() => setImgWasLoaded(true)}
+              />
+            </>
+          )}
+
+          {!profile_path && (
             <IconNoPhoto
               size={ICON_NO_PHOTO_SIZE}
               color={ICON_NO_PHOTO_COLOR}
