@@ -3,7 +3,6 @@ import { css } from '@emotion/react';
 import { Link } from 'react-router-dom';
 import { isStr, calcCSSValue, getList } from 'utils';
 import { bgiMovieLogo } from './icons';
-import { VscColorMode } from 'react-icons/vsc';
 
 // utils
 
