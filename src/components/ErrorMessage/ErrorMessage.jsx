@@ -11,9 +11,12 @@ export const ErrorMessage = ({ error }) => {
       <IconError size={40} color="var(--color-blue)" />
       <Caption>Something went wrong</Caption>
       <Text>{error.code}</Text>
-      <LinkButton to={-1} style={{ textTransform: 'capitalize' }}>
-        Go back
+      <LinkButton to="/" style={{ textTransform: 'capitalize' }}>
+        Go to the homepage
       </LinkButton>
+      {/* <LinkButton to={-1} style={{ textTransform: 'capitalize' }}>
+        Go back
+      </LinkButton> */}
     </Container>
   );
 };
