@@ -77,7 +77,8 @@ const Movies = ({ loader }) => {
   };
 
   const handleSearchbarSubmit = text => {
-    setQuery({ text, time: Date.now() });
+    setSearchParams({ query: text });
+    //setQuery({ text, time: Date.now() });
   };
 
   const showLoadMoreBtn =

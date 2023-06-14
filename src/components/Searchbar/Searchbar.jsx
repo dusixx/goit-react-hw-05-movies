@@ -12,7 +12,7 @@ import { IconSearch } from 'styles/icons';
 // извлекаем onChange, чтобы не перебивал (1) при прокидывании restProps (2)
 const Searchbar = ({ style, onSubmit, onChange, ...restProps }) => {
   const [query, setQuery] = useState('');
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
 
   // При изменении вручную строки запроса и нажатии Enter -
   // изменится текст в поле поиска
@@ -30,7 +30,6 @@ const Searchbar = ({ style, onSubmit, onChange, ...restProps }) => {
   // Менеям ?query в строке запроса только при сабмите
   const handleFormSubmit = e => {
     e.preventDefault();
-    setSearchParams({ query });
     onSubmit && onSubmit(query, e);
   };
 
