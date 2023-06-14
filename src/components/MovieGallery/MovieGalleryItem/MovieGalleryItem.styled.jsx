@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { FlexCentered, NoPosterBg, TransitionBase } from 'styles/shared';
 
 export const MovieLink = styled(Link)`
+  ${NoPosterBg}
+
   position: relative;
 
   display: block;
@@ -13,8 +15,6 @@ export const MovieLink = styled(Link)`
   border-radius: var(--border-radius);
   overflow: hidden;
 
-  ${NoPosterBg}
-
   &:hover,
   &:focus-visible {
     & [data-overlay] {
@@ -23,17 +23,13 @@ export const MovieLink = styled(Link)`
   }
 `;
 
-//
-// rating
-//
-
 export const Rating = styled.span`
+  ${FlexCentered()};
+
   position: absolute;
   top: 15px;
   right: -5px;
   z-index: 9;
-
-  ${FlexCentered()};
 
   padding-left: 7px;
   padding-right: 7px;
@@ -60,10 +56,6 @@ export const Poster = styled.img`
   object-fit: cover;
 `;
 
-//
-// overlay
-//
-
 export const Overlay = styled.div`
   position: absolute;
   top: 0;
@@ -89,15 +81,11 @@ export const Overlay = styled.div`
     gap: 10px;
   }
 
+  ${TransitionBase('opacity')};
+
   background-color: rgb(0 0 0 / 0.8);
   opacity: 0;
-
-  ${TransitionBase('opacity')};
 `;
-
-//
-// title
-//
 
 export const Title = styled.h2`
   padding-right: 25px;
@@ -133,10 +121,6 @@ export const AltTitle = styled.h3`
   }
 `;
 
-//
-// genres
-//
-
 export const Genres = styled.p`
   font-size: 14px;
   color: var(--color-orange);
@@ -147,10 +131,6 @@ export const Genres = styled.p`
     font-size: 12px;
   }
 `;
-
-//
-// overview
-//
 
 export const Overview = styled.p`
   height: 100%;

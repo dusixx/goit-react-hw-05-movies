@@ -1,11 +1,14 @@
 import { useState, useEffect } from 'react';
+import { string, func, oneOfType, arrayOf } from 'prop-types';
 import { OptionsList, OptionButton } from './OptionButtons.styled';
 import { normalizeStr, getList } from 'utils';
 
-export const OptionButtons = ({ items, value, onClick, style }) => {
+export const OptionButtons = ({ items, value, onClick, ...restProps }) => {
   const [active, setActive] = useState(value);
 
-  useEffect(() => setActive(value), [value]);
+  useEffect(() => {
+    setActive(value);
+  }, [value]);
 
   const handleClick = name => {
     setActive(name);
@@ -17,7 +20,7 @@ export const OptionButtons = ({ items, value, onClick, style }) => {
 
   return (
     btns.length > 0 && (
-      <OptionsList style={style}>
+      <OptionsList {...restProps}>
         {btns.map(name => (
           <OptionButton
             key={name}
@@ -30,4 +33,10 @@ export const OptionButtons = ({ items, value, onClick, style }) => {
       </OptionsList>
     )
   );
+};
+
+OptionButtons.propType = {
+  items: oneOfType([string, arrayOf(string)]),
+  value: string,
+  onClick: func,
 };

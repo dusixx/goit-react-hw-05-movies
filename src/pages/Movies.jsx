@@ -16,8 +16,9 @@ const searchbarStyle = {
   marginTop: 20,
 };
 
-// TODO: сохранять результаты поиска в ЛС и восстанавливать их если пришли с дочерней страницы
-// Например - смотрели детали фильма. Иначе очищать ЛС. Не скролить в топ!
+//
+// Movies
+//
 
 const Movies = ({ loader }) => {
   const [error, setError] = useState(null);
@@ -49,7 +50,7 @@ const Movies = ({ loader }) => {
       .searchMovies(text)
       .then(({ results, total_pages, total_results }) => {
         if (!total_results) {
-          // !! лучше отобразить на странице что-то
+          // !! лучше отобразить сообщение на странице
           return showInfo(NO_SEARCH_RESULTS);
         }
         setResults(results);

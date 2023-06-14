@@ -23,7 +23,7 @@ export const useImageGallery = ({ listRef, onLoad, data, scrollBy }) => {
       setShowLoader(true);
       const lastImage = imgs[imgs.length - 1];
 
-      // тут, в колбеке уже будут равны (curDataLen.current === data.length)
+      // вычисляем тут, в колбеке уже будут равны (curDataLen.current === data.length)
       const shouldAutoscroll = curDataLen.current < data?.length;
       const shouldScrollToTop = curDataLen.current >= data?.length;
 
@@ -31,7 +31,8 @@ export const useImageGallery = ({ listRef, onLoad, data, scrollBy }) => {
         setShowLoader(false);
         onLoadRef.current && onLoadRef.current();
 
-        // тут, чтобы знать актуальный, а не до момента полной загрузки
+        // тут, чтобы знать актуальный, а не тот,
+        // что был до момента загрузки галереи
         const listTop = listRef.current?.getBoundingClientRect().top;
 
         // полагаем, высота всех изображений в галерее одинаковая

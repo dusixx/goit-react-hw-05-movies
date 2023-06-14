@@ -1,8 +1,20 @@
+import { arrayOf, number, object, string } from 'prop-types';
 import { LinkPrimary } from 'styles/shared';
-import { Cast } from './About.styled';
 import { splitNumIntoTriads } from 'utils';
 
-import { List, Item, Container, Title, Tagline, Label } from './About.styled';
+import {
+  List,
+  Item,
+  Container,
+  Title,
+  Tagline,
+  Label,
+  Cast,
+} from './About.styled';
+
+//
+// About
+//
 
 export const About = ({
   budget,
@@ -128,4 +140,16 @@ export const About = ({
       )}
     </Container>
   );
+};
+
+About.propType = {
+  budget: number,
+  revenue: number,
+  runtime: number,
+  production_countries: arrayOf(object),
+  genres: arrayOf(object),
+  cast: object,
+  crew: object,
+  release_date: string,
+  tagline: string,
 };

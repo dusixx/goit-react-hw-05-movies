@@ -33,7 +33,7 @@ export const AvatarImage = styled.img`
   width: 100%;
   height: 100%;
   object-fit: cover;
-  /* При таком позиционировании видно лица на аватаре */
+  /* При таком позиционировании видно лица */
   object-position: top;
 `;
 

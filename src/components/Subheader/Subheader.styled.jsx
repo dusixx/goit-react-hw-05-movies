@@ -1,6 +1,5 @@
 import styled from '@emotion/styled';
-import { FlexCentered, TransitionBase } from 'styles/shared';
-import { Container as PageContainer } from '../SharedLayout/SharedLayout.styled';
+import { FlexCentered, TransitionBase, PageContainer } from 'styles/shared';
 
 const visibility = visible => (visible ? 'none' : 'translate(0, -60%)');
 

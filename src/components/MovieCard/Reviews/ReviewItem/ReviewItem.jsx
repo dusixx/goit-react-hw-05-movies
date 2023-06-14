@@ -1,3 +1,4 @@
+import { object, number, string } from 'prop-types';
 import { getAvatar } from 'services/tmdb/helpers';
 import { IconNoAvatar } from 'styles/icons';
 import { ExpandableContent } from 'components/etc/ExpandableContent';
@@ -16,7 +17,6 @@ const AVATAR_WIDTH = 185;
 const CONTENT_MAX_HEIGHT = 100;
 const ICON_NO_AVATAR_SIZE = 60;
 const ICON_NO_AVATAR_COLOR = 'lightgray';
-
 const NEW_TAB = { target: '_blank', rel: 'noopener noreferrer' };
 
 //
@@ -62,10 +62,17 @@ export const ReviewItem = ({
         </HeaderGroup>
       </Header>
 
-      <ExpandableContent
-        content={content}
-        maxHeight={CONTENT_MAX_HEIGHT}
-      />
+      <ExpandableContent content={content} maxHeight={CONTENT_MAX_HEIGHT} />
     </Container>
   );
+};
+
+ReviewItem.propType = {
+  author_details: object,
+  author: string,
+  content: string,
+  url: string,
+  created_at: string,
+  updated_at: string,
+  id: number,
 };

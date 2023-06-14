@@ -47,7 +47,7 @@ MovieGallery.propTypes = {
   data: array,
   onLoad: func,
   Loader: func,
-  autoscroll: number,
+  scrollBy: number,
   sortOptions: exact({
     key: string,
     ascending: bool,

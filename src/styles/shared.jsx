@@ -177,8 +177,6 @@ export const PageContainer = styled.div`
   max-width: 1200px;
   margin: 0 auto 0 auto;
   padding: 0 20px 0 20px;
-  padding-bottom: 40px;
-  padding-top: 50px;
 `;
 
 export const SpinnerCircle = styled.span`

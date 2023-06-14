@@ -20,8 +20,6 @@ export const CreditsListItem = styled.li`
   width: 150px;
 
   background: linear-gradient(180deg, #ebebeb 0, transparent);
-  /* box-shadow: 0 2px 8px rgb(0 0 0 / 10%); */
-
   border-radius: var(--border-radius);
   overflow: hidden;
 `;

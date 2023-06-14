@@ -8,6 +8,8 @@ let controller;
 const data = {
   API_BASE_URL: 'https://api.themoviedb.org/3',
   IMAGE_BASE_URL: 'https://image.tmdb.org/t/p',
+  TMDB_BASE_URL: 'https://www.themoviedb.org/movie',
+  IMDB_BASE_URL: 'https://www.imdb.com/title',
   API_KEY: '86d04e898c465c8de09e1ea2fc383ab8',
 };
 
@@ -33,6 +35,14 @@ export default class TmdbService {
   getImageUrl(relPath, size) {
     const sz = isNaN(parseInt(size)) ? 'original' : `w${size}`;
     return `${data.IMAGE_BASE_URL}/${sz}/${relPath}`;
+  }
+
+  getTmdbUrl(id) {
+    return `${data.TMDB_BASE_URL}/${id}`;
+  }
+
+  getImdbUrl(imdbId) {
+    return `${data.IMDB_BASE_URL}/${imdbId}`;
   }
 
   /**

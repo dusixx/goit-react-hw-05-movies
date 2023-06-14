@@ -1,12 +1,13 @@
 import styled from '@emotion/styled';
 import { Link } from 'react-router-dom';
+import { LinkBase, LinkPrimary } from 'styles/shared';
+
 import {
   Title as TitleShared,
   TransitionBase,
   NoPosterBg,
   Subtitle,
 } from 'styles/shared';
-import { LinkBase, LinkPrimary } from 'styles/shared';
 
 const HEADER_HEIGHT = '58px';
 const POSTER_HMULT = 1.5;
@@ -141,10 +142,6 @@ export const Homepage = styled(Link)`
 
 export const Overview = styled.div`
   line-height: 1.5;
-`;
-
-export const Text = styled.p`
-  max-width: 700px;
 `;
 
 export const Title = styled(Subtitle)`

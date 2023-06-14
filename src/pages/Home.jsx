@@ -1,18 +1,21 @@
 import { useEffect, useState, useRef } from 'react';
 import MovieGallery from 'components/MovieGallery';
 import { PageTitle } from 'styles/shared';
-import TmdbService from 'services/tmdb/tmdbSrv';
 import { OptionButtons } from 'components/etc/OptionButtons/OptionButtons';
 import { LoadMoreBtn } from 'components/etc/LoadMoreBtn/LoadMoreBtn';
 import { ErrorMessage } from 'components/ErrorMessage/ErrorMessage';
 import { SubHeader } from 'components/SubHeader/SubHeader';
 import { useWillUnmount } from 'hooks/useWillUnmount';
+import TmdbService from 'services/tmdb/tmdbSrv';
 
 const srv = new TmdbService();
-
 const PAGE_TITLE = `Trends`;
 const DEF_OPTION_VALUE = 'day';
 const OPTION_ITEMS = 'day week';
+
+//
+// Home
+//
 
 const Home = ({ loader }) => {
   const [active, setActive] = useState(DEF_OPTION_VALUE);

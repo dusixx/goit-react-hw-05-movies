@@ -1,12 +1,17 @@
 import { RotatingLines } from 'react-loader-spinner';
+import { number, oneOfType, string } from 'prop-types';
 
-export const Spinner = ({ spinnerWidth = 40, ...restProps }) => (
+export const Spinner = ({ width = 40, ...restProps }) => (
   <RotatingLines
     strokeColor="black"
     strokeWidth="3"
     animationDuration="0.75"
-    width={spinnerWidth}
+    width={width}
     visible={true}
     {...restProps}
   />
 );
+
+Spinner.propType = {
+  width: oneOfType([string, number]),
+};

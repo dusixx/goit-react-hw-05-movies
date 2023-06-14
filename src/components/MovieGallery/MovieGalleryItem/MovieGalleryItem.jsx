@@ -1,6 +1,6 @@
-import { showError } from 'utils';
 import { useState, useEffect, useRef } from 'react';
-import { func, arrayOf, number } from 'prop-types';
+import { func, arrayOf, number, string } from 'prop-types';
+import { showError } from 'utils';
 import TmdbService from 'services/tmdb/tmdbSrv';
 import { Spinner } from 'components/etc/Spinner';
 import { SpinnerWrapper } from 'styles/shared';
@@ -49,6 +49,7 @@ export const MovieGalleryItem = ({
       .catch(showError);
   }, [genre_ids, id, wasLoaded]);
 
+  // onLoad
   useEffect(() => {
     if (wasLoaded || !poster_path) {
       onLoadRef.current && onLoadRef.current(imgRef.current);
@@ -106,4 +107,6 @@ export const MovieGalleryItem = ({
 MovieGalleryItem.propTypes = {
   onLoad: func,
   genre_ids: arrayOf(number),
+  title: string,
+  poster_path: string,
 };

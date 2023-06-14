@@ -11,7 +11,7 @@ export const StyledHeader = styled.header`
   z-index: 99;
 
   color: white;
-  background-color: #242424;
+  background-color: var(--color-header-bg);
   border-bottom: 1px solid rgb(255 255 255 / 0.1);
 
   ${TransitionBase('transform opacity')};

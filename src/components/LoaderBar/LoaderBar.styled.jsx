@@ -6,6 +6,7 @@ export const BarContainer = styled.div`
   top: 0;
   left: 0;
   z-index: 999;
+
   width: 100vw;
   height: ${({ height }) => calcCSSValue(height)};
 `;
@@ -14,6 +15,7 @@ export const Bar = styled.div`
   position: relative;
   width: 100%;
   height: 100%;
+
   background: white;
   overflow: hidden;
 

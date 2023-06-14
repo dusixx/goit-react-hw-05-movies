@@ -1,23 +1,17 @@
 import styled from '@emotion/styled';
 import { GoBackLink } from 'components/etc/GoBackLink/GoBackLink';
-
-export const Container = styled.div`
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto 0 auto;
-  padding: 0 20px 0 20px;
-`;
+import { PageContainer } from 'styles/shared';
 
 export const HeaderWrapper = styled.div`
   position: relative;
 `;
 
-export const HeaderContainer = styled(Container)`
+export const HeaderContainer = styled(PageContainer)`
   display: flex;
   align-items: center;
 `;
 
-export const MainContainer = styled(Container)`
+export const MainContainer = styled(PageContainer)`
   padding-bottom: 40px;
   padding-top: 90px;
 

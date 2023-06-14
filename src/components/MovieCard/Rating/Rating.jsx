@@ -1,6 +1,9 @@
+import { number, oneOfType, string } from 'prop-types';
 import { IconImdbLogo, IconTmdbLogo } from 'styles/icons';
-import { shortenNum } from 'utils';
 import { HashBtnLink } from 'components/etc/HashBtnLink/HashBtnLink';
+import TmdbService from 'services/tmdb/tmdbSrv';
+import { shortenNum } from 'utils';
+
 import {
   VoteAverage,
   TmdbLink,
@@ -9,10 +12,13 @@ import {
   Stat,
 } from './Rating.styled';
 
+const srv = new TmdbService();
 const DEF_HEIGHT = 40;
-const TMDB_BASE_URL = 'https://www.themoviedb.org/movie/';
-const IMDB_BASE_URL = 'https://www.imdb.com/title/';
 const NEW_TAB = { target: '_blank', rel: 'noopener noreferrer' };
+
+//
+// Rating
+//
 
 export const Rating = ({
   height = DEF_HEIGHT,
@@ -27,10 +33,9 @@ export const Rating = ({
   let rating = Number(vote_average);
   rating = rating ? rating.toFixed(1) : 'N/A';
 
-  const tmdbUrl = `${TMDB_BASE_URL}${id}`;
+  const tmdbUrl = srv.getTmdbUrl(id);
+  const imdbUrl = srv.getImdbUrl(imdb_id);
   const tmdbData = { to: tmdbUrl, title: tmdbUrl, height, ...NEW_TAB };
-
-  const imdbUrl = `${IMDB_BASE_URL}${imdb_id}`;
   const imdbData = { to: imdbUrl, title: imdbUrl, height, ...NEW_TAB };
 
   return (
@@ -58,4 +63,14 @@ export const Rating = ({
       )}
     </Ratings>
   );
+};
+
+Rating.propType = {
+  height: oneOfType([string, number]),
+  vote_average: number,
+  vote_count: number,
+  popularity: number,
+  imdb_id: string,
+  reviewsCount: number,
+  id: number,
 };

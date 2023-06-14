@@ -4,14 +4,16 @@ import TmdbService from 'services/tmdb/tmdbSrv';
 import { MovieCard } from 'components/MovieCard/MovieCard';
 import { ErrorMessage } from 'components/ErrorMessage/ErrorMessage';
 import { useWillUnmount } from 'hooks/useWillUnmount';
-import { func } from 'prop-types';
 
 const srv = new TmdbService();
+
+//
+// MovieDetails
+//
 
 // !! некоторая информация для фильмов из списка трендов
 // более актуальная, чем при запросе деталей того же фильма
 // Например, рейтинг и кол-во голосов
-
 const MovieDetails = ({ loader: Loader }) => {
   const [error, setError] = useState(null);
   const [showLoader, setShowLoader] = useState(true);
@@ -24,9 +26,6 @@ const MovieDetails = ({ loader: Loader }) => {
   useEffect(() => {
     setShowLoader(true);
 
-    // TODO: лучше загружать постепенно,
-    // показывая загрузчик для, например, списка рецензий
-    // Можно начинать загрузку рецензий при скроле в область видимости
     Promise.all([
       srv.getMovieDetails(movieId),
       srv.getMovieReviews(movieId),
@@ -46,10 +45,6 @@ const MovieDetails = ({ loader: Loader }) => {
       {!error && details && <MovieCard data={details} />}
     </>
   );
-};
-
-MovieDetails.propTypes = {
-  Loader: func,
 };
 
 export default MovieDetails;

@@ -11,7 +11,7 @@ export const Container = styled.div`
   border-radius: var(--border-radius);
   overflow: hidden;
 
-  ${TransitionBase(['box-shadow', 'border-color'])};
+  ${TransitionBase('box-shadow border-color')};
 
   &:focus-within {
     box-shadow: 0 0 0 0.3rem rgb(var(--color-blue-rgb), 0.2);
@@ -25,6 +25,7 @@ export const Container = styled.div`
 
 export const SearchForm = styled.form`
   ${FlexCentered()};
+
   height: 100%;
   width: 100%;
   border-radius: unset;

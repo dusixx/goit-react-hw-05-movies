@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { object, string } from 'prop-types';
 import { Rating } from './Rating/Rating';
 import { About } from './About/About';
 import { Reviews } from './Reviews/Reviews';
@@ -25,7 +26,6 @@ import {
 } from './MovieCard.styled';
 
 const srv = new TmdbService();
-
 const POSTER_WIDTH = 500;
 const OVERVIEW_MAX_HEIGHT = 100;
 const NEW_TAB = { target: '_blank', rel: 'noopener noreferrer' };
@@ -35,9 +35,7 @@ const NEW_TAB = { target: '_blank', rel: 'noopener noreferrer' };
 //
 
 export const MovieCard = ({ data = {} }) => {
-  // деструктурируем инфу тут,
-  // чтобы не извлекать общие пропы для прокидывания кому надо
-  // TODO: сделать нормально
+  // деструктурируем итут, чтобы не извлекать общие пропы
   const {
     original_title,
     title,
@@ -74,8 +72,6 @@ export const MovieCard = ({ data = {} }) => {
   const cast = getCastPreview(credits);
   const crew = getCrewPreview(credits);
 
-  console.log(credits);
-
   return (
     <Card>
       <Info>
@@ -105,7 +101,7 @@ export const MovieCard = ({ data = {} }) => {
                 {releaseYear && ` (${releaseYear})`}
               </WellKnownTitle>
 
-              {/* Например, id(107406) id(569938) */}
+              {/* Пример id(107406) id(569938) */}
               {movieTitle !== original_title && (
                 <OriginalTitle> {original_title}</OriginalTitle>
               )}
@@ -149,4 +145,14 @@ export const MovieCard = ({ data = {} }) => {
       />
     </Card>
   );
+};
+
+MovieCard.propType = {
+  original_title: string,
+  title: string,
+  poster_path: string,
+  credits: object,
+  reviews: object,
+  homepage: string,
+  overview: string,
 };

@@ -34,6 +34,7 @@ export const LogoImage = styled(IconMovieLogo)`
 
 export const LogoText = styled.span`
   display: none;
+
   @media screen and (min-width: 320px) {
     display: inline;
   }

@@ -1,11 +1,17 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { PageTitle } from 'styles/shared';
-import TmdbService from 'services/tmdb/tmdbSrv';
 import { CreditsInfo } from 'components/CreditsInfo/CreditsInfo';
 import { ErrorMessage } from 'components/ErrorMessage/ErrorMessage';
 import { useWillUnmount } from 'hooks/useWillUnmount';
+import TmdbService from 'services/tmdb/tmdbSrv';
+
 const srv = new TmdbService();
+const DEF_SCROLL_BY = 2;
+
+//
+// Credits
+//
 
 const Credits = ({ loader }) => {
   const { movieId } = useParams();
@@ -28,7 +34,11 @@ const Credits = ({ loader }) => {
       {!error && details && (
         <>
           <PageTitle style={{ marginBottom: 35 }}>{details.title} </PageTitle>
-          <CreditsInfo data={details} loader={loader} />
+          <CreditsInfo
+            data={details}
+            loader={loader}
+            scrollBy={DEF_SCROLL_BY}
+          />
         </>
       )}
       {error && <ErrorMessage error={error} />}

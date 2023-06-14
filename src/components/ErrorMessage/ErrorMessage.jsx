@@ -1,6 +1,7 @@
 import { LinkButton } from 'styles/shared';
 import { Caption, Container, Text } from './ErrorMessage.styled';
 import { IconError } from 'styles/icons';
+import { shape, string } from 'prop-types';
 
 export const ErrorMessage = ({ error }) => {
   console.error(error);
@@ -15,4 +16,11 @@ export const ErrorMessage = ({ error }) => {
       </LinkButton>
     </Container>
   );
+};
+
+ErrorMessage.propType = {
+  error: shape({
+    message: string,
+    code: string,
+  }),
 };

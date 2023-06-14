@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
-import { oneOfType, string, number, func } from 'prop-types';
-import { IconSearch } from 'styles/icons';
-import { SearchBtn, SearchForm, Container } from './Searchbar.styled';
 import { useSearchParams } from 'react-router-dom';
+import { oneOfType, string, number, func } from 'prop-types';
+import { SearchBtn, SearchForm, Container } from './Searchbar.styled';
 import TextField from 'components/etc/TextField';
+import { IconSearch } from 'styles/icons';
 
 // извлекаем onChange, чтобы не перебивал (1) при прокидывании restProps (2)
 const Searchbar = ({ style, onSubmit, onChange, ...restProps }) => {
@@ -40,6 +40,7 @@ const Searchbar = ({ style, onSubmit, onChange, ...restProps }) => {
           value={query}
           {...restProps} // (2)
         />
+
         <SearchBtn type="submit" disabled={!query}>
           <IconSearch size="100%" />
         </SearchBtn>

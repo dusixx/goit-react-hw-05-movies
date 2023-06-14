@@ -1,6 +1,7 @@
 import { createPortal } from 'react-dom';
-import { GoBackLink } from 'components/etc/GoBackLink/GoBackLink';
 import { useHideOnScrollDown } from '../../hooks/useHideOnScrollDown';
+import { GoBackLink } from 'components/etc/GoBackLink/GoBackLink';
+
 import {
   Container,
   Left,
