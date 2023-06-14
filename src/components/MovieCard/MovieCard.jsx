@@ -6,7 +6,7 @@ import TmdbService from 'services/tmdb/tmdbSrv';
 import { getCrewPreview, getCastPreview } from 'services/tmdb/helpers';
 import { ModalImage } from 'components/etc/ModalImage/ModalImage';
 import { ExpandableContent } from 'components/etc/ExpandableContent';
-import { Spinner } from 'components/etc/Loader';
+import { Spinner } from 'components/etc/Spinner';
 import { SpinnerWrapper } from 'styles/shared';
 
 import {
@@ -73,6 +73,8 @@ export const MovieCard = ({ data = {} }) => {
 
   const cast = getCastPreview(credits);
   const crew = getCrewPreview(credits);
+
+  console.log(credits);
 
   return (
     <Card>

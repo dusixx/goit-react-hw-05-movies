@@ -2,7 +2,7 @@ import { useRef } from 'react';
 import { func, array, exact, string, bool, number } from 'prop-types';
 import { List, Item } from './MovieGallery.styled';
 import { MovieGalleryItem } from './MovieGalleryItem/MovieGalleryItem';
-import { useMovieGallery } from './useMovieGallery';
+import { useImageGallery } from '../../hooks/useImageGallery';
 
 //
 // MovieGallery
@@ -16,7 +16,7 @@ const MovieGallery = ({
   loader: Loader,
 }) => {
   const listRef = useRef(null);
-  const showLoader = useMovieGallery({ listRef, onLoad, data, scrollBy });
+  const [showLoader] = useImageGallery({ listRef, onLoad, data, scrollBy });
 
   // !! На week-трендах повторился фильм (id==87).
   // Запоминаем id, чтобы избежать дублирования

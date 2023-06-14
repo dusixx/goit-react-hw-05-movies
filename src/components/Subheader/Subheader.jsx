@@ -1,7 +1,6 @@
-import { useEffect, useState, useRef } from 'react';
 import { createPortal } from 'react-dom';
-import throttle from 'lodash.throttle';
 import { GoBackLink } from 'components/etc/GoBackLink/GoBackLink';
+import { useHideOnScrollDown } from '../../hooks/useHideOnScrollDown';
 import {
   Container,
   Left,
@@ -10,7 +9,6 @@ import {
   InnerContainer,
 } from './SubHeader.styled';
 
-const THROTTLE_DELAY = 150;
 const rootModal = document.querySelector('#root-modal');
 
 export const SubHeader = ({
@@ -18,25 +16,12 @@ export const SubHeader = ({
   rightContent,
   children,
 }) => {
-  const [visible, setVisible] = useState(true);
-  const [onTop, setOnTop] = useState(true);
-  const lastScrollY = useRef(0);
-
-  useEffect(() => {
-    const handleDocumentScroll = () => {
-      setOnTop(window.scrollY === 0);
-      setVisible(lastScrollY.current > window.scrollY);
-      lastScrollY.current = window.scrollY;
-    };
-
-    document.addEventListener(
-      'scroll',
-      throttle(handleDocumentScroll, THROTTLE_DELAY)
-    );
-  }, []);
+  const [visible, onTop] = useHideOnScrollDown();
 
   return createPortal(
-    <Container visible={onTop || visible}>
+    <Container
+      visible={visible || onTop} /* style={{ opacity: onTop || 0.8 }} */
+    >
       <InnerContainer>
         <Left>{leftContent}</Left>
         <Middle>{children}</Middle>

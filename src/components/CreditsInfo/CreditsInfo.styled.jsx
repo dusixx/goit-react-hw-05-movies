@@ -25,3 +25,7 @@ export const CreditsListItem = styled.li`
   border-radius: var(--border-radius);
   overflow: hidden;
 `;
+
+export const NoCredits = styled.p`
+  text-align: center;
+`;

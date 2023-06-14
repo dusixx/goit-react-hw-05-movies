@@ -23,11 +23,17 @@ export const App = ({ loader = <LoaderBar /> }) => {
           <Route path="/" element={<SharedLayout />}>
             <Route index element={<Home loader={loader} />}></Route>
             <Route path="movies" element={<Movies loader={loader} />}></Route>
+
             <Route
               path="movies/:movieId"
               element={<MovieDetails loader={loader} />}
             ></Route>
-            <Route path="movies/:movieId/credits" element={<Credits />}></Route>
+
+            <Route
+              path="movies/:movieId/credits"
+              element={<Credits loader={loader} />}
+            ></Route>
+
             <Route path="*" element={<PageNotFound />} />
           </Route>
         </Routes>

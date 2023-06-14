@@ -2,8 +2,13 @@ import { useRef, useState, useEffect, useCallback } from 'react';
 import { Content, Expander } from './ExpandableContent.styled';
 import { markupLinks } from 'utils';
 import debounce from 'lodash.debounce';
+import { string, number } from 'prop-types';
 
 const DEBOUNCE_DELAY = 100;
+
+//
+// ExpandableContent
+//
 
 export const ExpandableContent = ({ content, maxHeight = Infinity }) => {
   const [showExpander, setShowExpander] = useState(false);
@@ -45,4 +50,9 @@ export const ExpandableContent = ({ content, maxHeight = Infinity }) => {
       )}
     </>
   );
+};
+
+ExpandableContent.propType = {
+  content: string,
+  maxHeight: number,
 };

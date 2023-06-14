@@ -1,13 +1,12 @@
 import Searchbar from 'components/Searchbar/Searchbar';
 import { useEffect, useState, useRef } from 'react';
 import MovieGallery from 'components/MovieGallery/MovieGallery';
-import { useSearchParams, useLocation } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import TmdbService from 'services/tmdb/tmdbSrv';
 import { LoadMoreBtn } from 'components/etc/LoadMoreBtn/LoadMoreBtn';
 import { ErrorMessage } from 'components/ErrorMessage/ErrorMessage';
 import { showInfo } from 'utils';
-import { SubHeader } from 'components/SubHeader/SubHeader';
-import { useWillUnmount } from './useWillUnmount';
+import { useWillUnmount } from 'hooks/useWillUnmount';
 
 const srv = new TmdbService();
 const NO_SEARCH_RESULTS = 'No search results matching your query';
@@ -33,22 +32,24 @@ const Movies = ({ loader }) => {
   useWillUnmount(srv.abort);
 
   useEffect(() => {
-    const text = searchParams.get('query') ?? '';
-    setQuery({ text, time: Date.now() });
+    setQuery({ text: searchParams.get('query'), time: Date.now() });
   }, [searchParams]);
 
-  // Добавляем в query текущее время, чтобы запрос всегда был уникален
-  // Тогда при повторном нажатии на кнопку поиска - будет запрос
+  // Добавляем в query текущее время, чтобы запрос был уникален и
+  // многократно срабатывал поиск по одному и тому же тексту
   useEffect(() => {
-    if (!query) return;
+    const text = query?.text ?? '';
 
-    const { text } = query;
-    if (!text) return;
+    if (!text) {
+      setWasLoaded(false);
+      return setResults([]);
+    }
 
     srv
       .searchMovies(text)
       .then(({ results, total_pages, total_results }) => {
         if (!total_results) {
+          // !! лучше отобразить на странице что-то
           return showInfo(NO_SEARCH_RESULTS);
         }
         setResults(results);
@@ -69,30 +70,23 @@ const Movies = ({ loader }) => {
       .catch(setError);
   };
 
-  // для простоты - очищаем строку запроса. В свою очередь произойдет
-  // установка query, поиск по пустому запросу вернет пустой массив и
-  // очистится галерея найденных ранее
+  // для простоты - очищаем строку запроса
   const handleQueryChange = query => {
-    if (!query) {
-      setResults([]);
-      setSearchParams({ query });
-      setWasLoaded(false);
-    }
+    if (!query) setSearchParams({ query });
   };
 
   const handleSearchbarSubmit = text => {
-    setResults([]);
     setQuery({ text, time: Date.now() });
   };
 
   const showLoadMoreBtn =
+    // wasLoaded, чтобы не висела пока формируется галерея найденых
     wasLoaded && totalPages.current > 0 && page.current < totalPages.current;
 
   return error ? (
     <ErrorMessage error={error} />
   ) : (
     <>
-      <SubHeader />
       <Searchbar
         style={searchbarStyle}
         onSubmit={handleSearchbarSubmit}

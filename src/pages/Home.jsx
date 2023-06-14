@@ -6,7 +6,7 @@ import { OptionButtons } from 'components/etc/OptionButtons/OptionButtons';
 import { LoadMoreBtn } from 'components/etc/LoadMoreBtn/LoadMoreBtn';
 import { ErrorMessage } from 'components/ErrorMessage/ErrorMessage';
 import { SubHeader } from 'components/SubHeader/SubHeader';
-import { useWillUnmount } from './useWillUnmount';
+import { useWillUnmount } from 'hooks/useWillUnmount';
 
 const srv = new TmdbService();
 
@@ -14,7 +14,7 @@ const PAGE_TITLE = `Trends`;
 const DEF_OPTION_VALUE = 'day';
 const OPTION_ITEMS = 'day week';
 
-const Home = ({ loader, fromOutlet }) => {
+const Home = ({ loader }) => {
   const [active, setActive] = useState(DEF_OPTION_VALUE);
   const [error, setError] = useState(null);
   const [trends, setTrends] = useState([]);

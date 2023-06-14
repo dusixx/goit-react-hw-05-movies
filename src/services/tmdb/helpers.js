@@ -10,6 +10,8 @@ const srv = new TmdbService();
  * @returns - массив объектов без дублирования
  */
 const normalizeCredits = (data, fieldName) => {
+  if (!Array.isArray(data)) return [];
+
   const hash = data.reduce((res, personData) => {
     const { id } = personData;
     const fieldValue = personData[fieldName];

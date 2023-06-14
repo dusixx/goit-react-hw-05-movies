@@ -1,12 +1,14 @@
 import { useEffect, useRef, useState } from 'react';
 import { Button, Spinner } from './LoadMoreBtn.styled';
+import { func, bool } from 'prop-types';
 
-export const LoadMoreBtn = ({
-  loader: Loader,
-  onClick,
-  centered = true,
-  ...restProps
-}) => {
+const BTN_TITLE = 'Load more';
+
+//
+// LoadMoreBtn
+//
+
+export const LoadMoreBtn = ({ onClick, centered = true, ...restProps }) => {
   const [showLoader, setShowLoader] = useState(false);
   const btnRef = useRef(null);
   const btnRect = useRef(null);
@@ -42,7 +44,12 @@ export const LoadMoreBtn = ({
       isLoading={showLoader}
       {...btnProps}
     >
-      {showLoader ? <Spinner size={height * 0.5} /> : 'Load more'}
+      {showLoader ? <Spinner size={height * 0.5} /> : BTN_TITLE}
     </Button>
   );
+};
+
+LoadMoreBtn.propType = {
+  onClick: func,
+  centered: bool,
 };

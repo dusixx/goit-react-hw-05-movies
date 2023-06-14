@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import {
   Title as TitleShared,
   TransitionBase,
-  FlexCentered,
   NoPosterBg,
   Subtitle,
 } from 'styles/shared';

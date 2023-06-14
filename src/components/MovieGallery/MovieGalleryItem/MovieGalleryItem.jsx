@@ -2,7 +2,7 @@ import { showError } from 'utils';
 import { useState, useEffect, useRef } from 'react';
 import { func, arrayOf, number } from 'prop-types';
 import TmdbService from 'services/tmdb/tmdbSrv';
-import { Spinner } from 'components/etc/Loader';
+import { Spinner } from 'components/etc/Spinner';
 import { SpinnerWrapper } from 'styles/shared';
 
 import {
@@ -55,7 +55,7 @@ export const MovieGalleryItem = ({
     }
   }, [wasLoaded, poster_path]);
 
-  let rating = vote_average ? vote_average.toFixed(1) : STR_NA;
+  const rating = vote_average ? vote_average.toFixed(1) : STR_NA;
   const releaseYear = release_date?.substring(0, 4);
 
   return (

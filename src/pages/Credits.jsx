@@ -4,11 +4,10 @@ import { PageTitle } from 'styles/shared';
 import TmdbService from 'services/tmdb/tmdbSrv';
 import { CreditsInfo } from 'components/CreditsInfo/CreditsInfo';
 import { ErrorMessage } from 'components/ErrorMessage/ErrorMessage';
-import { useWillUnmount } from './useWillUnmount';
-
+import { useWillUnmount } from 'hooks/useWillUnmount';
 const srv = new TmdbService();
 
-const Credits = () => {
+const Credits = ({ loader }) => {
   const { movieId } = useParams();
   const [error, setError] = useState(null);
   const [details, setDetails] = useState(null);
@@ -29,7 +28,7 @@ const Credits = () => {
       {!error && details && (
         <>
           <PageTitle style={{ marginBottom: 35 }}>{details.title} </PageTitle>
-          <CreditsInfo data={details} />
+          <CreditsInfo data={details} loader={loader} />
         </>
       )}
       {error && <ErrorMessage error={error} />}

@@ -10,9 +10,8 @@ const Searchbar = ({ style, onSubmit, onChange, ...restProps }) => {
   const [query, setQuery] = useState('');
   const [searchParams, setSearchParams] = useSearchParams();
 
-  // синхронизация со строкой запроса
-  // При изменении ее вручную и нажатии Enter -
-  // изменится запрос в поле поиска
+  // При изменении вручную строки запроса и нажатии Enter -
+  // изменится текст в поле поиска
   useEffect(() => {
     setQuery(searchParams.get('query') ?? '');
   }, [searchParams]);
@@ -24,8 +23,7 @@ const Searchbar = ({ style, onSubmit, onChange, ...restProps }) => {
     onChange && onChange(query, e);
   };
 
-  // синхронизация со строкой запроса
-  // Менеям ?query только при сабмите.
+  // Менеям ?query в строке запроса только при сабмите
   const handleFormSubmit = e => {
     e.preventDefault();
     setSearchParams({ query });

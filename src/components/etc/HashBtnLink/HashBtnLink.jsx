@@ -1,5 +1,6 @@
 import { ButtonLink } from 'styles/shared';
 import { useEffect, useRef } from 'react';
+import { string, shape } from 'prop-types';
 
 const DEF_SCROLL_OPTS = {
   behavior: 'smooth',
@@ -14,8 +15,8 @@ const DEF_SCROLL_OPTS = {
  */
 export const HashBtnLink = ({
   to,
-  scrollOptions = DEF_SCROLL_OPTS,
   children,
+  scrollOptions = DEF_SCROLL_OPTS,
   ...restProps
 }) => {
   const target = useRef(null);
@@ -32,4 +33,13 @@ export const HashBtnLink = ({
       {children}
     </ButtonLink>
   );
+};
+
+HashBtnLink.propType = {
+  to: string,
+  scrollOptions: shape({
+    behavior: string,
+    block: string,
+    inline: string,
+  }),
 };

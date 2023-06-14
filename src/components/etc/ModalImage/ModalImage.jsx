@@ -1,9 +1,14 @@
 import { useState } from 'react';
-import Modal from 'components/etc/Modal';
-import { Spinner } from 'components/etc/Loader';
+import Modal from './Modal/Modal';
+import { Spinner } from '../Spinner';
 import { ModalContainer, ModalThumb } from './ModalImage.styled';
+import { string, bool, func } from 'prop-types';
 
 const COLOR_MODAL_BG = 'rgb(255 255 255 / 0.7)';
+
+//
+// ModalImage
+//
 
 export const ModalImage = ({ src, alt, visible, onClose }) => {
   const [wasModalImageLoaded, setWasModalImageLoaded] = useState(false);
@@ -22,4 +27,11 @@ export const ModalImage = ({ src, alt, visible, onClose }) => {
       </ModalContainer>
     </Modal>
   );
+};
+
+ModalImage.propType = {
+  src: string,
+  alt: string,
+  visible: bool,
+  onClose: func,
 };

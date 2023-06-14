@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import TmdbService from 'services/tmdb/tmdbSrv';
 import { MovieCard } from 'components/MovieCard/MovieCard';
 import { ErrorMessage } from 'components/ErrorMessage/ErrorMessage';
-import { useWillUnmount } from './useWillUnmount';
+import { useWillUnmount } from 'hooks/useWillUnmount';
 import { func } from 'prop-types';
 
 const srv = new TmdbService();
