@@ -155,7 +155,7 @@ export default class TmdbService {
   }
 
   abort() {
-    controller.abort();
+    // controller.abort();
   }
 }
 
