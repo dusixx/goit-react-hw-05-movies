@@ -5,7 +5,6 @@ import { OptionButtons } from 'components/etc/OptionButtons/OptionButtons';
 import { LoadMoreBtn } from 'components/etc/LoadMoreBtn/LoadMoreBtn';
 import { ErrorMessage } from 'components/ErrorMessage/ErrorMessage';
 import { SubHeader } from 'components/Subheader/Subheader';
-import { useWillUnmount } from 'hooks/useWillUnmount';
 import TmdbService from 'services/tmdb/tmdbSrv';
 
 const srv = new TmdbService();
@@ -24,9 +23,6 @@ const Home = ({ loader }) => {
   const [wasLoaded, setWasLoaded] = useState(false);
   const totalPages = useRef(1);
   const page = useRef(1);
-
-  // cleanup
-  useWillUnmount(srv.abort);
 
   useEffect(() => {
     srv

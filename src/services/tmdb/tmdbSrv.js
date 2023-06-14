@@ -3,7 +3,7 @@ import { isObj, isArray, camelToSnake, normalizeStr } from '../../utils';
 import Cache from './cache';
 
 const cache = new Cache();
-let controller;
+// let controller;
 
 const data = {
   API_BASE_URL: 'https://api.themoviedb.org/3',
@@ -51,11 +51,11 @@ export default class TmdbService {
    * @returns
    */
   async fetch(url) {
-    controller = new AbortController();
-    const { signal } = controller;
+    // controller = new AbortController();
+    // const { signal } = controller;
 
     try {
-      const resp = await axios.get(url, { signal });
+      const resp = await axios.get(url /* { signal } */);
       return { ...(this.#response = resp) };
       // error
     } catch (err) {
@@ -154,9 +154,9 @@ export default class TmdbService {
     return cache.data;
   }
 
-  abort() {
-    // controller.abort();
-  }
+  // abort() {
+  //   controller.abort();
+  // }
 }
 
 /**

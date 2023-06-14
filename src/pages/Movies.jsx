@@ -6,7 +6,6 @@ import TmdbService from 'services/tmdb/tmdbSrv';
 import { LoadMoreBtn } from 'components/etc/LoadMoreBtn/LoadMoreBtn';
 import { ErrorMessage } from 'components/ErrorMessage/ErrorMessage';
 import { showInfo } from 'utils';
-import { useWillUnmount } from 'hooks/useWillUnmount';
 
 const srv = new TmdbService();
 const NO_SEARCH_RESULTS = 'No search results matching your query';
@@ -28,9 +27,6 @@ const Movies = ({ loader }) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const totalPages = useRef(1);
   let page = useRef(1);
-
-  // cleanup
-  useWillUnmount(srv.abort);
 
   useEffect(() => {
     setQuery({ text: searchParams.get('query'), time: Date.now() });
