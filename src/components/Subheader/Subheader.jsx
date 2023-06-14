@@ -8,7 +8,7 @@ import {
   Middle,
   Right,
   InnerContainer,
-} from './Subheader.styled';
+} from './SubHeader.styled';
 
 const rootModal = document.querySelector('#root-modal');
 

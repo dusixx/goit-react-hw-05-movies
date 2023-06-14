@@ -13,7 +13,7 @@ const NO_SEARCH_RESULTS = 'No search results matching your query';
 const searchbarStyle = {
   height: 45,
   marginBottom: 40,
-  marginTop: 20,
+  marginTop: 10,
 };
 
 //

@@ -3,12 +3,12 @@ import { object, string } from 'prop-types';
 import { Rating } from './Rating/Rating';
 import { About } from './About/About';
 import { Reviews } from './Reviews/Reviews';
-import TmdbService from 'services/tmdb/tmdbSrv';
 import { getCrewPreview, getCastPreview } from 'services/tmdb/helpers';
 import { ModalImage } from 'components/etc/ModalImage/ModalImage';
 import { ExpandableContent } from 'components/etc/ExpandableContent';
 import { Spinner } from 'components/etc/Spinner';
 import { SpinnerWrapper } from 'styles/shared';
+import TmdbService from 'services/tmdb/tmdbSrv';
 
 import {
   Card,
@@ -35,7 +35,7 @@ const NEW_TAB = { target: '_blank', rel: 'noopener noreferrer' };
 //
 
 export const MovieCard = ({ data = {} }) => {
-  // деструктурируем итут, чтобы не извлекать общие пропы
+  // деструктурируем тут, чтобы не извлекать общие пропы
   const {
     original_title,
     title,

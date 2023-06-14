@@ -5,6 +5,10 @@ import { SearchBtn, SearchForm, Container } from './Searchbar.styled';
 import TextField from 'components/etc/TextField';
 import { IconSearch } from 'styles/icons';
 
+//
+// Searchbar
+//
+
 // извлекаем onChange, чтобы не перебивал (1) при прокидывании restProps (2)
 const Searchbar = ({ style, onSubmit, onChange, ...restProps }) => {
   const [query, setQuery] = useState('');

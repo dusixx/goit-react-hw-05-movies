@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { OptionButtons } from '../etc/OptionButtons/OptionButtons';
 import { PersonCard } from './PersonCard/PersonCard';
 import { LoadMoreBtn } from 'components/etc/LoadMoreBtn/LoadMoreBtn';
-import { SubHeader } from 'components/Subheader/Subheader';
+import { SubHeader } from 'components/SubHeader/SubHeader';
 import { normalizeCrewData, normalizeCastData } from 'services/tmdb/helpers';
 import { useImageGallery } from 'hooks/useImageGallery';
 import { sortObj } from 'utils';
