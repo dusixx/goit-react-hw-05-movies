@@ -1,7 +1,7 @@
 import { ToastContainer } from 'react-toastify';
 import { Container } from './App.styled';
 import { Routes, Route } from 'react-router-dom';
-import SharedLayout from 'components/SharedLayout';
+import { SharedLayout } from 'components/SharedLayout';
 import { PageNotFound } from 'components/ErrorMessage/PageNotFound';
 import { LoaderBar } from 'components/LoaderBar/LoaderBar';
 import { lazyImport } from 'utils';
