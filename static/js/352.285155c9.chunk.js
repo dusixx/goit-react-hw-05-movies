@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkreact_homework_template=self.webpackChunkreact_homework_template||[]).push([[352],{352:function(e,n,t){t.r(n),t.d(n,{useWillUnmount:function(){return c}});var u=t(2791),r=t(2703),c=function(e){var n=(0,u.useRef)((0,r.isFunc)(e)?e:null);(0,u.useEffect)((function(){var e=n.current;return function(){return e&&e()}}),[])}}}]);
+//# sourceMappingURL=352.285155c9.chunk.js.map

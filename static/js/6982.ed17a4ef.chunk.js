@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkreact_homework_template=self.webpackChunkreact_homework_template||[]).push([[6982],{6982:function(e,t,a){e.exports=a.p+"static/media/imdbLogo.0a3096ad49f0f667302a.svg"}}]);
