@@ -50,7 +50,7 @@ export const CreditsInfo = ({
   });
 
   const creditsNorm = useRef({
-    /* !! id(798286) 2 роли на 1 человека */
+    /* id(798286) 2 роли у 1 человека */
     cast: normalizeCastData(data.credits.cast),
     crew: normalizeCrewData(data.credits.crew),
   });
@@ -63,7 +63,7 @@ export const CreditsInfo = ({
   const showLoadMore =
     !showLoader && cards.length > 0 && cards.length < credits.length;
 
-  // No credits: no cast id(454172)
+  // no cast id(454172)
   const { cast, crew } = creditsNorm.current;
   if (!cast.length && !crew.length) {
     return <NoCredits> {noCredits()}</NoCredits>;

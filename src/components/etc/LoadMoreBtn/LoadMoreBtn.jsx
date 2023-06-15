@@ -20,8 +20,8 @@ export const LoadMoreBtn = ({ onClick, centered = true, ...restProps }) => {
     observer.current = new IntersectionObserver(() => setShowLoader(false));
     observer.current.observe(ref);
 
-    // фактический размер, чтобы спинер не менял габариты кнопки
-    // Иначе надо жестко задать размеры кнопки в стилях
+    // фактический размер, чтобы спинер не изменял габариты кнопки
+    // Иначе, надо жестко задать размеры кнопки в стилях
     btnRect.current = btnRef.current.getBoundingClientRect();
 
     return () => observer.current.unobserve(ref);

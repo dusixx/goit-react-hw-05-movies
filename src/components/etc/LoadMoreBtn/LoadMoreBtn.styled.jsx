@@ -5,23 +5,16 @@ import { calcCSSValue } from 'utils';
 export const Button = styled(ButtonSecondary)`
   ${FlexCentered()};
 
-  /* padding-top: 17px;
-  padding-bottom: 17px; */
-  /* width: 100%; */
-
   margin-left: ${({ centered }) => (centered ? 'auto' : 0)};
   margin-right: ${({ centered }) => (centered ? 'auto' : 0)};
 
-  /* без ceil при адаптивке переносится текст кнопки */
-  width: ${({ width }) => calcCSSValue(Math.ceil(width))};
-  height: ${({ height }) => calcCSSValue(Math.ceil(height))};
-
-  //white-space: nowrap;
+  width: ${({ width }) => calcCSSValue(width)};
+  height: ${({ height }) => calcCSSValue(height)};
 
   /*
     Пока кнопка со спинером - не убираем цвето фона
     Иначе, спиннер сольется с фоном страницы
-    Можно сдлеать так, чтобы цвет спиннера менялся на прозрачном фоне
+    Можно сдлеать, чтобы цвет спиннера менялся на прозрачном фоне
   */
   background-color: ${({ isLoading }) =>
     isLoading ? 'var(--color-blue)' : 'transparent'};
