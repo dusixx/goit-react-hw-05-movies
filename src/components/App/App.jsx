@@ -2,7 +2,7 @@ import { ToastContainer } from 'react-toastify';
 import { Routes, Route } from 'react-router-dom';
 import { SharedLayout } from 'components/SharedLayout';
 import { PageNotFound } from 'components/ErrorMessage/PageNotFound';
-import { LoaderBar } from 'components/LoaderBar/LoaderBar';
+import { LoaderBar } from 'components/etc/LoaderBar/LoaderBar';
 import { lazyImport } from 'utils';
 
 const Home = lazyImport('pages/Home');
