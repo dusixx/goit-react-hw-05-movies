@@ -5,7 +5,7 @@ import { ReviewItem } from './ReviewItem/ReviewItem';
 import { List, Container, Title, Item } from './Reviews.styled';
 import { LoadMoreBtn } from 'components/etc/LoadMoreBtn/LoadMoreBtn';
 import { array, number, shape } from 'prop-types';
-import { useAutoScroll } from 'hooks/useAutoScroll';
+import { useAutoScroll } from 'hooks';
 
 const srv = new TmdbService();
 

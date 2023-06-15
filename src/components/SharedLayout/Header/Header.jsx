@@ -1,5 +1,5 @@
 import { StyledHeader } from './Header.styled';
-import { useHideOnScrollDown } from 'hooks/useHideOnScrollDown';
+import { useHideOnScrollDown } from 'hooks';
 
 export const Header = ({ children }) => {
   const [visible, onTop] = useHideOnScrollDown(true);

@@ -4,7 +4,7 @@ import { PersonCard } from './PersonCard/PersonCard';
 import { LoadMoreBtn } from 'components/etc/LoadMoreBtn/LoadMoreBtn';
 import { SubHeader } from 'components/Subheader/Subheader';
 import { normalizeCrewData, normalizeCastData } from 'services/tmdb/helpers';
-import { useImageGallery } from 'hooks/useImageGallery';
+import { useImageGallery, usePagination } from 'hooks';
 import { sortObj } from 'utils';
 
 import {
@@ -34,9 +34,13 @@ export const CreditsInfo = ({
   sortOptions = DEF_SORT_OPTIONS,
 }) => {
   const [active, setActive] = useState(DEF_OPTION_VALUE);
-  const [cards, setCards] = useState([]);
-  const [page, setPage] = useState(1);
+  const [credits, setCredits] = useState([]);
   const listRef = useRef(null);
+
+  const [cards, setPage] = usePagination({
+    data: credits,
+    itemsPerPage: CARDS_PER_PAGE,
+  });
 
   const [showLoader] = useImageGallery({
     listRef,
@@ -45,38 +49,22 @@ export const CreditsInfo = ({
     data: cards,
   });
 
-  const creditsNormalized = useRef({
+  const creditsNorm = useRef({
     /* !! id(798286) 2 роли на 1 человека */
     cast: normalizeCastData(data.credits.cast),
     crew: normalizeCrewData(data.credits.crew),
   });
 
-  const sortedCreditsActive = useRef([]);
-
   useEffect(() => {
-    const arr = creditsNormalized.current[active];
-    sortedCreditsActive.current = sortObj(arr, sortOptions);
-  }, [active, sortOptions]);
-
-  useEffect(() => {
-    setCards(cur => [
-      ...sortedCreditsActive.current.slice(0, page * CARDS_PER_PAGE),
-    ]);
-  }, [page, active]);
-
-  const handleClickOption = name => {
-    setCards([]);
-    setActive(name);
     setPage(1);
-  };
+    setCredits(sortObj(creditsNorm.current[active], sortOptions));
+  }, [active, sortOptions, setPage]);
 
   const showLoadMore =
-    !showLoader &&
-    cards.length > 0 &&
-    cards.length < sortedCreditsActive.current?.length;
+    !showLoader && cards.length > 0 && cards.length < credits.length;
 
   // No credits: no cast id(454172)
-  const { cast, crew } = creditsNormalized.current;
+  const { cast, crew } = creditsNorm.current;
   if (!cast.length && !crew.length) {
     return <NoCredits> {noCredits()}</NoCredits>;
   }
@@ -87,14 +75,12 @@ export const CreditsInfo = ({
         <SubHeader>
           <OptionButtons
             items={OPTION_ITEMS}
-            onClick={handleClickOption}
+            onClick={setActive}
             value={active}
           />
         </SubHeader>
 
-        {!creditsNormalized.current[active].length && (
-          <NoCredits> {noCredits(active)}</NoCredits>
-        )}
+        {!credits.length && <NoCredits> {noCredits(active)}</NoCredits>}
 
         {cards.length > 0 && (
           <CreditsList ref={listRef}>

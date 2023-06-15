@@ -2,7 +2,7 @@ import { useRef } from 'react';
 import { func, array, exact, string, bool, number } from 'prop-types';
 import { List, Item } from './MovieGallery.styled';
 import { MovieGalleryItem } from './MovieGalleryItem/MovieGalleryItem';
-import { useImageGallery } from '../../hooks/useImageGallery';
+import { useImageGallery } from '../../hooks';
 
 //
 // MovieGallery
