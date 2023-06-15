@@ -3,8 +3,14 @@ export * from './toast';
 
 const NEW_TAB = `target='_blank', rel='noopener noreferrer'`;
 const URL_RE = new RegExp(
-  '(http[s]?:\\/\\/(www\\.)?|ftp:\\/\\/(www\\.)?|www\\.){1}([0-9A-Za-z-\\.@:%_+~#=]+)+((\\.[a-zA-Z]{2,3})+)(/(.)*)?(\\?(.)*)?',
-  'gi'
+  [
+    `(http[s]?:\\/\\/(www\\.)?|`,
+    `ftp:\\/\\/(www\\.)?|www\\.){1}`,
+    `([0-9A-Za-z-\\.@:%_+~#=]+)+`,
+    `((\\.[a-zA-Z]{2,3})+)`,
+    `(/(.)*)?(\\?(.)*)?`,
+  ].join(''),
+  `gi`
 );
 
 const toStr = Object.prototype.toString;
@@ -221,7 +227,6 @@ export const isVScrollBarVisible = () => {
  */
 export const onImageLoad = (img, callback) => {
   if (!img) return;
-
   const image = new Image();
   image.src = img.src || img;
   image.onload = callback;

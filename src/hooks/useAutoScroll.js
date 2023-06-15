@@ -1,5 +1,9 @@
 import { useRef, useEffect } from 'react';
 
+// TODO: для мобильных можно уменьшать scrollBy
+// window.matchMedia(...).addEventListener('change', cb)
+// Или высчитывать от текущей высоты вьюпорта
+
 export const useAutoScroll = ({ listRef, data, scrollBy }) => {
   const DEF_SCROLL_BY = 2;
   const DEF_SCROLL_BEHAVIOR = 'smooth';
