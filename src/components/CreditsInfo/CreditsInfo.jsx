@@ -18,7 +18,9 @@ const CARDS_PER_PAGE = 30;
 const DEF_SORT_OPTIONS = { key: 'popularity', ascending: false };
 const DEF_OPTION_VALUE = 'cast';
 const OPTION_ITEMS = 'cast crew';
-const NO_CREDITS = 'The cast for this film has not been added';
+
+const noCredits = (active = 'credits') =>
+  `The ${active} for this film has not been added`;
 
 //
 // CreditsInfo
@@ -43,23 +45,23 @@ export const CreditsInfo = ({
     data: cards,
   });
 
-  const credits = useRef({
+  const creditsNormalized = useRef({
     /* !! id(798286) 2 роли на 1 человека */
     cast: normalizeCastData(data.credits.cast),
     crew: normalizeCrewData(data.credits.crew),
   });
 
-  const sortedCredits = useRef([]);
+  const sortedCreditsActive = useRef([]);
 
   useEffect(() => {
-    const arr = credits.current[active];
-    sortedCredits.current = sortObj(arr, sortOptions);
+    const arr = creditsNormalized.current[active];
+    sortedCreditsActive.current = sortObj(arr, sortOptions);
   }, [active, sortOptions]);
 
   useEffect(() => {
-    const start = (page - 1) * CARDS_PER_PAGE;
-    const end = start + CARDS_PER_PAGE;
-    setCards(cur => [...cur, ...sortedCredits.current.slice(start, end)]);
+    setCards(cur => [
+      ...sortedCreditsActive.current.slice(0, page * CARDS_PER_PAGE),
+    ]);
   }, [page, active]);
 
   const handleClickOption = name => {
@@ -71,12 +73,12 @@ export const CreditsInfo = ({
   const showLoadMore =
     !showLoader &&
     cards.length > 0 &&
-    cards.length < sortedCredits.current?.length;
+    cards.length < sortedCreditsActive.current?.length;
 
-  // No credits
-  const { cast, crew } = credits.current;
+  // No credits: no cast id(454172)
+  const { cast, crew } = creditsNormalized.current;
   if (!cast.length && !crew.length) {
-    return <NoCredits> {NO_CREDITS}</NoCredits>;
+    return <NoCredits> {noCredits()}</NoCredits>;
   }
 
   return (
@@ -90,17 +92,23 @@ export const CreditsInfo = ({
           />
         </SubHeader>
 
-        <CreditsList ref={listRef}>
-          {cards.map(({ id, ...rest }) => (
-            <CreditsListItem key={id}>
-              {/* !! при большом кол-ве тормозит - 
+        {!creditsNormalized.current[active].length && (
+          <NoCredits> {noCredits(active)}</NoCredits>
+        )}
+
+        {cards.length > 0 && (
+          <CreditsList ref={listRef}>
+            {cards.map(({ id, ...rest }) => (
+              <CreditsListItem key={id}>
+                {/* !! при большом кол-ве тормозит - 
                 возможно из-за большого кол-ва styled component
                 в разметке PersonCard
               */}
-              <PersonCard {...rest} />
-            </CreditsListItem>
-          ))}
-        </CreditsList>
+                <PersonCard {...rest} />
+              </CreditsListItem>
+            ))}
+          </CreditsList>
+        )}
 
         {showLoader && Loader}
       </>

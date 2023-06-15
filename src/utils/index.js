@@ -1,6 +1,9 @@
 import { lazy } from 'react';
 export * from './toast';
 
+const toStr = Object.prototype.toString;
+const normId = id => `${id}`.replace(/[^$\w]/gi, '').replace(/^\d+/, '');
+
 const NEW_TAB = `target='_blank', rel='noopener noreferrer'`;
 const URL_RE = new RegExp(
   [
@@ -12,9 +15,6 @@ const URL_RE = new RegExp(
   ].join(''),
   `gi`
 );
-
-const toStr = Object.prototype.toString;
-const normId = id => `${id}`.replace(/[^$\w]/gi, '').replace(/^\d+/, '');
 
 //
 // prove

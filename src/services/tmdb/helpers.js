@@ -8,6 +8,8 @@ const srv = new TmdbService();
  * Убирает дублирование персон, сворачивая поле [fieldName] в список
  * @param {array} data - массив данных (объектов) о съмочной группе
  * @returns - массив объектов без дублирования
+ *
+ * !! id(283546) в crew один человек("Luke Losey") Director/Writer, но разные id
  */
 const normalizeCredits = (data, fieldName) => {
   if (!Array.isArray(data)) return [];
