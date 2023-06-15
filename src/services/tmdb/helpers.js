@@ -25,7 +25,7 @@ const normalizeCredits = (data, fieldName) => {
     return res;
   }, {});
 
-  //   преобразуем в строку, чтобы не делать это в целевом компоненте
+  // преобразуем в строку, чтобы не делать это в целевом компоненте
   return Object.values(hash).map(obj => ({
     ...obj,
     [fieldName]: obj[fieldName].join(', '),
@@ -36,11 +36,10 @@ export const normalizeCrewData = crew => normalizeCredits(crew, 'job');
 export const normalizeCastData = cast => normalizeCredits(cast, 'character');
 
 /**
- * Информация об актерах
  *
+ * Информация об актерах
  * @param {object} credits - объект с массивами cast и crew
  * @param {number} count - кол-во имен актеров для анонса
- *
  * @returns {object}
  *  {preview, remaining}
  *    preview - строка-список имен (анонс)
@@ -70,8 +69,8 @@ export const getCastPreview = (credits, count = 5) => {
 };
 
 /**
- * Информация об основном персонале
  *
+ * Информация об основном персонале
  * @param {object} credits - объект с массивами cast и crew
  * @returns {object} - {director, screenplay, writer, ...}
  */
