@@ -4,7 +4,7 @@ import { PersonCard } from './PersonCard/PersonCard';
 import { LoadMoreBtn } from 'components/etc/LoadMoreBtn/LoadMoreBtn';
 import { SubHeader } from 'components/Subheader/Subheader';
 import { normalizeCrewData, normalizeCastData } from 'services/tmdb/helpers';
-import { useImageGallery, usePagination } from 'hooks';
+import { useImageGallery, useLoadMorePagination } from 'hooks';
 import { sortObj } from 'utils';
 
 import {
@@ -37,7 +37,7 @@ export const CreditsInfo = ({
   const [credits, setCredits] = useState([]);
   const listRef = useRef(null);
 
-  const [cards, setPage] = usePagination({
+  const [cards, setPage] = useLoadMorePagination({
     data: credits,
     itemsPerPage: CARDS_PER_PAGE,
   });

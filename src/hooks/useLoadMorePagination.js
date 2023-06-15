@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-export const usePagination = ({ data, itemsPerPage }) => {
+export const useLoadMorePagination = ({ data, itemsPerPage }) => {
   const [portion, setPortion] = useState([]);
   const [page, setPage] = useState(1);
 
