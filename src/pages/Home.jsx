@@ -35,8 +35,6 @@ const Home = ({ loader }) => {
         setError(err);
         console.log(err);
       });
-
-    return () => srv.abort();
   }, [active]);
 
   const handleLoadMoreClick = clickCount => {

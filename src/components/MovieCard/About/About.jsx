@@ -47,7 +47,7 @@ export const About = ({
     .substr(11, 5)
     .replace(':', 'h ')}m`;
 
-  const haveAnyDataAbout =
+  const shouldRender =
     releaseDate ||
     countries ||
     genresList ||
@@ -56,88 +56,86 @@ export const About = ({
     revenue > 0 ||
     runtimeHHMM;
 
+  if (!shouldRender) return null;
+
   return (
     <Container>
-      {haveAnyDataAbout && (
-        <>
-          <Title>About</Title>
+      <Title>About</Title>
 
-          <List {...restProps}>
-            {releaseDate && (
-              <Item>
-                <Label>release</Label>
-                <span>{releaseDate}</span>
-              </Item>
-            )}
+      <List {...restProps}>
+        {releaseDate && (
+          <Item>
+            <Label>release</Label>
+            <span>{releaseDate}</span>
+          </Item>
+        )}
 
-            {countries && (
-              <Item>
-                <Label>countries</Label>
-                <span>{countries}</span>
-              </Item>
-            )}
+        {countries && (
+          <Item>
+            <Label>countries</Label>
+            <span>{countries}</span>
+          </Item>
+        )}
 
-            {genresList && (
-              <Item>
-                <Label>genres</Label>
-                <span>{genresList}</span>
-              </Item>
-            )}
+        {genresList && (
+          <Item>
+            <Label>genres</Label>
+            <span>{genresList}</span>
+          </Item>
+        )}
 
-            {tagline && (
-              <Item>
-                <Label>tagline</Label>
-                <span>
-                  <Tagline>{tagline}</Tagline>
-                </span>
-              </Item>
-            )}
+        {tagline && (
+          <Item>
+            <Label>tagline</Label>
+            <span>
+              <Tagline>{tagline}</Tagline>
+            </span>
+          </Item>
+        )}
 
-            {budget > 0 && (
-              <Item>
-                <Label>budget</Label>
-                <span>${splitNumIntoTriads(budget)}</span>
-              </Item>
-            )}
+        {budget > 0 && (
+          <Item>
+            <Label>budget</Label>
+            <span>${splitNumIntoTriads(budget)}</span>
+          </Item>
+        )}
 
-            {revenue > 0 && (
-              <Item>
-                <Label>revenue</Label>
-                <span>${splitNumIntoTriads(revenue)}</span>
-              </Item>
-            )}
+        {revenue > 0 && (
+          <Item>
+            <Label>revenue</Label>
+            <span>${splitNumIntoTriads(revenue)}</span>
+          </Item>
+        )}
 
-            {crew &&
-              Object.entries(crew).map(([jobName, persons]) => {
-                return (
-                  persons.length > 0 && (
-                    <Item key={jobName}>
-                      <Label>{jobName}</Label>
-                      <span>{persons.join(', ')}</span>
-                    </Item>
-                  )
-                );
-              })}
+        {crew &&
+          Object.entries(crew).map(([jobName, persons]) => {
+            return (
+              persons.length > 0 && (
+                <Item key={jobName}>
+                  <Label>{jobName}</Label>
+                  <span>{persons.join(', ')}</span>
+                </Item>
+              )
+            );
+          })}
 
-            {cast && (
-              <Item>
-                <Label>cast</Label>
-                <Cast>
-                  {cast.preview}
-                  <LinkPrimary to="credits">{cast.remaining}</LinkPrimary>
-                </Cast>
-              </Item>
-            )}
+        {cast && (
+          <Item>
+            <Label>cast</Label>
+            <Cast>
+              {cast.preview}
+              <LinkPrimary to="credits">{cast.remaining}</LinkPrimary>
+            </Cast>
+          </Item>
+        )}
 
-            {runtime > 0 && (
-              <Item>
-                <Label>runtime</Label>
-                <span>{runtimeHHMM}</span>
-              </Item>
-            )}
-          </List>
-        </>
-      )}
+        {runtime > 0 && (
+          <Item>
+            <Label>runtime</Label>
+            <span>{runtimeHHMM}</span>
+          </Item>
+        )}
+      </List>
     </Container>
   );
 };
