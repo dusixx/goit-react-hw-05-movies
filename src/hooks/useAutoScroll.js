@@ -20,13 +20,16 @@ export const useAutoScroll = ({ listRef, data, scrollBy }) => {
 
     if (listTop < 0) {
       if (curDataLen.current < data.length) {
+        const scrollByNum = parseInt(scrollBy);
         return window.scrollBy({
-          top: listItemHeight.current * (parseInt(scrollBy) || DEF_SCROLL_BY),
+          top:
+            listItemHeight.current *
+            (isNaN(scrollByNum) ? DEF_SCROLL_BY : scrollByNum),
           behavior: DEF_SCROLL_BEHAVIOR,
         });
       }
 
-      if (curDataLen.current === data.length) {
+      if (curDataLen.current >= data.length) {
         listRef.current.scrollIntoView({ behavior: DEF_SCROLL_BEHAVIOR });
       }
     }
