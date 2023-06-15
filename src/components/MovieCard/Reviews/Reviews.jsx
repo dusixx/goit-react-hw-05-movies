@@ -5,6 +5,7 @@ import { ReviewItem } from './ReviewItem/ReviewItem';
 import { List, Container, Title, Item } from './Reviews.styled';
 import { LoadMoreBtn } from 'components/etc/LoadMoreBtn/LoadMoreBtn';
 import { array, number, shape } from 'prop-types';
+import { useAutoScroll } from 'hooks/useAutoScroll';
 
 const srv = new TmdbService();
 
@@ -15,6 +16,9 @@ const srv = new TmdbService();
 export const Reviews = ({ data: { id, results, total_pages } }) => {
   const [reviews, setReviews] = useState(results);
   const page = useRef(1);
+  const listRef = useRef(null);
+
+  useAutoScroll({ listRef, data: reviews, scrollBy: 1 });
 
   const handleLoadMoreClick = clickCount => {
     srv
@@ -27,7 +31,7 @@ export const Reviews = ({ data: { id, results, total_pages } }) => {
     <Container>
       <Title>Reviews</Title>
 
-      <List id="reviews">
+      <List id="reviews" ref={listRef}>
         {reviews.map(({ id, ...rest }) => {
           return (
             <Item key={id}>
