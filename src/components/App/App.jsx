@@ -14,29 +14,28 @@ const MovieDetails = lazyImport('pages/MovieDetails');
 // App
 //
 
-export const App = ({ loader = <LoaderBar /> }) => {
-  return (
-    <div style={{ height: '100vh' }}>
-      <Routes>
-        <Route path="/" element={<SharedLayout />}>
-          <Route index element={<Home loader={loader} />}></Route>
-          <Route path="movies" element={<Movies loader={loader} />}></Route>
+export const App = ({ loader = <LoaderBar /> }) => (
+  <>
+    <Routes>
+      <Route path="/" element={<SharedLayout />}>
+        <Route index element={<Home loader={loader} />}></Route>
 
-          <Route
-            path="movies/:movieId"
-            element={<MovieDetails loader={loader} />}
-          ></Route>
+        <Route path="movies" element={<Movies loader={loader} />}></Route>
 
-          <Route
-            path="movies/:movieId/credits"
-            element={<Credits loader={loader} />}
-          ></Route>
+        <Route
+          path="movies/:movieId"
+          element={<MovieDetails loader={loader} />}
+        ></Route>
 
-          <Route path="*" element={<PageNotFound />} />
-        </Route>
-      </Routes>
+        <Route
+          path="movies/:movieId/credits"
+          element={<Credits loader={loader} />}
+        ></Route>
 
-      <ToastContainer autoClose={1500} progressStyle={{ height: '3px' }} />
-    </div>
-  );
-};
+        <Route path="*" element={<PageNotFound />} />
+      </Route>
+    </Routes>
+
+    <ToastContainer autoClose={1500} progressStyle={{ height: '3px' }} />
+  </>
+);
