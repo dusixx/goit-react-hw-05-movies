@@ -16,7 +16,7 @@ export const ModalThumb = styled.div`
   position: absolute;
 
   & img {
-    height: 90vh;
+    max-height: 90vh;
     width: auto;
     /* чтобы оставалось куда кликнуть в бекдроп */
     max-width: 70vw;
