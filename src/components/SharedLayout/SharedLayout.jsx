@@ -6,6 +6,7 @@ import { Header } from './Header/Header';
 import { LoaderBar } from 'components/etc/LoaderBar/LoaderBar';
 import { SubHeader } from 'components/Subheader/Subheader';
 import { Backtop } from 'components/etc/Backtop/Backtop';
+import { ScrollToTop } from 'components/etc/ScrollToTop/ScrollToTop';
 
 import {
   Main,
@@ -16,6 +17,8 @@ import {
 
 export const SharedLayout = () => (
   <>
+    <ScrollToTop />
+
     <HeaderWrapper>
       <SubHeader />
       <Header>
