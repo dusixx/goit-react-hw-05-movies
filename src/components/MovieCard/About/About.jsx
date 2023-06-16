@@ -1,4 +1,5 @@
 import { arrayOf, number, object, string } from 'prop-types';
+import { useEffect, useRef, useState } from 'react';
 import { LinkPrimary } from 'styles/shared';
 import { splitNumIntoTriads } from 'utils';
 
@@ -30,6 +31,13 @@ export const About = ({
   runtime,
   ...restProps
 }) => {
+  const listRef = useRef(null);
+  const [shouldRender, setShouldRender] = useState(true);
+
+  useEffect(() => {
+    setShouldRender(listRef.current?.children.length > 0);
+  }, []);
+
   const genresList = genres?.length
     ? genres.map(({ name }) => name).join(', ')
     : null;
@@ -42,19 +50,12 @@ export const About = ({
     ? new Date(release_date).toLocaleDateString()
     : null;
 
-  const runtimeHHMM = `${new Date(runtime * 60000)
-    .toISOString()
-    .substr(11, 5)
-    .replace(':', 'h ')}m`;
-
-  const shouldRender =
-    releaseDate ||
-    countries ||
-    genresList ||
-    tagline ||
-    budget > 0 ||
-    revenue > 0 ||
-    runtime;
+  const runtimeHHMM =
+    runtime &&
+    `${new Date(runtime * 60000)
+      .toISOString()
+      .substr(11, 5)
+      .replace(':', 'h ')}m`;
 
   if (!shouldRender) return null;
 
@@ -62,7 +63,7 @@ export const About = ({
     <Container>
       <Title>About</Title>
 
-      <List {...restProps}>
+      <List ref={listRef} {...restProps}>
         {releaseDate && (
           <Item>
             <Label>release</Label>
