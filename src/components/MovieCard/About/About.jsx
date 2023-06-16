@@ -54,7 +54,7 @@ export const About = ({
     tagline ||
     budget > 0 ||
     revenue > 0 ||
-    runtimeHHMM;
+    runtime;
 
   if (!shouldRender) return null;
 
