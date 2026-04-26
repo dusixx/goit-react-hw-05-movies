@@ -15,10 +15,12 @@ export const MovieLink = styled(Link)`
   border-radius: var(--border-radius);
   overflow: hidden;
 
-  &:hover,
-  &:focus-visible {
-    & [data-overlay] {
-      opacity: 1;
+  @media (hover: hover) and (pointer: fine) {
+    &:hover,
+    &:focus-visible {
+      & [data-overlay] {
+        opacity: 1;
+      }
     }
   }
 `;
