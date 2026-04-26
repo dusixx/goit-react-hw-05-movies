@@ -1,4 +1,5 @@
 import { getCastPreview, getCrewPreview } from '@common';
+import { NEW_TAB_TARGET_REL } from '@common/constants.js';
 import { ExpandableContent } from '@components/etc/ExpandableContent/ExpandableContent';
 import { ModalImage } from '@components/etc/ModalImage/ModalImage';
 import { Spinner } from '@components/etc/Spinner/Spinner';
@@ -25,9 +26,9 @@ import { Rating } from './Rating/Rating';
 import { Reviews } from './Reviews/Reviews';
 
 const srv = new TmdbService();
+
 const POSTER_WIDTH = 500;
 const OVERVIEW_MAX_HEIGHT = 100;
-const NEW_TAB = { target: '_blank', rel: 'noopener noreferrer' };
 
 export const MovieCard = ({ data = {} }) => {
   const [showModal, setShowModal] = useState(false);
@@ -101,13 +102,13 @@ export const MovieCard = ({ data = {} }) => {
 
             <About cast={cast} crew={crew} {...restProps} />
 
-            {/* no credits id(874156) */}
+            {/* id(874156) no credits  */}
             {(cast || crew) && (
               <CastAndCrewLink to="credits">Full cast & crew</CastAndCrewLink>
             )}
 
             {homepage && (
-              <Homepage to={homepage} title={homepage} {...NEW_TAB}>
+              <Homepage to={homepage} title={homepage} {...NEW_TAB_TARGET_REL}>
                 Official website
               </Homepage>
             )}

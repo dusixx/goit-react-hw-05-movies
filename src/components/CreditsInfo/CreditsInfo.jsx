@@ -59,7 +59,7 @@ export const CreditsInfo = ({
   const showLoadMore =
     !showLoader && cards.length > 0 && cards.length < credits.length;
 
-  // no cast id(454172)
+  // id(454172) no cast
   const { cast, crew } = creditsNorm.current;
   if (!cast.length && !crew.length) {
     return <NoCredits> {noCredits()}</NoCredits>;

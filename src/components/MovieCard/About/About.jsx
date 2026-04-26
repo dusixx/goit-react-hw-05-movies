@@ -1,4 +1,4 @@
-import { splitNumIntoTriads } from '@common';
+import { minutesToHHMM, splitNumIntoTriads } from '@common';
 import { LinkPrimary } from '@styles';
 import { arrayOf, number, object, string } from 'prop-types';
 import { useEffect, useRef, useState } from 'react';
@@ -43,15 +43,11 @@ export const About = ({
     ? new Date(release_date).toLocaleDateString()
     : null;
 
-  const runtimeHHMM =
-    runtime &&
-    `${new Date(runtime * 60000)
-      .toISOString()
-      .substr(11, 5)
-      .replace(':', 'h ')}m`;
+  const runtimeHHMM = minutesToHHMM(runtime);
 
-  if (!shouldRender) return null;
-
+  if (!shouldRender) {
+    return null;
+  }
   return (
     <Container>
       <Title>About</Title>

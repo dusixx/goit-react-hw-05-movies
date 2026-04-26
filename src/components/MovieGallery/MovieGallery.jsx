@@ -13,7 +13,7 @@ export const MovieGallery = ({
   const listRef = useRef(null);
   const [showLoader] = useImageGallery({ listRef, onLoad, data, scrollBy });
 
-  // may be duplicated (eg. week trends -> id(87)).
+  // duplicates are possible (eg. week trends -> id(87)).
   const hash = {};
 
   return (
@@ -21,7 +21,9 @@ export const MovieGallery = ({
       <>
         <List ref={listRef}>
           {data.map(({ id, ...restProps }) => {
-            if (hash[id]) return null;
+            if (hash[id]) {
+              return null;
+            }
             hash[id] = true;
 
             return (

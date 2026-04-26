@@ -1,4 +1,5 @@
 import { showError } from '@common';
+import { NOT_AVAILABLE } from '@common/constants.js';
 import { Spinner } from '@components/etc/Spinner/Spinner';
 import { TmdbService } from '@services';
 import { SpinnerWrapper } from '@styles';
@@ -16,8 +17,8 @@ import {
 } from './MovieGalleryItem.styled';
 
 const srv = new TmdbService();
+
 const DEF_POSTER_WIDTH = 500;
-const STR_NA = 'N/A';
 
 export const MovieGalleryItem = ({
   id,
@@ -49,7 +50,7 @@ export const MovieGalleryItem = ({
     }
   }, [wasLoaded, poster_path]);
 
-  const rating = vote_average ? vote_average.toFixed(1) : STR_NA;
+  const rating = vote_average ? vote_average.toFixed(1) : NOT_AVAILABLE;
   const releaseYear = release_date?.substring(0, 4);
 
   return (

@@ -10,7 +10,6 @@ export const Button = styled(ButtonSecondary)`
 
   width: ${({ width }) => calcCSSValue(width)};
   height: ${({ height }) => calcCSSValue(height)};
-
   /* 
   While the button has a spinner, don't remove the background color.
   Otherwise, the spinner will blend into the page background.

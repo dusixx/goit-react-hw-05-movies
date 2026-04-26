@@ -1,4 +1,5 @@
 import { shortenNum } from '@common';
+import { NEW_TAB_TARGET_REL, NOT_AVAILABLE } from '@common/constants.js';
 import { HashBtnLink } from '@components/etc/HashBtnLink/HashBtnLink';
 import { TmdbService } from '@services';
 import { IconImdbLogo, IconTmdbLogo } from '@styles';
@@ -12,8 +13,8 @@ import {
 } from './Rating.styled';
 
 const srv = new TmdbService();
+
 const DEF_HEIGHT = 40;
-const NEW_TAB = { target: '_blank', rel: 'noopener noreferrer' };
 
 export const Rating = ({
   height = DEF_HEIGHT,
@@ -24,12 +25,22 @@ export const Rating = ({
   id,
 }) => {
   let rating = Number(vote_average);
-  rating = rating ? rating.toFixed(1) : 'N/A';
+  rating = rating ? rating.toFixed(1) : NOT_AVAILABLE;
 
   const tmdbUrl = srv.getTmdbUrl(id);
   const imdbUrl = srv.getImdbUrl(imdb_id);
-  const tmdbData = { to: tmdbUrl, title: tmdbUrl, height, ...NEW_TAB };
-  const imdbData = { to: imdbUrl, title: imdbUrl, height, ...NEW_TAB };
+  const tmdbData = {
+    to: tmdbUrl,
+    title: tmdbUrl,
+    height,
+    ...NEW_TAB_TARGET_REL,
+  };
+  const imdbData = {
+    to: imdbUrl,
+    title: imdbUrl,
+    height,
+    ...NEW_TAB_TARGET_REL,
+  };
 
   return (
     <Ratings>

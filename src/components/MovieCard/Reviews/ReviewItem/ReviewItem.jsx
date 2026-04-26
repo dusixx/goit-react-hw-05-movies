@@ -2,7 +2,14 @@ import { getAvatar } from '@common';
 import { ExpandableContent } from '@components/etc/ExpandableContent/ExpandableContent';
 import { IconNoAvatar } from '@styles';
 import { number, object, string } from 'prop-types';
+import {
+  AVATAR_WIDTH,
+  CONTENT_MAX_HEIGHT,
+  ICON_NO_AVATAR_COLOR,
+  ICON_NO_AVATAR_SIZE,
+} from './ReviewItem.constants.js';
 
+import { NEW_TAB_TARGET_REL } from '@common/constants.js';
 import {
   AvatarAndName,
   AvatarImage,
@@ -12,12 +19,6 @@ import {
   HeaderGroup,
   SourceLink,
 } from './ReviewItem.styled';
-
-const AVATAR_WIDTH = 185;
-const CONTENT_MAX_HEIGHT = 100;
-const ICON_NO_AVATAR_SIZE = 60;
-const ICON_NO_AVATAR_COLOR = 'lightgray';
-const NEW_TAB = { target: '_blank', rel: 'noopener noreferrer' };
 
 export const ReviewItem = ({
   author_details: { avatar_path },
@@ -50,7 +51,7 @@ export const ReviewItem = ({
 
         <HeaderGroup>
           <span>{createdDate}</span>
-          <SourceLink to={url} title={url} {...NEW_TAB}>
+          <SourceLink to={url} title={url} {...NEW_TAB_TARGET_REL}>
             Direct link
           </SourceLink>
         </HeaderGroup>

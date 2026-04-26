@@ -10,7 +10,7 @@ import {
 import { Link } from 'react-router-dom';
 
 const HEADER_HEIGHT = '58px';
-const POSTER_HMULT = 1.5;
+const POSTER_HEIGHT_MULTIPLE = 1.5;
 
 export const Card = styled.article``;
 
@@ -36,7 +36,7 @@ export const PosterLink = styled(Link)`
   pointer-events: ${({ clickable }) => (clickable ? 'all' : 'none')};
 
   width: 90vw;
-  height: calc(90vw * ${POSTER_HMULT});
+  height: calc(90vw * ${POSTER_HEIGHT_MULTIPLE});
 
   border-radius: var(--border-radius);
   overflow: hidden;
@@ -47,7 +47,7 @@ export const PosterLink = styled(Link)`
     position: sticky;
     top: 40px; // ${HEADER_HEIGHT};
     width: 330px;
-    height: calc(330px * ${POSTER_HMULT});
+    height: calc(330px * ${POSTER_HEIGHT_MULTIPLE});
   }
 `;
 

@@ -1,7 +1,7 @@
 import { Spinner } from '@components/etc/Spinner/Spinner.jsx';
 import { bool, func, string } from 'prop-types';
 import { useState } from 'react';
-import { Modal } from './Modal/Modal.jsx';
+import { Modal } from '../Modal/Modal.jsx';
 import { ModalContainer, ModalThumb } from './ModalImage.styled';
 
 const COLOR_MODAL_BG = 'rgb(255 255 255 / 0.7)';

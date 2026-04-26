@@ -157,3 +157,10 @@ export const onImageLoad = (img, callback) => {
   image.src = img.src || img;
   image.onload = callback;
 };
+
+export const minutesToHHMM = minutes =>
+  minutes &&
+  `${new Date(minutes * 60 * 1000)
+    .toISOString()
+    .slice(11, 16)
+    .replace(':', 'h ')}m`;

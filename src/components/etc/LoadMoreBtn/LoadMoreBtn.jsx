@@ -15,9 +15,10 @@ export const LoadMoreBtn = ({ onClick, centered = true, ...restProps }) => {
     const { current: ref } = btnRef;
     observer.current = new IntersectionObserver(() => setShowLoader(false));
     observer.current.observe(ref);
-
-    // actual size, so the spinner doesn't change the button's dimensions
-    // Otherwise, we need to hard-code the button's dimensions in the styles
+    /*
+    Actual size, so the spinner doesn't change the button's dimensions
+    Otherwise, we need to hard-code the button's dimensions in the styles
+    */
     btnRect.current = btnRef.current.getBoundingClientRect();
 
     return () => observer.current.unobserve(ref);

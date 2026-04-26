@@ -1,3 +1,4 @@
+import { NOT_AVAILABLE } from '@common/constants.js';
 import { ModalImage } from '@components/etc/ModalImage/ModalImage';
 import { Spinner } from '@components/etc/Spinner/Spinner';
 import { TmdbService } from '@services';
@@ -19,7 +20,6 @@ const srv = new TmdbService();
 const PROFILE_WIDTH = 185;
 const ICON_NO_PHOTO_COLOR = 'lightgray';
 const ICON_NO_PHOTO_SIZE = 50;
-const STR_NA = 'n/a';
 
 // NOTE: for crew, the job field is available instead of character
 
@@ -80,7 +80,7 @@ export const PersonCard = ({
       </ProfileLink>
       <Desc>
         <Name>{personName}</Name>
-        <Job>{job || character || STR_NA}</Job>
+        <Job>{job || character || NOT_AVAILABLE}</Job>
       </Desc>
 
       <ModalImage
