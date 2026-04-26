@@ -1,8 +1,6 @@
 {
-  "name": "movies-finder",
-  "version": "0.1.0",
-  "private": true,
-  "homepage": "https://dusixx.github.io/goit-react-hw-05-movies/",
+  "name": "movie-finder",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -45,12 +43,6 @@
     "globals": "^17.5.0",
     "prettier": "^3.8.3",
     "vite": "^8.0.10"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
   },
   "browserslist": {
     "production": [

@@ -6,13 +6,10 @@ import { useParams } from 'react-router-dom';
 
 const srv = new TmdbService();
 
-//
-// MovieDetails
-//
-
-// Some information for movies from the trending list
+// NOTE: some information for movies from the trending list
 // is more relevant than when requesting details for the same movie
 // For example, rating and number of votes
+
 const MovieDetails = ({ loader: Loader }) => {
   const [error, setError] = useState(null);
   const [showLoader, setShowLoader] = useState(true);
