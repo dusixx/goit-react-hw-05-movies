@@ -16,7 +16,7 @@ export const Searchbar = ({ style, onSubmit, onChange, ...restProps }) => {
     setQuery(searchParams.get('query') ?? '');
   }, [searchParams]);
 
-  // you can change ?query in the request here, but need to debounce it
+  // can change ?query in the request here, but need to debounce it
   const handleSearchQueryChange = e => {
     const query = e?.target.value.trim() || '';
     setQuery(query);

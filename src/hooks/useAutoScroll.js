@@ -1,11 +1,11 @@
-import { useRef, useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 
 const DEF_SCROLL_BY = 2;
 const DEF_SCROLL_BEHAVIOR = 'smooth';
 
-// TODO: для мобильных можно уменьшать scrollBy
+// TODO: For mobile devices, we can decrease scrollBy
 // window.matchMedia(...).addEventListener('change', cb)
-// Или высчитывать от текущей высоты вьюпорта
+// Or calculate it based on the current viewport height
 
 export const useAutoScroll = ({ listRef, data, scrollBy }) => {
   const listItemHeight = useRef(null);

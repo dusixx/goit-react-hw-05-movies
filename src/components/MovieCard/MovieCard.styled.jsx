@@ -58,7 +58,6 @@ export const Poster = styled.img`
   height: 100%;
   object-fit: cover;
 
-  /* Сюда вместо ссылки - чтобы не cработывало для заглушек */
   &:hover,
   &:focus-visible {
     filter: brightness(1.1);

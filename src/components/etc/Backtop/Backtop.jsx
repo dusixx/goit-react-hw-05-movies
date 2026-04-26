@@ -9,7 +9,6 @@ const BTN_TITLE = 'Go to Top';
 const ICON_SIZE = '60%';
 
 export const Backtop = ({
-  // !! при smooth может иногда запинаться не доезжая до верху
   scrollBehavior = 'smooth',
   threshold = 700,
   ...restProps

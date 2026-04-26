@@ -29,10 +29,10 @@ export const Bar = styled.div`
     width: 50%;
 
     background: var(--color-orange);
-    animation: animloader 2s ease-in infinite;
+    animation: loader-anim 2s ease-in infinite;
   }
 
-  @keyframes animloader {
+  @keyframes loader-anim {
     0% {
       left: 0;
       transform: translateX(-100%);

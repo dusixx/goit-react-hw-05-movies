@@ -31,7 +31,7 @@ export const useImageGallery = ({ listRef, onLoad, data, scrollBy }) => {
         setShowLoader(false);
         onLoadRef.current && onLoadRef.current();
 
-        // here, so you know the current one, not the one that was there before the gallery loaded
+        // here, so we know the current one, not the one that was there before the gallery loaded
         const listTop = listRef.current?.getBoundingClientRect().top;
 
         // we assume that the height of all images in the gallery is the same

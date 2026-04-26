@@ -19,8 +19,6 @@ export const BodyScrollLock = () => {
 
     return () => {
       body.style.cssText = bodyCSSText;
-
-      // предотвращаем автоскролинг
       root.style.scrollBehavior = 'auto';
       window.scrollTo({ top });
       root.style.removeProperty('scroll-behavior');
