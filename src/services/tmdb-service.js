@@ -2,11 +2,10 @@ import { camelToSnake, isArray, isObj, normalizeStr } from '@common';
 import axios from 'axios';
 import { Cache } from './cache';
 
-const API_BASE_URL = 'https://api.themoviedb.org/3';
+const { VITE_TMDB_API_KEY, VITE_TMDB_API_URL } = import.meta.env;
 const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p';
 const TMDB_BASE_URL = 'https://www.themoviedb.org/movie';
 const IMDB_BASE_URL = 'https://www.imdb.com/title';
-const API_KEY = '86d04e898c465c8de09e1ea2fc383ab8';
 
 const cache = new Cache();
 
@@ -14,7 +13,9 @@ export class TmdbService {
   #instance;
 
   constructor() {
-    if (this.#instance) return this.#instance;
+    if (this.#instance) {
+      return this.#instance;
+    }
     this.#instance = this;
   }
 
@@ -37,8 +38,8 @@ export class TmdbService {
   }
 
   async get(path, params) {
-    const url = `${API_BASE_URL}/${path}?api_key=${
-      API_KEY
+    const url = `${VITE_TMDB_API_URL}/${path}?api_key=${
+      VITE_TMDB_API_KEY
     }&${new URLSearchParams(namesToSnake(params))}`;
 
     return await this.fetch(url);
@@ -63,7 +64,7 @@ export class TmdbService {
   }
 
   async getTrendingMovies(period, params) {
-    // don't cache - they are loaded as pages
+    // don't cache - they are loaded page by page
     const { data } = await this.get(
       `trending/movie/${normalizeStr(period)}`,
       params
@@ -92,7 +93,7 @@ export class TmdbService {
     return data;
   }
 
-  // don't cache - they are loaded as pages
+  // don't cache - they are loaded page by page
   async getMovieReviews(id, params) {
     const { data } = await this.get(`movie/${id}/reviews`, params);
     return data;

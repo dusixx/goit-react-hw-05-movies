@@ -22,6 +22,8 @@ export const isObj = v => toStr.call(v) === '[object Object]';
 export const isArray = v => Array.isArray(v);
 
 export const calcCSSValue = v => (isNum(v) ? `${v}px` : v);
+export const normalizeStr = s => s && String(s).trim().toLocaleLowerCase();
+export const cap = v => (isStr(v) && v ? v[0].toUpperCase() + v.slice(1) : '');
 
 export const parseCSSValue = v => {
   const value = parseFloat(v);
@@ -34,10 +36,6 @@ export const getIdGenerator = initial => {
   return () => `${(initial++).toString(24)}`;
 };
 
-export const normalizeStr = s => s && String(s).trim().toLocaleLowerCase();
-
-export const cap = v => (isStr(v) && v ? v[0].toUpperCase() + v.slice(1) : '');
-
 export function camelToSnake(str) {
   return normId(str)
     .replace(/(?<=[^A-Z])([A-Z])/g, (_, ch) => `_${ch.toLowerCase()}`)
@@ -45,7 +43,9 @@ export function camelToSnake(str) {
 }
 
 export function shortenNum(v, fractDigits = 2) {
-  if (!isNum(v)) return '';
+  if (!isNum(v)) {
+    return '';
+  }
   let res = String(v);
   // integer part
   const digits = res.split('.')[0].length;
@@ -56,7 +56,6 @@ export function shortenNum(v, fractDigits = 2) {
     if (found) res = `${(v / 10 ** power).toFixed(fractDigits)}${suffix}`;
     return found;
   });
-
   return res;
 }
 
@@ -100,8 +99,9 @@ export const markupLinks = (
 };
 
 export function setProp(obj, path, value, splitter = '/') {
-  if (typeof obj !== 'object') return;
-
+  if (typeof obj !== 'object') {
+    return;
+  }
   return String(path)
     .split(splitter)
     .reduce((ref, key, idx, arr) => {
@@ -150,7 +150,9 @@ export const isVScrollBarVisible = () => {
 };
 
 export const onImageLoad = (img, callback) => {
-  if (!img) return;
+  if (!img) {
+    return;
+  }
   const image = new Image();
   image.src = img.src || img;
   image.onload = callback;

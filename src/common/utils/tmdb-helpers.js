@@ -30,7 +30,9 @@ export const normalizeCrewData = crew => normalizeCredits(crew, 'job');
 export const normalizeCastData = cast => normalizeCredits(cast, 'character');
 
 export const getCastPreview = (credits, count = 5) => {
-  if (!Array.isArray(credits?.cast)) return;
+  if (!Array.isArray(credits?.cast)) {
+    return;
+  }
   const { cast } = credits;
 
   const castList = cast
@@ -52,9 +54,10 @@ export const getCastPreview = (credits, count = 5) => {
 };
 
 export const getCrewPreview = credits => {
-  if (!Array.isArray(credits?.crew)) return;
+  if (!Array.isArray(credits?.crew)) {
+    return;
+  }
   const { crew } = credits;
-
   let personsCount = 0;
 
   const personsList = {
@@ -70,13 +73,13 @@ export const getCrewPreview = credits => {
     const jobName = normalizeStr(job);
     const dep = normalizeStr(department);
 
-    if (jobName === 'director' && dep !== 'directing') return res;
-
+    if (jobName === 'director' && dep !== 'directing') {
+      return res;
+    }
     if (res[jobName]) {
       personsCount += 1;
       res[jobName] = [...res[jobName], name];
     }
-
     return res;
   }, personsList);
 
