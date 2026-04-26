@@ -14,6 +14,7 @@
 
 # production
 /build
+dist/
 
 # misc
 .DS_Store
@@ -33,3 +34,5 @@ codes.js
 todo.js
 backup
 #--------------------
+
+.env*

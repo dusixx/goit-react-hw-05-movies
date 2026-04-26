@@ -1,8 +1,8 @@
+import { calcCSSValue } from '@common';
 import styled from '@emotion/styled';
-import { ButtonLink, LinkBase } from 'styles/shared';
-import { calcCSSValue } from 'utils';
+import { ButtonLink, LinkBase } from '@styles';
 
-// pre чтобы сохранить оригинальное форматирование
+// <pre> to preserve formatting
 export const Content = styled.pre`
   max-height: ${({ maxHeight }) => calcCSSValue(maxHeight)};
 
@@ -12,7 +12,7 @@ export const Content = styled.pre`
   white-space: pre-wrap;
   overflow: hidden;
 
-  /* Линки внутри поста */
+  /* links inside posts */
   & a {
     ${LinkBase};
     color: var(--color-blue);

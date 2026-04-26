@@ -1,8 +1,8 @@
+import { ErrorMessage } from '@components/ErrorMessage/ErrorMessage';
+import { MovieCard } from '@components/MovieCard/MovieCard';
+import { TmdbService } from '@services';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import TmdbService from 'services/tmdb/tmdbSrv';
-import { MovieCard } from 'components/MovieCard/MovieCard';
-import { ErrorMessage } from 'components/ErrorMessage/ErrorMessage';
 
 const srv = new TmdbService();
 
@@ -10,9 +10,9 @@ const srv = new TmdbService();
 // MovieDetails
 //
 
-// !! некоторая информация для фильмов из списка трендов
-// более актуальная, чем при запросе деталей того же фильма
-// Например, рейтинг и кол-во голосов
+// Some information for movies from the trending list
+// is more relevant than when requesting details for the same movie
+// For example, rating and number of votes
 const MovieDetails = ({ loader: Loader }) => {
   const [error, setError] = useState(null);
   const [showLoader, setShowLoader] = useState(true);
@@ -22,6 +22,7 @@ const MovieDetails = ({ loader: Loader }) => {
   useEffect(() => {
     setShowLoader(true);
 
+    // TODO: show content loader (skeleton)
     Promise.all([
       srv.getMovieDetails(movieId),
       srv.getMovieReviews(movieId),

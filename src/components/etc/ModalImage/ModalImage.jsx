@@ -1,14 +1,10 @@
+import { Spinner } from '@components/etc/Spinner/Spinner.jsx';
+import { bool, func, string } from 'prop-types';
 import { useState } from 'react';
-import Modal from './Modal/Modal';
-import { Spinner } from '../Spinner';
+import { Modal } from './Modal/Modal.jsx';
 import { ModalContainer, ModalThumb } from './ModalImage.styled';
-import { string, bool, func } from 'prop-types';
 
 const COLOR_MODAL_BG = 'rgb(255 255 255 / 0.7)';
-
-//
-// ModalImage
-//
 
 export const ModalImage = ({ src, alt, visible, onClose }) => {
   const [wasModalImageLoaded, setWasModalImageLoaded] = useState(false);

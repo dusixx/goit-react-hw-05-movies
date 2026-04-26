@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { isVScrollBarVisible } from 'utils';
+import { isVScrollBarVisible } from '@common';
 
 const { body } = document;
 const root = document.documentElement;

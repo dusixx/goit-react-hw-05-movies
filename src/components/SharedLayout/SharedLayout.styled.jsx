@@ -1,6 +1,6 @@
+import { GoBackLink } from '@components/etc/GoBackLink/GoBackLink';
 import styled from '@emotion/styled';
-import { GoBackLink } from 'components/etc/GoBackLink/GoBackLink';
-import { PageContainer } from 'styles/shared';
+import { PageContainer } from '@styles';
 
 export const HeaderWrapper = styled.div`
   position: relative;
@@ -21,7 +21,6 @@ export const MainContainer = styled(PageContainer)`
 `;
 
 export const Main = styled.main`
-  /* background: linear-gradient(180deg, #ebebeb 0, transparent); */
   margin: 0 auto 0 auto;
   max-width: 1350px;
   min-height: 100vh;

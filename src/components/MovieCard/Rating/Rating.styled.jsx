@@ -1,7 +1,7 @@
+import { calcCSSValue } from '@common';
 import styled from '@emotion/styled';
+import { FlexCentered, TransitionBase } from '@styles';
 import { Link } from 'react-router-dom';
-import { FlexCentered, TransitionBase } from 'styles/shared';
-import { calcCSSValue } from 'utils';
 
 export const Ratings = styled.div`
   ${FlexCentered('gap: 15px; flex-wrap: wrap;')};

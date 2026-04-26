@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { Subtitle } from 'styles/shared';
+import { Subtitle } from '@styles';
 
 export const Container = styled.div`
   display: flex;

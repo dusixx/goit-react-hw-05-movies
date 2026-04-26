@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { PageTitle } from 'styles/shared';
+import { PageTitle } from '@styles';
 
 export const Container = styled.div`
   display: flex;

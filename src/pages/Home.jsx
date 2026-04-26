@@ -1,20 +1,17 @@
-import { useEffect, useState, useRef } from 'react';
-import MovieGallery from 'components/MovieGallery';
-import { PageTitle } from 'styles/shared';
-import { OptionButtons } from 'components/etc/OptionButtons/OptionButtons';
-import { LoadMoreBtn } from 'components/etc/LoadMoreBtn/LoadMoreBtn';
-import { ErrorMessage } from 'components/ErrorMessage/ErrorMessage';
-import { SubHeader } from 'components/Subheader/Subheader';
-import TmdbService from 'services/tmdb/tmdbSrv';
+import { ErrorMessage } from '@components/ErrorMessage/ErrorMessage';
+import { LoadMoreBtn } from '@components/etc/LoadMoreBtn/LoadMoreBtn';
+import { OptionButtons } from '@components/etc/OptionButtons/OptionButtons';
+import { MovieGallery } from '@components/MovieGallery/MovieGallery';
+import { SubHeader } from '@components/Subheader/Subheader';
+import { TmdbService } from '@services';
+import { PageTitle } from '@styles';
+import { useEffect, useRef, useState } from 'react';
 
-const srv = new TmdbService();
 const PAGE_TITLE = `Trends`;
 const DEF_OPTION_VALUE = 'day';
 const OPTION_ITEMS = 'day week';
 
-//
-// Home
-//
+const srv = new TmdbService();
 
 const Home = ({ loader }) => {
   const [active, setActive] = useState(DEF_OPTION_VALUE);
@@ -33,7 +30,7 @@ const Home = ({ loader }) => {
       })
       .catch(err => {
         setError(err);
-        console.log(err);
+        console.debug(err);
       });
   }, [active]);
 

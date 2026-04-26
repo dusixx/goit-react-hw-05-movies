@@ -1,16 +1,11 @@
+import { useImageGallery } from '@hooks';
+import { array, bool, exact, func, number, string } from 'prop-types';
 import { useRef } from 'react';
-import { func, array, exact, string, bool, number } from 'prop-types';
-import { List, Item } from './MovieGallery.styled';
+import { Item, List } from './MovieGallery.styled';
 import { MovieGalleryItem } from './MovieGalleryItem/MovieGalleryItem';
-import { useImageGallery } from '../../hooks';
 
-//
-// MovieGallery
-//
-
-const MovieGallery = ({
+export const MovieGallery = ({
   data = [],
-  sortOptions,
   onLoad,
   scrollBy,
   loader: Loader,
@@ -18,8 +13,7 @@ const MovieGallery = ({
   const listRef = useRef(null);
   const [showLoader] = useImageGallery({ listRef, onLoad, data, scrollBy });
 
-  // !! На week-трендах повторился фильм (id==87).
-  // Запоминаем id, чтобы избежать дублирования
+  // may be duplicated (eg. week trends -> id(87)).
   const hash = {};
 
   return (
@@ -53,5 +47,3 @@ MovieGallery.propTypes = {
     ascending: bool,
   }),
 };
-
-export default MovieGallery;

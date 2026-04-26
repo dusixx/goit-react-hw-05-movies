@@ -1,20 +1,17 @@
-import { setProp, getProp } from 'utils';
+import { getProp, setProp } from '@common';
 
-export default class Cache {
+export class Cache {
   #cache = {};
 
   set(path, value) {
     setProp(this.#cache, path, value);
   }
-
   get(path) {
     return getProp(this.#cache, path);
   }
-
   get data() {
     return { ...this.#cache };
   }
-
   clear() {
     this.#cache = {};
   }

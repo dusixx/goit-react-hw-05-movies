@@ -1,6 +1,5 @@
-import { LinkButton } from 'styles/shared';
+import { IconError, LinkButton } from '@styles';
 import { Caption, Container, Text } from './ErrorMessage.styled';
-import { IconError } from 'styles/icons';
 
 const TEXT =
   'It may have been moved, or you may have simply mistyped the page address.';

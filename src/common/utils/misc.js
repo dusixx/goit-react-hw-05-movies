@@ -1,6 +1,3 @@
-import { lazy } from 'react';
-export * from './toast';
-
 const toStr = Object.prototype.toString;
 const normId = id => `${id}`.replace(/[^$\w]/gi, '').replace(/^\d+/, '');
 
@@ -16,21 +13,13 @@ const URL_RE = new RegExp(
   `gi`
 );
 
-//
-// prove
-//
-
-export const isStr = v => typeof v === 'string';
 export const isNum = v => !isNaN(v - parseFloat(v));
 export const isDef = v => typeof v !== 'undefined';
 export const isFunc = v => typeof v === 'function';
+export const isStr = v => typeof v === 'string';
 export const isInt = v => Number.isInteger(v);
 export const isObj = v => toStr.call(v) === '[object Object]';
 export const isArray = v => Array.isArray(v);
-
-//
-// css
-//
 
 export const calcCSSValue = v => (isNum(v) ? `${v}px` : v);
 
@@ -39,10 +28,6 @@ export const parseCSSValue = v => {
   const unit = String(v).slice(String(value).length) || 'px';
   return { value, unit };
 };
-
-//
-// string
-//
 
 export const getIdGenerator = initial => {
   if (!isNum(initial)) initial = 0;
@@ -59,16 +44,10 @@ export function camelToSnake(str) {
     .replace(/_+/g, '_');
 }
 
-/**
- *
- * @param {*} v
- * @param {*} fractDigits
- * @returns
- */
 export function shortenNum(v, fractDigits = 2) {
   if (!isNum(v)) return '';
   let res = String(v);
-  // целая часть
+  // integer part
   const digits = res.split('.')[0].length;
   const map = { K: 3, M: 6, B: 9, T: 12 };
 
@@ -81,20 +60,11 @@ export function shortenNum(v, fractDigits = 2) {
   return res;
 }
 
-/**
- *
- * @param {*} v
- * @param {*} splitter
- * @returns
- */
 export function splitNumIntoTriads(v, splitter = ' ') {
-  // !! очень большие числа некорректно конвертит в строку
   const str = String(v).replace(/\s/g, '');
-
-  // числа только в "обычном" формате (не научный и тп)
-  if (!/^\d+(\.\d+)?$/.test(str)) return '';
-
-  // разбиваем на триады только целую часть
+  if (!/^\d+(\.\d+)?$/.test(str)) {
+    return '';
+  }
   const part = str.split('.');
   const headLen = part[0].length % 3;
 
@@ -102,7 +72,6 @@ export function splitNumIntoTriads(v, splitter = ' ') {
     RegExp(`(${headLen ? `^\\d{${headLen}}|` : ``}\\d{3})(?!$)`, `g`),
     `$1${splitter}`
   );
-
   return part.join('.');
 }
 
@@ -111,12 +80,6 @@ export const getList = (v, splitter) => {
   return isStr(splitter) ? ret.join(splitter) : ret;
 };
 
-/**
- *
- * @param {*} post
- * @param {*} param1
- * @returns
- */
 export const markupLinks = (
   post,
   { newTab = true, text = 'Click here' } = {}
@@ -127,27 +90,15 @@ export const markupLinks = (
   const link = url =>
     `<a href="${url}" title="${url}" ${strNewTab}>${text || 'Link'}</a>`;
 
-  const formatted = links?.reduce((res, itm) => {
-    // если не добавить протокол - сделает линк относительным текущему хосту
+  const formatted = links?.reduce((_, itm) => {
+    // need protocol
     const url = /^http.*/i.test(itm) ? itm : `https://${itm}`;
-    return (res = post.replace(itm, link(url)));
+    return post.replace(itm, link(url));
   }, post);
 
   return formatted ?? post ?? '';
 };
 
-//
-// object
-//
-
-/**
- *
- * @param {*} obj
- * @param {*} path
- * @param {*} value
- * @param {*} splitter
- * @returns
- */
 export function setProp(obj, path, value, splitter = '/') {
   if (typeof obj !== 'object') return;
 
@@ -155,56 +106,35 @@ export function setProp(obj, path, value, splitter = '/') {
     .split(splitter)
     .reduce((ref, key, idx, arr) => {
       if (idx === arr.length - 1) ref[key] = value;
-      // если (промежуточного) свойства не существует -
-      // ставим объект
+      // create object
       return ref[key] || (ref[key] = {});
     }, obj);
 }
 
-/**
- *
- * @param {*} obj
- * @param {*} path
- * @param {*} splitter
- * @returns
- */
 export function getProp(obj, path, splitter = '/') {
   try {
     return String(path)
       .split(splitter)
       .reduce((ref, key) => ref[key], obj);
-  } catch {}
+  } catch {
+    // empty
+  }
 }
 
-//
-// collection
-//
-
-/**
- *
- * @param {array} col
- * @param {*} param1
- * @returns
- */
+/** @param {unknown[]} col */
 export const sortObj = (col, { key, ascending = true } = {}) => {
-  if (!isArray(col) || !col.length) return [];
-  if (!col[0].hasOwnProperty(key)) return [...col];
-
+  if (!isArray(col) || !col.length) {
+    return [];
+  }
+  if (!Object.hasOwn(col[0], key)) {
+    return [...col];
+  }
   const order = +!!ascending || -1;
-
   const compareFn = isNum(col[0][key])
     ? (a, b) => (a[key] - b[key]) * order
     : (a, b) => a.localeCompare(b) * order;
 
   return [...col].sort(compareFn);
-};
-
-//
-// misc
-//
-
-export const lazyImport = path => {
-  return lazy(() => import(`/src/${path}`));
 };
 
 export const isVScrollBarVisible = () => {
@@ -219,12 +149,6 @@ export const isVScrollBarVisible = () => {
   return res;
 };
 
-/**
- *
- * @param {*} img
- * @param {*} callback
- * @returns
- */
 export const onImageLoad = (img, callback) => {
   if (!img) return;
   const image = new Image();

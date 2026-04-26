@@ -1,16 +1,13 @@
+import { CreditsInfo } from '@components/CreditsInfo/CreditsInfo';
+import { ErrorMessage } from '@components/ErrorMessage/ErrorMessage';
+import { TmdbService } from '@services';
+import { PageTitle } from '@styles';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { PageTitle } from 'styles/shared';
-import { CreditsInfo } from 'components/CreditsInfo/CreditsInfo';
-import { ErrorMessage } from 'components/ErrorMessage/ErrorMessage';
-import TmdbService from 'services/tmdb/tmdbSrv';
 
-const srv = new TmdbService();
 const DEF_SCROLL_BY = 2;
 
-//
-// Credits
-//
+const srv = new TmdbService();
 
 const Credits = ({ loader }) => {
   const { movieId } = useParams();

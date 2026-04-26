@@ -1,7 +1,8 @@
-import styled from '@emotion/styled';
+/* eslint-disable react-refresh/only-export-components */
+import { calcCSSValue, getList, isStr } from '@common';
 import { css } from '@emotion/react';
+import styled from '@emotion/styled';
 import { Link } from 'react-router-dom';
-import { isStr, calcCSSValue, getList } from 'utils';
 import { bgiMovieLogo } from './icons';
 
 // utils
@@ -30,10 +31,10 @@ export const Disabled = css`
 `;
 
 export const NoPosterBg = css`
-  /* Где-то перебивается - без !important не работает */
   background-repeat: no-repeat !important;
   background-position: center !important;
-  background: linear-gradient(0deg, #e0e0e0 0, transparent),
+  background:
+    linear-gradient(0deg, #e0e0e0 0, transparent),
     linear-gradient(180deg, #e0e0e0 0, transparent), url(${bgiMovieLogo});
 `;
 

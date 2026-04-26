@@ -1,6 +1,6 @@
+import { calcCSSValue } from '@common';
 import styled from '@emotion/styled';
-import { ButtonPrimary, FlexCentered, TransitionBase } from 'styles/shared';
-import { calcCSSValue } from 'utils';
+import { ButtonPrimary, FlexCentered, TransitionBase } from '@styles';
 
 export const Container = styled.div`
   height: ${({ height }) => calcCSSValue(height) || '100%'};

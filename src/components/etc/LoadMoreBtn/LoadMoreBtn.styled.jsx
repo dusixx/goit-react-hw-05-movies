@@ -1,6 +1,6 @@
+import { calcCSSValue } from '@common';
 import styled from '@emotion/styled';
-import { ButtonSecondary, FlexCentered } from 'styles/shared';
-import { calcCSSValue } from 'utils';
+import { ButtonSecondary, FlexCentered } from '@styles';
 
 export const Button = styled(ButtonSecondary)`
   ${FlexCentered()};
@@ -11,10 +11,10 @@ export const Button = styled(ButtonSecondary)`
   width: ${({ width }) => calcCSSValue(width)};
   height: ${({ height }) => calcCSSValue(height)};
 
-  /*
-    Пока кнопка со спинером - не убираем цвето фона
-    Иначе, спиннер сольется с фоном страницы
-    Можно сдлеать, чтобы цвет спиннера менялся на прозрачном фоне
+  /* 
+  While the button has a spinner, don't remove the background color.
+  Otherwise, the spinner will blend into the page background.
+  You can make the spinner's color change on a transparent background. 
   */
   background-color: ${({ isLoading }) =>
     isLoading ? 'var(--color-blue)' : 'transparent'};

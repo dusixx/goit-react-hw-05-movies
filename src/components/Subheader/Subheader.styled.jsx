@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { FlexCentered, TransitionBase, PageContainer } from 'styles/shared';
+import { FlexCentered, PageContainer, TransitionBase } from '@styles';
 
 const visibility = visible => (visible ? 'none' : 'translate(0, -60%)');
 

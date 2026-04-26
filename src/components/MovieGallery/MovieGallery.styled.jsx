@@ -1,8 +1,5 @@
 import styled from '@emotion/styled';
 
-// const POSTER_HMULT = 1.5;
-// const POSTER_MAX_WIDTH = 500;
-
 export const List = styled.ul`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));

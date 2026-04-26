@@ -1,17 +1,13 @@
-import { useState, useRef } from 'react';
-import { showError } from 'utils';
-import TmdbService from 'services/tmdb/tmdbSrv';
-import { ReviewItem } from './ReviewItem/ReviewItem';
-import { List, Container, Title, Item } from './Reviews.styled';
-import { LoadMoreBtn } from 'components/etc/LoadMoreBtn/LoadMoreBtn';
+import { showError } from '@common';
+import { LoadMoreBtn } from '@components/etc/LoadMoreBtn/LoadMoreBtn';
+import { useAutoScroll } from '@hooks';
+import { TmdbService } from '@services';
 import { array, number, shape } from 'prop-types';
-import { useAutoScroll } from 'hooks';
+import { useRef, useState } from 'react';
+import { ReviewItem } from './ReviewItem/ReviewItem';
+import { Container, Item, List, Title } from './Reviews.styled';
 
 const srv = new TmdbService();
-
-//
-// Reviews
-//
 
 export const Reviews = ({ data: { id, results, total_pages } }) => {
   const [reviews, setReviews] = useState(results);

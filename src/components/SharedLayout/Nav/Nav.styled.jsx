@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
+import { LinkBase, TransitionBase } from '@styles';
 import { NavLink } from 'react-router-dom';
-import { LinkBase, TransitionBase } from 'styles/shared';
 
 export const NavStyled = styled.nav`
   display: flex;
@@ -23,7 +23,6 @@ export const StyledNavLink = styled(NavLink)`
     font-size: 16px;
   }
 
-  /* Линия внизу у активного */
   &::after {
     content: '';
 

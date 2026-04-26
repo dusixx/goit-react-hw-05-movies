@@ -1,18 +1,16 @@
-import { useState, useEffect, useRef } from 'react';
-import { OptionButtons } from '../etc/OptionButtons/OptionButtons';
-import { PersonCard } from './PersonCard/PersonCard';
-import { LoadMoreBtn } from 'components/etc/LoadMoreBtn/LoadMoreBtn';
-import { SubHeader } from 'components/Subheader/Subheader';
-import { normalizeCrewData, normalizeCastData } from 'services/tmdb/helpers';
-import { useImageGallery, useLoadMorePagination } from 'hooks';
-import { sortObj } from 'utils';
-
+import { normalizeCastData, normalizeCrewData, sortObj } from '@common';
+import { LoadMoreBtn } from '@components/etc/LoadMoreBtn/LoadMoreBtn';
+import { OptionButtons } from '@components/etc/OptionButtons/OptionButtons';
+import { SubHeader } from '@components/Subheader/Subheader';
+import { useImageGallery, useLoadMorePagination } from '@hooks';
+import { useEffect, useRef, useState } from 'react';
 import {
+  Container,
   CreditsList,
   CreditsListItem,
-  Container,
   NoCredits,
 } from './CreditsInfo.styled';
+import { PersonCard } from './PersonCard/PersonCard';
 
 const CARDS_PER_PAGE = 30;
 const DEF_SORT_OPTIONS = { key: 'popularity', ascending: false };
@@ -21,10 +19,6 @@ const OPTION_ITEMS = 'cast crew';
 
 const noCredits = (active = 'credits') =>
   `The ${active} for this film has not been added`;
-
-//
-// CreditsInfo
-//
 
 export const CreditsInfo = ({
   data,
@@ -42,6 +36,8 @@ export const CreditsInfo = ({
     itemsPerPage: CARDS_PER_PAGE,
   });
 
+  // TODO: it's better to scroll first and only then wait (spinner)
+  // for all the images to actually load
   const [showLoader] = useImageGallery({
     listRef,
     onLoad,
@@ -50,7 +46,7 @@ export const CreditsInfo = ({
   });
 
   const creditsNorm = useRef({
-    /* id(798286) 2 роли у 1 человека */
+    /* id(798286) one person has 2 roles */
     cast: normalizeCastData(data.credits.cast),
     crew: normalizeCrewData(data.credits.crew),
   });
@@ -86,10 +82,6 @@ export const CreditsInfo = ({
           <CreditsList ref={listRef}>
             {cards.map(({ id, ...rest }) => (
               <CreditsListItem key={id}>
-                {/* !! при большом кол-ве тормозит - 
-                возможно из-за большого кол-ва styled component
-                в разметке PersonCard
-              */}
                 <PersonCard {...rest} />
               </CreditsListItem>
             ))}

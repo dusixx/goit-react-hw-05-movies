@@ -1,12 +1,8 @@
+import { bool, func } from 'prop-types';
 import { useEffect, useRef, useState } from 'react';
 import { Button, Spinner } from './LoadMoreBtn.styled';
-import { func, bool } from 'prop-types';
 
 const BTN_TITLE = 'Load more';
-
-//
-// LoadMoreBtn
-//
 
 export const LoadMoreBtn = ({ onClick, centered = true, ...restProps }) => {
   const [showLoader, setShowLoader] = useState(false);
@@ -20,8 +16,8 @@ export const LoadMoreBtn = ({ onClick, centered = true, ...restProps }) => {
     observer.current = new IntersectionObserver(() => setShowLoader(false));
     observer.current.observe(ref);
 
-    // фактический размер, чтобы спинер не изменял габариты кнопки
-    // Иначе, надо жестко задать размеры кнопки в стилях
+    // actual size, so the spinner doesn't change the button's dimensions
+    // Otherwise, you need to hard-code the button's dimensions in the styles
     btnRect.current = btnRef.current.getBoundingClientRect();
 
     return () => observer.current.unobserve(ref);

@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { FlexCentered, TransitionBase } from 'styles/shared';
+import { FlexCentered, TransitionBase } from '@styles';
 import { Link } from 'react-router-dom';
 
 export const Card = styled.div`
@@ -8,7 +8,6 @@ export const Card = styled.div`
 
 export const ProfileLink = styled(Link)`
   position: relative;
-  /* height: 100%; */
 
   cursor: ${({ clickable }) => (clickable ? 'pointer' : 'auto')};
   pointer-events: ${({ clickable }) => (clickable ? 'all' : 'none')};
@@ -54,7 +53,7 @@ export const ProfileImage = styled.img`
   height: 100%;
   object-fit: cover;
 
-  /* Сюда вместо ссылки - чтобы не cработывало для заглушек */
+  /* so that it doesn't work for stubs */
   &:hover,
   &:focus-visible {
     filter: brightness(1.1);

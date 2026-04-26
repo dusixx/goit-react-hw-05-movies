@@ -9,14 +9,13 @@
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Source Sans Pro', Helvetica,
-    Arial, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family:
+    -apple-system, BlinkMacSystemFont, 'Source Sans Pro', Helvetica, Arial,
+    'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 
   font-size: 14px;
   color: var(--color-black);
   background-color: var(--color-background);
-
-  /* Чтобы не прыгал скрол, показываем его всегда */
   overflow-y: scroll;
 
   -webkit-font-smoothing: antialiased;
@@ -24,6 +23,6 @@ body {
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family:
+    source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }

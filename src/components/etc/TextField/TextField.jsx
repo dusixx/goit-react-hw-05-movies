@@ -1,6 +1,6 @@
 import { func, string } from 'prop-types';
-import { ClearBtn, InputWrapper, Input, Field } from './TextField.styled';
 import { VscClose as IconClose } from 'react-icons/vsc';
+import { ClearBtn, Field, Input, InputWrapper } from './TextField.styled';
 
 const TextField = ({ value, type, onChange, ...restProps }) => {
   return (
@@ -13,7 +13,6 @@ const TextField = ({ value, type, onChange, ...restProps }) => {
           {...restProps}
         />
         {value && (
-          // !! обязательно type="button", по-умолчанию ставит "submit"
           <ClearBtn type="button" onClick={() => onChange(null)}>
             <IconClose size="100%" />
           </ClearBtn>

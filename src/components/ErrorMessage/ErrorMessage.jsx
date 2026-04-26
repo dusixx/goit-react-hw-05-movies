@@ -1,10 +1,9 @@
-import { LinkButton } from 'styles/shared';
-import { Caption, Container, Text } from './ErrorMessage.styled';
-import { IconError } from 'styles/icons';
+import { IconError, LinkButton } from '@styles';
 import { shape, string } from 'prop-types';
+import { Caption, Container, Text } from './ErrorMessage.styled';
 
 export const ErrorMessage = ({ error }) => {
-  console.error(error);
+  console.debug(error);
 
   return (
     <Container>
@@ -14,9 +13,6 @@ export const ErrorMessage = ({ error }) => {
       <LinkButton to="/" style={{ textTransform: 'capitalize' }}>
         Go to the homepage
       </LinkButton>
-      {/* <LinkButton to={-1} style={{ textTransform: 'capitalize' }}>
-        Go back
-      </LinkButton> */}
     </Container>
   );
 };

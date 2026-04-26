@@ -1,18 +1,18 @@
+import { Backtop } from '@components/etc/Backtop/Backtop';
+import { LoaderBar } from '@components/etc/LoaderBar/LoaderBar';
+import { ScrollToTop } from '@components/etc/ScrollToTop/ScrollToTop';
+import { SubHeader } from '@components/Subheader/Subheader';
 import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
-import { Nav } from './Nav/Nav';
-import { Logo } from './Logo/Logo';
 import { Header } from './Header/Header';
-import { LoaderBar } from 'components/etc/LoaderBar/LoaderBar';
-import { SubHeader } from 'components/Subheader/Subheader';
-import { Backtop } from 'components/etc/Backtop/Backtop';
-import { ScrollToTop } from 'components/etc/ScrollToTop/ScrollToTop';
+import { Logo } from './Logo/Logo';
+import { Nav } from './Nav/Nav';
 
 import {
-  Main,
   HeaderContainer,
-  MainContainer,
   HeaderWrapper,
+  Main,
+  MainContainer,
 } from './SharedLayout.styled';
 
 export const SharedLayout = () => (

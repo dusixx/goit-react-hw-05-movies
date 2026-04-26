@@ -1,6 +1,6 @@
+import { calcCSSValue } from '@common';
 import styled from '@emotion/styled';
-import { ButtonBase, FlexCentered, TransitionBase } from 'styles/shared';
-import { calcCSSValue } from 'utils';
+import { ButtonBase, FlexCentered, TransitionBase } from '@styles';
 
 const DEF_OFFSET = 15;
 const DEF_SIZE = 50;

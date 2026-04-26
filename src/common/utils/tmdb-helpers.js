@@ -1,19 +1,13 @@
-import { normalizeStr } from 'utils';
-import TmdbService from './tmdbSrv';
+import { normalizeStr } from '@common';
+import { TmdbService } from '@services';
 
 const srv = new TmdbService();
 
-/**
- *
- * Убирает дублирование персон, сворачивая поле [fieldName] в список
- * @param {array} data - массив данных (объектов) о съмочной группе
- * @returns - массив объектов без дублирования
- *
- * !! id(283546) в crew один человек("Luke Losey") Director/Writer, но разные id
- */
+/* id(283546) -> crew "Luke Losey" Director/Writer, different IDs */
 const normalizeCredits = (data, fieldName) => {
-  if (!Array.isArray(data)) return [];
-
+  if (!Array.isArray(data)) {
+    return [];
+  }
   const hash = data.reduce((res, personData) => {
     const { id } = personData;
     const fieldValue = personData[fieldName];
@@ -23,11 +17,9 @@ const normalizeCredits = (data, fieldName) => {
     } else {
       res[id] = { ...personData, [fieldName]: [fieldValue] };
     }
-
     return res;
   }, {});
 
-  // преобразуем в строку, чтобы не делать это в целевом компоненте
   return Object.values(hash).map(obj => ({
     ...obj,
     [fieldName]: obj[fieldName].join(', '),
@@ -37,21 +29,10 @@ const normalizeCredits = (data, fieldName) => {
 export const normalizeCrewData = crew => normalizeCredits(crew, 'job');
 export const normalizeCastData = cast => normalizeCredits(cast, 'character');
 
-/**
- *
- * Информация об актерах
- * @param {object} credits - объект с массивами cast и crew
- * @param {number} count - кол-во имен актеров для анонса
- * @returns {object}
- *  {preview, remaining}
- *    preview - строка-список имен (анонс)
- *    remaining - строка (оставшиеся) для ссылки на страницу всех актеров
- */
 export const getCastPreview = (credits, count = 5) => {
   if (!Array.isArray(credits?.cast)) return;
   const { cast } = credits;
 
-  // валидность данных массива не проверяем (для упрощения)
   const castList = cast
     .slice(0, count)
     .map(({ original_name, name }) => original_name || name);
@@ -70,12 +51,6 @@ export const getCastPreview = (credits, count = 5) => {
     : null;
 };
 
-/**
- *
- * Информация об основном персонале
- * @param {object} credits - объект с массивами cast и crew
- * @returns {object} - {director, screenplay, writer, ...}
- */
 export const getCrewPreview = credits => {
   if (!Array.isArray(credits?.crew)) return;
   const { crew } = credits;

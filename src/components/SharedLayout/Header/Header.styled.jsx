@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { TransitionBase } from 'styles/shared';
+import { TransitionBase } from '@styles';
 
 const visibility = visible => (visible ? 'none' : 'translate(0, -100%)');
 

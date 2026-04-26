@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { LinkPrimary } from 'styles/shared';
+import { LinkPrimary } from '@styles';
 
 export const LinkStyled = styled(LinkPrimary)`
   display: inline-flex;

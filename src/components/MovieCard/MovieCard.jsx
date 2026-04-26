@@ -1,41 +1,37 @@
-import { useState } from 'react';
+import { getCastPreview, getCrewPreview } from '@common';
+import { ExpandableContent } from '@components/etc/ExpandableContent/ExpandableContent';
+import { ModalImage } from '@components/etc/ModalImage/ModalImage';
+import { Spinner } from '@components/etc/Spinner/Spinner';
+import { TmdbService } from '@services';
+import { SpinnerWrapper } from '@styles';
 import { object, string } from 'prop-types';
-import { Rating } from './Rating/Rating';
+import { useState } from 'react';
 import { About } from './About/About';
-import { Reviews } from './Reviews/Reviews';
-import { getCrewPreview, getCastPreview } from 'services/tmdb/helpers';
-import { ModalImage } from 'components/etc/ModalImage/ModalImage';
-import { ExpandableContent } from 'components/etc/ExpandableContent';
-import { Spinner } from 'components/etc/Spinner';
-import { SpinnerWrapper } from 'styles/shared';
-import TmdbService from 'services/tmdb/tmdbSrv';
-
 import {
   Card,
-  Info,
-  PosterLink,
-  Poster,
+  CastAndCrewLink,
   Desc,
+  Homepage,
+  Info,
   MovieTitle,
   OriginalTitle,
-  WellKnownTitle,
-  CastAndCrewLink,
-  Title,
-  Homepage,
   Overview,
+  Poster,
+  PosterLink,
+  Title,
+  WellKnownTitle,
 } from './MovieCard.styled';
+import { Rating } from './Rating/Rating';
+import { Reviews } from './Reviews/Reviews';
 
 const srv = new TmdbService();
 const POSTER_WIDTH = 500;
 const OVERVIEW_MAX_HEIGHT = 100;
 const NEW_TAB = { target: '_blank', rel: 'noopener noreferrer' };
 
-//
-// Movie card
-//
-
 export const MovieCard = ({ data = {} }) => {
-  // деструктурируем тут, чтобы не извлекать общие пропы
+  const [showModal, setShowModal] = useState(false);
+  const [wasLoaded, setWasLoaded] = useState(false);
   const {
     original_title,
     title,
@@ -47,25 +43,19 @@ export const MovieCard = ({ data = {} }) => {
     ...restProps
   } = data;
 
-  const [showModal, setShowModal] = useState(false);
-  const [wasLoaded, setWasLoaded] = useState(false);
-
-  const handleImageClick = (e, path) => {
+  const handleImageClick = e => {
     e.preventDefault();
     setShowModal(true);
   };
 
-  // original_title - название на языке оригинала (например, китайский)
+  // title in the original language
   let movieTitle = title || original_title;
 
-  // постер
   const posterData = {
     original: srv.getImageUrl(poster_path),
     src: srv.getImageUrl(poster_path, POSTER_WIDTH),
     alt: movieTitle,
   };
-
-  // год релиза
   const releaseYear = data.release_date?.substring(0, 4);
   const reviewsCount = reviews?.total_results;
 
@@ -75,7 +65,7 @@ export const MovieCard = ({ data = {} }) => {
   return (
     <Card>
       <Info>
-        {/* !! id(359246) изображение не втиснуто */}
+        {/* id(359246) didn't fit */}
         <PosterLink
           to={posterData.original}
           onClick={handleImageClick}
@@ -101,7 +91,7 @@ export const MovieCard = ({ data = {} }) => {
                 {releaseYear && ` (${releaseYear})`}
               </WellKnownTitle>
 
-              {/* Пример id(107406) id(569938) */}
+              {/* id(107406) id(569938) */}
               {movieTitle !== original_title && (
                 <OriginalTitle> {original_title}</OriginalTitle>
               )}
@@ -111,7 +101,7 @@ export const MovieCard = ({ data = {} }) => {
 
             <About cast={cast} crew={crew} {...restProps} />
 
-            {/* Пример без credits id(874156) */}
+            {/* no credits id(874156) */}
             {(cast || crew) && (
               <CastAndCrewLink to="credits">Full cast & crew</CastAndCrewLink>
             )}

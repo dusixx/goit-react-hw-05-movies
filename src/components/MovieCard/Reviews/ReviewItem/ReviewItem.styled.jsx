@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { FlexCentered, LinkPrimary } from 'styles/shared';
+import { FlexCentered, LinkPrimary } from '@styles';
 
 // movies/860623
 export const Container = styled.article`
@@ -33,7 +33,6 @@ export const AvatarImage = styled.img`
   width: 100%;
   height: 100%;
   object-fit: cover;
-  /* При таком позиционировании видно лица */
   object-position: top;
 `;
 

@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { ButtonBase, FlexCentered, TransitionBase } from 'styles/shared';
+import { ButtonBase, FlexCentered, TransitionBase } from '@styles';
 
 const COLOR_ACTIVE = 'white';
 const COLOR_INACTIVE = 'var(--color-text)';

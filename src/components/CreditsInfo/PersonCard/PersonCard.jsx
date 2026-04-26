@@ -1,29 +1,27 @@
-import { useState } from 'react';
-import { IconNoPhoto } from 'styles/icons';
-import TmdbService from 'services/tmdb/tmdbSrv';
-import { ModalImage } from 'components/etc/ModalImage/ModalImage';
-import { Spinner } from 'components/etc/Spinner';
-import { SpinnerWrapper } from 'styles/shared';
+import { ModalImage } from '@components/etc/ModalImage/ModalImage';
+import { Spinner } from '@components/etc/Spinner/Spinner';
+import { TmdbService } from '@services';
+import { IconNoPhoto, SpinnerWrapper } from '@styles';
 import { string } from 'prop-types';
-
+import { useState } from 'react';
 import {
-  Thumb,
-  ProfileImage,
-  Desc,
-  Name,
-  Job,
-  ProfileLink,
   Card,
+  Desc,
+  Job,
+  Name,
+  ProfileImage,
+  ProfileLink,
+  Thumb,
 } from './PersonCard.styled';
 
 const srv = new TmdbService();
+
 const PROFILE_WIDTH = 185;
 const ICON_NO_PHOTO_COLOR = 'lightgray';
 const ICON_NO_PHOTO_SIZE = 50;
 const STR_NA = 'n/a';
 
-// для crew вместо character доступно поле job
-// В остальном для crew и cast все рендерится одинаково
+// NOTE: for crew, the job field is available instead of character
 
 export const PersonCard = ({
   name,
@@ -45,8 +43,9 @@ export const PersonCard = ({
   const personName = name || original_name;
 
   const shouldRender = personName || profile_path || character || job;
-
-  if (!shouldRender) return null;
+  if (!shouldRender) {
+    return null;
+  }
 
   return (
     <Card>
@@ -79,8 +78,6 @@ export const PersonCard = ({
           )}
         </Thumb>
       </ProfileLink>
-
-      {/* Не ссылкой, чтобы копировать текст при желании */}
       <Desc>
         <Name>{personName}</Name>
         <Job>{job || character || STR_NA}</Job>

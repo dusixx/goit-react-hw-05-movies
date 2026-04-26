@@ -1,5 +1,5 @@
-import { useRef, useState, useEffect } from 'react';
-import { onImageLoad } from 'utils';
+import { onImageLoad } from '@common';
+import { useEffect, useRef, useState } from 'react';
 
 const DEF_SCROLL_BEHAVIOR = 'smooth';
 const DEF_SCROLL_BY = 1.5;
@@ -10,8 +10,7 @@ export const useImageGallery = ({ listRef, onLoad, data, scrollBy }) => {
   const listItemHeight = useRef(null);
   const curDataLen = useRef(null);
 
-  // полагаем, галерея загружена,
-  // если загружено последнее изображение(не lazy)
+  // assume the gallery is loaded,if the last image (not lazy) is loaded
   useEffect(() => {
     listItemHeight.current =
       listItemHeight.current ??
@@ -23,7 +22,8 @@ export const useImageGallery = ({ listRef, onLoad, data, scrollBy }) => {
       setShowLoader(true);
       const lastImage = imgs[imgs.length - 1];
 
-      // вычисляем тут, в колбеке уже будут равны (curDataLen.current === data.length)
+      // we calculate here, in the callback they will already be equal
+      // (curDataLen.current === data.length)
       const shouldAutoscroll = curDataLen.current < data?.length;
       const shouldScrollToTop = curDataLen.current >= data?.length;
 
@@ -31,11 +31,10 @@ export const useImageGallery = ({ listRef, onLoad, data, scrollBy }) => {
         setShowLoader(false);
         onLoadRef.current && onLoadRef.current();
 
-        // тут, чтобы знать актуальный, а не тот,
-        // что был до момента загрузки галереи
+        // here, so you know the current one, not the one that was there before the gallery loaded
         const listTop = listRef.current?.getBoundingClientRect().top;
 
-        // полагаем, высота всех изображений в галерее одинаковая
+        // we assume that the height of all images in the gallery is the same
         if (listTop < 0) {
           if (shouldScrollToTop) {
             return listRef.current.scrollIntoView({
@@ -55,7 +54,6 @@ export const useImageGallery = ({ listRef, onLoad, data, scrollBy }) => {
         }
       });
     }
-    // запоминаем текущее
     curDataLen.current = data?.length;
   }, [data, scrollBy, listRef]);
 

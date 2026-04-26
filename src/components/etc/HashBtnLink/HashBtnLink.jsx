@@ -1,6 +1,6 @@
-import { ButtonLink } from 'styles/shared';
+import { ButtonLink } from '@styles';
+import { shape, string } from 'prop-types';
 import { useEffect, useRef } from 'react';
-import { string, shape } from 'prop-types';
 
 const DEF_SCROLL_OPTS = {
   behavior: 'smooth',
@@ -8,11 +8,6 @@ const DEF_SCROLL_OPTS = {
   inline: 'nearest',
 };
 
-/**
- *
- *  @param to - любой валидный селектор
- *  @param scrollOptions - параметры для scrollIntoView
- */
 export const HashBtnLink = ({
   to,
   children,

@@ -1,34 +1,27 @@
+import { shortenNum } from '@common';
+import { HashBtnLink } from '@components/etc/HashBtnLink/HashBtnLink';
+import { TmdbService } from '@services';
+import { IconImdbLogo, IconTmdbLogo } from '@styles';
 import { number, oneOfType, string } from 'prop-types';
-import { IconImdbLogo, IconTmdbLogo } from 'styles/icons';
-import { HashBtnLink } from 'components/etc/HashBtnLink/HashBtnLink';
-import TmdbService from 'services/tmdb/tmdbSrv';
-import { shortenNum } from 'utils';
-
 import {
-  VoteAverage,
-  TmdbLink,
   ImdbLink,
   Ratings,
   Stat,
+  TmdbLink,
+  VoteAverage,
 } from './Rating.styled';
 
 const srv = new TmdbService();
 const DEF_HEIGHT = 40;
 const NEW_TAB = { target: '_blank', rel: 'noopener noreferrer' };
 
-//
-// Rating
-//
-
 export const Rating = ({
   height = DEF_HEIGHT,
   vote_average,
   vote_count,
-  popularity,
   imdb_id,
   reviewsCount,
   id,
-  ...restProps
 }) => {
   let rating = Number(vote_average);
   rating = rating ? rating.toFixed(1) : 'N/A';

@@ -1,14 +1,10 @@
-import { useRef, useState, useEffect, useCallback } from 'react';
-import { Content, Expander } from './ExpandableContent.styled';
-import { markupLinks } from 'utils';
+import { markupLinks } from '@common';
 import debounce from 'lodash.debounce';
-import { string, number } from 'prop-types';
+import { number, string } from 'prop-types';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { Content, Expander } from './ExpandableContent.styled';
 
 const DEBOUNCE_DELAY = 100;
-
-//
-// ExpandableContent
-//
 
 export const ExpandableContent = ({ content, maxHeight = Infinity }) => {
   const [showExpander, setShowExpander] = useState(false);
@@ -17,7 +13,7 @@ export const ExpandableContent = ({ content, maxHeight = Infinity }) => {
   const contentShouldBeCollapsed = useCallback(() => {
     const { current: ref } = contentRef;
 
-    // раскрываем и замеряем высоту контента для текущей высоты вьюпорта
+    // expand and measure the content height for the current viewport height
     ref.style.maxHeight = 'max-content';
     const { height } = ref.getBoundingClientRect();
     ref.style.maxHeight = null;
@@ -41,7 +37,7 @@ export const ExpandableContent = ({ content, maxHeight = Infinity }) => {
     <>
       <Content
         ref={contentRef}
-        // В постах попадается разметка, ставим в innerHTML
+        // sometimes posts contain markup
         dangerouslySetInnerHTML={{ __html: markupLinks(content) }}
         maxHeight={showExpander ? maxHeight : 'max-content'}
       />

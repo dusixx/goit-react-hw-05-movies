@@ -1,13 +1,13 @@
-import { object, number, string } from 'prop-types';
-import { getAvatar } from 'services/tmdb/helpers';
-import { IconNoAvatar } from 'styles/icons';
-import { ExpandableContent } from 'components/etc/ExpandableContent';
+import { getAvatar } from '@common';
+import { ExpandableContent } from '@components/etc/ExpandableContent/ExpandableContent';
+import { IconNoAvatar } from '@styles';
+import { number, object, string } from 'prop-types';
 
 import {
-  Container,
-  AvatarThumb,
-  AvatarImage,
   AvatarAndName,
+  AvatarImage,
+  AvatarThumb,
+  Container,
   Header,
   HeaderGroup,
   SourceLink,
@@ -19,18 +19,12 @@ const ICON_NO_AVATAR_SIZE = 60;
 const ICON_NO_AVATAR_COLOR = 'lightgray';
 const NEW_TAB = { target: '_blank', rel: 'noopener noreferrer' };
 
-//
-// ReviewCard
-//
-
 export const ReviewItem = ({
   author_details: { avatar_path },
   author,
   content,
   url,
   created_at,
-  updated_at,
-  id,
 }) => {
   const createdDate = new Date(created_at).toLocaleString();
 

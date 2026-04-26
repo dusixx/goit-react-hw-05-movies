@@ -1,28 +1,23 @@
-import { useState, useEffect, useRef } from 'react';
-import { func, arrayOf, number, string } from 'prop-types';
-import { showError } from 'utils';
-import TmdbService from 'services/tmdb/tmdbSrv';
-import { Spinner } from 'components/etc/Spinner';
-import { SpinnerWrapper } from 'styles/shared';
-
+import { showError } from '@common';
+import { Spinner } from '@components/etc/Spinner/Spinner';
+import { TmdbService } from '@services';
+import { SpinnerWrapper } from '@styles';
+import { arrayOf, func, number, string } from 'prop-types';
+import { useEffect, useRef, useState } from 'react';
 import {
-  Poster,
+  AltTitle,
+  Genres,
   MovieLink,
   Overlay,
-  Title,
   Overview,
+  Poster,
   Rating,
-  Genres,
-  AltTitle,
+  Title,
 } from './MovieGalleryItem.styled';
 
 const srv = new TmdbService();
 const DEF_POSTER_WIDTH = 500;
 const STR_NA = 'N/A';
-
-//
-// MovieGalleryItem
-//
 
 export const MovieGalleryItem = ({
   id,
@@ -34,14 +29,12 @@ export const MovieGalleryItem = ({
   release_date,
   genre_ids,
   onLoad,
-  ...restProps
 }) => {
   const [wasLoaded, setWasLoaded] = useState(false);
   const [genres, setGenres] = useState(null);
   const imgRef = useRef(null);
   const onLoadRef = useRef(onLoad);
 
-  // имена жанров
   useEffect(() => {
     srv
       .getGenres(genre_ids)

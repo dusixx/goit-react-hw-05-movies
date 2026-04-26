@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
-import { string, func, oneOfType, arrayOf } from 'prop-types';
-import { OptionsList, OptionButton } from './OptionButtons.styled';
-import { normalizeStr, getList } from 'utils';
+import { getList, normalizeStr } from '@common';
+import { arrayOf, func, oneOfType, string } from 'prop-types';
+import { useEffect, useState } from 'react';
+import { OptionButton, OptionsList } from './OptionButtons.styled';
 
 export const OptionButtons = ({ items, value, onClick, ...restProps }) => {
   const [active, setActive] = useState(value);

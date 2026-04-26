@@ -1,13 +1,12 @@
+import { GoBackLink } from '@components/etc/GoBackLink/GoBackLink';
+import { useHideOnScrollDown } from '@hooks';
 import { createPortal } from 'react-dom';
-import { useHideOnScrollDown } from '../../hooks';
-import { GoBackLink } from 'components/etc/GoBackLink/GoBackLink';
-
 import {
   Container,
+  InnerContainer,
   Left,
   Middle,
   Right,
-  InnerContainer,
 } from './Subheader.styled';
 
 const rootModal = document.querySelector('#root-modal');
@@ -20,9 +19,7 @@ export const SubHeader = ({
   const [visible, onTop] = useHideOnScrollDown();
 
   return createPortal(
-    <Container
-      visible={visible || onTop} /* style={{ opacity: onTop || 0.8 }} */
-    >
+    <Container visible={visible || onTop}>
       <InnerContainer>
         <Left>{leftContent}</Left>
         <Middle>{children}</Middle>

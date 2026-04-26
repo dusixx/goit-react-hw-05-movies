@@ -1,29 +1,22 @@
+import { splitNumIntoTriads } from '@common';
+import { LinkPrimary } from '@styles';
 import { arrayOf, number, object, string } from 'prop-types';
 import { useEffect, useRef, useState } from 'react';
-import { LinkPrimary } from 'styles/shared';
-import { splitNumIntoTriads } from 'utils';
-
 import {
-  List,
-  Item,
-  Container,
-  Title,
-  Tagline,
-  Label,
   Cast,
+  Container,
+  Item,
+  Label,
+  List,
+  Tagline,
+  Title,
 } from './About.styled';
-
-//
-// About
-//
 
 export const About = ({
   budget,
   revenue,
   production_countries = [],
   genres = [],
-  homepage,
-  overview,
   release_date,
   tagline,
   crew,

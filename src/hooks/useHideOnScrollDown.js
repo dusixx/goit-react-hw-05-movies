@@ -1,5 +1,5 @@
-import { useEffect, useState, useRef } from 'react';
 import throttle from 'lodash.throttle';
+import { useEffect, useRef, useState } from 'react';
 
 const THROTTLE_DELAY = 150;
 
@@ -18,11 +18,8 @@ export const useHideOnScrollDown = (
       lastScrollY.current = window.scrollY;
     };
 
-    document.addEventListener(
-      'scroll',
-      throttle(handleDocumentScroll, THROTTLE_DELAY)
-    );
-  }, []);
+    document.addEventListener('scroll', throttle(handleDocumentScroll, delay));
+  }, [delay]);
 
   return [visible, onTop];
 };

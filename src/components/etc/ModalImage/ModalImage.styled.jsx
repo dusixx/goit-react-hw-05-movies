@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { FlexCentered } from 'styles/shared';
+import { FlexCentered } from '@styles';
 
 export const ModalContainer = styled.div`
   position: relative;
@@ -18,7 +18,6 @@ export const ModalThumb = styled.div`
   & img {
     max-height: 90vh;
     width: auto;
-    /* чтобы оставалось куда кликнуть в бекдроп */
     max-width: 70vw;
     object-fit: contain;
     object-position: center;

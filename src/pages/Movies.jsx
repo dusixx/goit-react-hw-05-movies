@@ -1,13 +1,12 @@
-import Searchbar from 'components/Searchbar/Searchbar';
-import { useEffect, useState, useRef } from 'react';
-import MovieGallery from 'components/MovieGallery/MovieGallery';
+import { showInfo } from '@common';
+import { ErrorMessage } from '@components/ErrorMessage/ErrorMessage';
+import { LoadMoreBtn } from '@components/etc/LoadMoreBtn/LoadMoreBtn';
+import { MovieGallery } from '@components/MovieGallery/MovieGallery';
+import { Searchbar } from '@components/Searchbar/Searchbar';
+import { TmdbService } from '@services';
+import { useEffect, useRef, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import TmdbService from 'services/tmdb/tmdbSrv';
-import { LoadMoreBtn } from 'components/etc/LoadMoreBtn/LoadMoreBtn';
-import { ErrorMessage } from 'components/ErrorMessage/ErrorMessage';
-import { showInfo } from 'utils';
 
-const srv = new TmdbService();
 const NO_SEARCH_RESULTS = 'No search results matching your query';
 const searchbarStyle = {
   height: 45,
@@ -15,9 +14,7 @@ const searchbarStyle = {
   marginTop: 10,
 };
 
-//
-// Movies
-//
+const srv = new TmdbService();
 
 const Movies = ({ loader }) => {
   const [error, setError] = useState(null);
@@ -32,8 +29,6 @@ const Movies = ({ loader }) => {
     setQuery({ text: searchParams.get('query'), time: Date.now() });
   }, [searchParams]);
 
-  // Добавляем в query текущее время, чтобы запрос был уникален и
-  // многократно срабатывал поиск по одному и тому же тексту
   useEffect(() => {
     const text = query?.text ?? '';
 
@@ -46,7 +41,6 @@ const Movies = ({ loader }) => {
       .searchMovies(text)
       .then(({ results, total_pages, total_results }) => {
         if (!total_results) {
-          // !! лучше отобразить сообщение на странице
           return showInfo(NO_SEARCH_RESULTS);
         }
         setResults(results);
@@ -67,18 +61,15 @@ const Movies = ({ loader }) => {
       .catch(setError);
   };
 
-  // для простоты - очищаем строку запроса
   const handleQueryChange = query => {
     if (!query) setSearchParams({ query });
   };
 
   const handleSearchbarSubmit = text => {
     setSearchParams({ query: text });
-    //setQuery({ text, time: Date.now() });
   };
 
   const showLoadMoreBtn =
-    // wasLoaded, чтобы не висела пока формируется галерея найденых
     wasLoaded && totalPages.current > 0 && page.current < totalPages.current;
 
   return error ? (

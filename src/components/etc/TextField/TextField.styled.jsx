@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { ButtonBase, TransitionBase } from 'styles/shared';
+import { ButtonBase, TransitionBase } from '@styles';
 
 export const Field = styled.label`
   width: ${({ width }) => width || '100%'};

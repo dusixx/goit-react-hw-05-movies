@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
+import { FlexCentered, NoPosterBg, TransitionBase } from '@styles';
 import { Link } from 'react-router-dom';
-import { FlexCentered, NoPosterBg, TransitionBase } from 'styles/shared';
 
 export const MovieLink = styled(Link)`
   ${NoPosterBg}
@@ -61,10 +61,6 @@ export const Overlay = styled.div`
   top: 0;
   left: 0;
 
-  /* 
-    Не будет выпадать маржин, например, у Overview
-    Паддинги работают для всего контента, в тч для Overview
-  */
   display: flex;
   flex-direction: column;
   gap: 15px;

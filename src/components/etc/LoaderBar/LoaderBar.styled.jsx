@@ -1,5 +1,5 @@
+import { calcCSSValue } from '@common';
 import styled from '@emotion/styled';
-import { calcCSSValue } from 'utils';
 
 export const BarContainer = styled.div`
   position: fixed;

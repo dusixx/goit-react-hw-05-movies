@@ -1,14 +1,12 @@
-import { BiSearch } from 'react-icons/bi';
-import { VscClose } from 'react-icons/vsc';
+import { BiArrowBack, BiMessageRoundedError, BiSearch } from 'react-icons/bi';
 import { FaUserCircle } from 'react-icons/fa';
 import { FiCameraOff } from 'react-icons/fi';
-import { MdKeyboardArrowLeft } from 'react-icons/md';
-import { ReactComponent as IconImdbLogo } from '../images/imdbLogo.svg';
-import { SiThemoviedatabase } from 'react-icons/si';
-import { RiMovie2Line } from 'react-icons/ri';
-import { BiMessageRoundedError } from 'react-icons/bi';
-import { BiArrowBack } from 'react-icons/bi';
 import { IoIosArrowUp } from 'react-icons/io';
+import { MdKeyboardArrowLeft } from 'react-icons/md';
+import { RiMovie2Line } from 'react-icons/ri';
+import { SiThemoviedatabase } from 'react-icons/si';
+import { VscClose } from 'react-icons/vsc';
+import IconImdbLogo from '../images/imdb-logo.svg?react';
 
 export const IconSearch = BiSearch;
 export const IconClose = VscClose;

@@ -1,13 +1,13 @@
 import styled from '@emotion/styled';
-import { Link } from 'react-router-dom';
-import { LinkBase, LinkPrimary } from 'styles/shared';
-
 import {
-  Title as TitleShared,
-  TransitionBase,
+  LinkBase,
+  LinkPrimary,
   NoPosterBg,
   Subtitle,
-} from 'styles/shared';
+  Title as TitleShared,
+  TransitionBase,
+} from '@styles';
+import { Link } from 'react-router-dom';
 
 const HEADER_HEIGHT = '58px';
 const POSTER_HMULT = 1.5;
