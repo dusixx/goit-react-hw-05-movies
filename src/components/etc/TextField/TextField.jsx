@@ -2,7 +2,7 @@ import { func, string } from 'prop-types';
 import { VscClose as IconClose } from 'react-icons/vsc';
 import { ClearBtn, Field, Input, InputWrapper } from './TextField.styled';
 
-const TextField = ({ value, type, onChange, ...restProps }) => {
+const TextField = ({ value, type, onChange, onClear, ...restProps }) => {
   return (
     <Field>
       <InputWrapper>
@@ -13,7 +13,7 @@ const TextField = ({ value, type, onChange, ...restProps }) => {
           {...restProps}
         />
         {value && (
-          <ClearBtn type="button" onClick={() => onChange(null)}>
+          <ClearBtn type="button" onClick={() => onClear()}>
             <IconClose size="100%" />
           </ClearBtn>
         )}

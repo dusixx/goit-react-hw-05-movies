@@ -8,11 +8,6 @@ import { useEffect, useRef, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 const NO_SEARCH_RESULTS = 'No search results matching your query';
-const searchbarStyle = {
-  height: 45,
-  marginBottom: 40,
-  marginTop: 10,
-};
 
 const srv = new TmdbService();
 
@@ -20,41 +15,27 @@ const Movies = ({ loader }) => {
   const [error, setError] = useState(null);
   const [wasLoaded, setWasLoaded] = useState(false);
   const [results, setResults] = useState([]);
-  const [query, setQuery] = useState(null);
+  const [query, setQuery] = useState('');
   const [searchParams, setSearchParams] = useSearchParams();
   const totalPages = useRef(1);
   let page = useRef(1);
 
   useEffect(() => {
-    setQuery({ text: searchParams.get('query'), time: Date.now() });
-  }, [searchParams]);
+    const query = searchParams.get('query') ?? '';
+    setQuery(query);
 
-  useEffect(() => {
-    const text = query?.text ?? '';
-
-    if (!text) {
+    if (query) {
+      searchMovies(query);
+    } else {
+      setResults([]);
       setWasLoaded(false);
-      return setResults([]);
     }
-
-    srv
-      .searchMovies(text)
-      .then(({ results, total_pages, total_results }) => {
-        if (!total_results) {
-          return showInfo(NO_SEARCH_RESULTS);
-        }
-        setResults(results);
-        totalPages.current = total_pages;
-      })
-      .catch(setError);
-  }, [query]);
+  }, [searchParams]);
 
   const handleLoadMoreClick = clickCount => {
     page.current = clickCount;
-    const { text } = query;
-
     srv
-      .searchMovies(text, { page: page.current })
+      .searchMovies(query, { page: page.current })
       .then(({ results }) => {
         setResults(cur => [...cur, ...results]);
       })
@@ -62,14 +43,29 @@ const Movies = ({ loader }) => {
   };
 
   const handleQueryChange = query => {
-    if (!query) setSearchParams({ query });
+    setQuery(query);
   };
 
-  const handleSearchbarSubmit = text => {
-    setSearchParams({ query: text });
+  const searchMovies = query => {
+    srv
+      .searchMovies(query)
+      .then(({ results, total_pages, total_results }) => {
+        totalPages.current = total_pages;
+
+        if (!total_results) {
+          setResults([]);
+          return showInfo(NO_SEARCH_RESULTS);
+        }
+        setResults(results);
+      })
+      .catch(setError);
   };
 
-  const showLoadMoreBtn =
+  const handleQuerySubmit = () => {
+    setSearchParams({ query });
+  };
+
+  const shouldShowLoadMore =
     wasLoaded && totalPages.current > 0 && page.current < totalPages.current;
 
   return error ? (
@@ -77,9 +73,14 @@ const Movies = ({ loader }) => {
   ) : (
     <>
       <Searchbar
-        style={searchbarStyle}
-        onSubmit={handleSearchbarSubmit}
+        style={{
+          height: 45,
+          marginBottom: 40,
+          marginTop: 10,
+        }}
+        onSubmit={handleQuerySubmit}
         onChange={handleQueryChange}
+        value={query}
       />
 
       {results?.length > 0 && (
@@ -90,7 +91,7 @@ const Movies = ({ loader }) => {
         />
       )}
 
-      {showLoadMoreBtn && (
+      {shouldShowLoadMore && (
         <LoadMoreBtn onClick={handleLoadMoreClick} style={{ marginTop: 40 }} />
       )}
     </>
