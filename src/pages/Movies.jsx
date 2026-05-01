@@ -53,8 +53,7 @@ const Movies = ({ loader }) => {
         totalPages.current = total_pages;
 
         if (!total_results) {
-          setResults([]);
-          return showInfo(NO_SEARCH_RESULTS);
+          showInfo(NO_SEARCH_RESULTS);
         }
         setResults(results);
       })
