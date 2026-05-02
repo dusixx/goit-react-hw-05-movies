@@ -1,5 +1,5 @@
-import { useEffect } from 'react';
 import { isVScrollBarVisible } from '@common';
+import { useEffect } from 'react';
 
 const { body } = document;
 const root = document.documentElement;
@@ -25,5 +25,3 @@ export const BodyScrollLock = () => {
     };
   }, []);
 };
-
-export default BodyScrollLock;

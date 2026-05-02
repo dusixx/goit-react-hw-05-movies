@@ -1,4 +1,4 @@
-import { GoBackLink } from '@components/etc/GoBackLink/GoBackLink';
+import { GoBackLink } from '@components/etc';
 import { useHideOnScrollDown } from '@hooks';
 import { createPortal } from 'react-dom';
 import {

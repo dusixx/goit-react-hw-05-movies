@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { LinkStyled } from './GoBackLink.styled';
 
-const PREV_LOC = -1;
+const PREV_LOCATION = -1;
 const DEF_ICON_SIZE = 25;
 
 export const GoBackLink = ({ children, ...restProps }) => {
@@ -11,7 +11,7 @@ export const GoBackLink = ({ children, ...restProps }) => {
   const [path, setPath] = useState(null);
 
   useEffect(() => {
-    setPath(pathname === '/' ? null : PREV_LOC);
+    setPath(pathname === '/' ? null : PREV_LOCATION);
   }, [pathname]);
 
   return (

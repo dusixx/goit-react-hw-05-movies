@@ -1,8 +1,5 @@
-import { getCastPreview, getCrewPreview } from '@common';
-import { NEW_TAB_TARGET_REL } from '@common/constants.js';
-import { ExpandableContent } from '@components/etc/ExpandableContent/ExpandableContent';
-import { ModalImage } from '@components/etc/ModalImage/ModalImage';
-import { Spinner } from '@components/etc/Spinner/Spinner';
+import { getCastPreview, getCrewPreview, NEW_TAB_TARGET_REL } from '@common';
+import { ExpandableContent, ModalImage, Spinner } from '@components/etc';
 import { TmdbService } from '@services';
 import { SpinnerWrapper } from '@styles';
 import { object, string } from 'prop-types';

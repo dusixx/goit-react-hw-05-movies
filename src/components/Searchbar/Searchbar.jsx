@@ -1,4 +1,4 @@
-import TextField from '@components/etc/TextField/TextField.jsx';
+import { TextField } from '@components/etc';
 import { IconSearch } from '@styles';
 import { func, number, oneOfType, string } from 'prop-types';
 import { Container, SearchBtn, SearchForm } from './Searchbar.styled';

@@ -1,5 +1,5 @@
 import { showError } from '@common';
-import { LoadMoreBtn } from '@components/etc/LoadMoreBtn/LoadMoreBtn';
+import { LoadMoreBtn } from '@components/etc';
 import { useAutoScroll } from '@hooks';
 import { TmdbService } from '@services';
 import { array, number, shape } from 'prop-types';

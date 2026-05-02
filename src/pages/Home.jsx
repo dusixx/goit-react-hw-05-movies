@@ -1,6 +1,5 @@
 import { ErrorMessage } from '@components/ErrorMessage/ErrorMessage';
-import { LoadMoreBtn } from '@components/etc/LoadMoreBtn/LoadMoreBtn';
-import { OptionButtons } from '@components/etc/OptionButtons/OptionButtons';
+import { LoadMoreBtn, OptionButtons } from '@components/etc';
 import { MovieGallery } from '@components/MovieGallery/MovieGallery';
 import { SubHeader } from '@components/Subheader/Subheader';
 import { TmdbService } from '@services';

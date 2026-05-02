@@ -1,6 +1,5 @@
-import { NOT_AVAILABLE } from '@common/constants.js';
-import { ModalImage } from '@components/etc/ModalImage/ModalImage';
-import { Spinner } from '@components/etc/Spinner/Spinner';
+import { NOT_AVAILABLE } from '@common';
+import { ModalImage, Spinner } from '@components/etc';
 import { TmdbService } from '@services';
 import { IconNoPhoto, SpinnerWrapper } from '@styles';
 import { string } from 'prop-types';
@@ -22,7 +21,6 @@ const ICON_NO_PHOTO_COLOR = 'lightgray';
 const ICON_NO_PHOTO_SIZE = 50;
 
 // NOTE: for crew, the job field is available instead of character
-
 export const PersonCard = ({
   name,
   original_name,

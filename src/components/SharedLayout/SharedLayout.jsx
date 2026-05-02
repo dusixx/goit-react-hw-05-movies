@@ -1,6 +1,4 @@
-import { Backtop } from '@components/etc/Backtop/Backtop';
-import { LoaderBar } from '@components/etc/LoaderBar/LoaderBar';
-import { ScrollToTop } from '@components/etc/ScrollToTop/ScrollToTop';
+import { Backtop, LoaderBar, ScrollToTop } from '@components/etc';
 import { SubHeader } from '@components/Subheader/Subheader';
 import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';

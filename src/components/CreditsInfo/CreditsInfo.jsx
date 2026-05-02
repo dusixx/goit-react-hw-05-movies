@@ -1,6 +1,5 @@
 import { normalizeCastData, normalizeCrewData, sortObj } from '@common';
-import { LoadMoreBtn } from '@components/etc/LoadMoreBtn/LoadMoreBtn';
-import { OptionButtons } from '@components/etc/OptionButtons/OptionButtons';
+import { LoadMoreBtn, OptionButtons } from '@components/etc';
 import { SubHeader } from '@components/Subheader/Subheader';
 import { useImageGallery, useLoadMorePagination } from '@hooks';
 import { useEffect, useRef, useState } from 'react';

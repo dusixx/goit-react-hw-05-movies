@@ -1,6 +1,5 @@
-import { showError } from '@common';
-import { NOT_AVAILABLE } from '@common/constants.js';
-import { Spinner } from '@components/etc/Spinner/Spinner';
+import { NOT_AVAILABLE, showError } from '@common';
+import { Spinner } from '@components/etc';
 import { TmdbService } from '@services';
 import { SpinnerWrapper } from '@styles';
 import { arrayOf, func, number, string } from 'prop-types';

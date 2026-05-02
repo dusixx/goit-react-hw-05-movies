@@ -1,6 +1,5 @@
-import { shortenNum } from '@common';
-import { NEW_TAB_TARGET_REL, NOT_AVAILABLE } from '@common/constants.js';
-import { HashBtnLink } from '@components/etc/HashBtnLink/HashBtnLink';
+import { NEW_TAB_TARGET_REL, NOT_AVAILABLE, shortenNum } from '@common';
+import { HashBtnLink } from '@components/etc';
 import { TmdbService } from '@services';
 import { IconImdbLogo, IconTmdbLogo } from '@styles';
 import { number, oneOfType, string } from 'prop-types';

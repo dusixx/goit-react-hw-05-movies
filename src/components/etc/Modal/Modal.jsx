@@ -1,25 +1,12 @@
-import BodyScrollLock from '@components/etc/BodyScrollLock/BodyScrollLock';
+import { BodyScrollLock } from '@components/etc/BodyScrollLock/BodyScrollLock';
 import { bool, func, string } from 'prop-types';
 import { useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { Transition } from 'react-transition-group';
 import { Backdrop, Container } from './Modal.styled';
+import { getBackdropStyle, TRANSITION_DURATION } from './Modal.utils';
 
 const rootModal = document.querySelector('#root-modal');
-
-const TRANS_DURATION = 250;
-
-const defaultStyle = {
-  transitionProperty: `opacity`,
-  transitionDuration: 'var(--trans-duration)',
-  transitionTimingFunction: 'var(--trans-func)',
-  opacity: 0,
-};
-
-const transitionStyles = {
-  entering: { opacity: 1 },
-  entered: { opacity: 1 },
-};
 
 export const Modal = ({
   children,
@@ -46,7 +33,7 @@ export const Modal = ({
     <Transition
       mountOnEnter
       unmountOnExit
-      timeout={TRANS_DURATION}
+      timeout={TRANSITION_DURATION}
       nodeRef={backdropRef}
       in={visible}
     >
@@ -55,10 +42,7 @@ export const Modal = ({
           ref={backdropRef}
           onClick={handleBackdropClick}
           bgColor={bgColor}
-          style={{
-            ...defaultStyle,
-            ...transitionStyles[state],
-          }}
+          style={getBackdropStyle(state)}
         >
           {bodyScrollLock && <BodyScrollLock />}
           <Container>{children}</Container>

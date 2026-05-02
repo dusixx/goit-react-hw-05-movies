@@ -1,6 +1,6 @@
 import { showInfo } from '@common';
 import { ErrorMessage } from '@components/ErrorMessage/ErrorMessage';
-import { LoadMoreBtn } from '@components/etc/LoadMoreBtn/LoadMoreBtn';
+import { LoadMoreBtn } from '@components/etc';
 import { MovieGallery } from '@components/MovieGallery/MovieGallery';
 import { Searchbar } from '@components/Searchbar/Searchbar';
 import { TmdbService } from '@services';

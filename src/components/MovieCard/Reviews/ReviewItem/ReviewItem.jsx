@@ -1,5 +1,5 @@
-import { getAvatar } from '@common';
-import { ExpandableContent } from '@components/etc/ExpandableContent/ExpandableContent';
+import { getAvatar, NEW_TAB_TARGET_REL } from '@common';
+import { ExpandableContent } from '@components/etc';
 import { IconNoAvatar } from '@styles';
 import { number, object, string } from 'prop-types';
 import {
@@ -8,8 +8,6 @@ import {
   ICON_NO_AVATAR_COLOR,
   ICON_NO_AVATAR_SIZE,
 } from './ReviewItem.constants.js';
-
-import { NEW_TAB_TARGET_REL } from '@common/constants.js';
 import {
   AvatarAndName,
   AvatarImage,

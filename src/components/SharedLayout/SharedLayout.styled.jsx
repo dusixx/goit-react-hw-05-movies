@@ -1,4 +1,4 @@
-import { GoBackLink } from '@components/etc/GoBackLink/GoBackLink';
+import { GoBackLink } from '@components/etc';
 import styled from '@emotion/styled';
 import { PageContainer } from '@styles';
 

@@ -2,7 +2,7 @@ import { ButtonLink } from '@styles';
 import { shape, string } from 'prop-types';
 import { useEffect, useRef } from 'react';
 
-const DEF_SCROLL_OPTS = {
+const DefaultScrollOptions = {
   behavior: 'smooth',
   block: 'nearest',
   inline: 'nearest',
@@ -11,7 +11,7 @@ const DEF_SCROLL_OPTS = {
 export const HashBtnLink = ({
   to,
   children,
-  scrollOptions = DEF_SCROLL_OPTS,
+  scrollOptions = DefaultScrollOptions,
   ...restProps
 }) => {
   const target = useRef(null);
